@@ -51,14 +51,14 @@ export default function BlogContent({ post, relatedPosts }: BlogContentProps) {
                 </div>
             )}
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-poppins leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-sans leading-tight">
                 {post.title}
             </h1>
-            <p className="text-gray-400 mb-12 font-poppins text-lg">
+            <p className="text-gray-400 mb-12 font-sans text-lg">
                 {formatDate(post.publishedAt)}
             </p>
 
-            <article className="prose prose-lg max-w-none prose-invert font-poppins">
+            <article className="prose prose-lg max-w-none prose-invert font-sans">
                 <PortableText 
                     value={post.body} 
                     components={portableTextComponents}
@@ -79,7 +79,7 @@ export default function BlogContent({ post, relatedPosts }: BlogContentProps) {
                         </div>
                     )}
                     <div className="flex flex-col justify-center">
-                        <p className="font-semibold text-white font-poppins">{post.author.name}</p>
+                        <p className="font-semibold text-white font-sans">{post.author.name}</p>
                         {post.author.bio && (
                             <PortableText 
                                 value={post.author.bio} 
@@ -92,7 +92,7 @@ export default function BlogContent({ post, relatedPosts }: BlogContentProps) {
 
             {relatedPosts.length > 0 && (
                 <section className="mt-16 pt-8 border-t border-gray-800">
-                    <h2 className="text-3xl font-bold mb-8 text-center text-white font-poppins">
+                    <h2 className="text-3xl font-bold mb-8 text-center text-white font-sans">
                         Autres articles
                     </h2>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -113,10 +113,10 @@ export default function BlogContent({ post, relatedPosts }: BlogContentProps) {
                                     </div>
                                 )}
                                 <div className="p-4">
-                                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-white group-hover:text-green-400 transition-colors font-poppins">
+                                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-white group-hover:text-green-400 transition-colors font-sans">
                                         {relatedPost.title}
                                     </h3>
-                                    <p className="text-sm text-gray-400 mb-3 font-poppins">
+                                    <p className="text-sm text-gray-400 mb-3 font-sans">
                                         {formatDate(relatedPost.publishedAt)}
                                     </p>
                                     <p className="text-green-400 text-sm font-medium group-hover:text-green-300 transition-colors">

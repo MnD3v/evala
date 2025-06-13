@@ -38,7 +38,7 @@ export default function AppBar() {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className="text-gray-300 hover:text-green-400 transition-colors duration-300 font-poppins"
+                                className="text-gray-300 hover:text-green-400 transition-colors duration-300 font-sans"
                             >
                                 {item.label}
                             </Link>
@@ -89,7 +89,7 @@ export default function AppBar() {
                                     <Link
                                         key={item.href}
                                         href={item.href}
-                                        className="text-gray-300 hover:text-green-400 transition-colors duration-300 font-poppins"
+                                        className="text-gray-300 hover:text-green-400 transition-colors duration-300 font-sans"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         {item.label}

@@ -57,19 +57,89 @@ export default function Gallery() {
           <h2 className="text-4xl md:text-6xl font-[var(--font-cinzel)] mb-8 text-red-600 text-center">
             Qu'est ce que Evala ?
           </h2>
-          <div className="max-w-4xl mx-auto text-white/90 space-y-6 font-montserrat">
-            <p className="text-base md:text-lg leading-relaxed">
-              Les Evala sont une tradition ancestrale et un festival de lutte traditionnelle qui se déroule chaque année 
-              dans la préfecture de Kozah, au nord du Togo. Cette manifestation culturelle unique représente bien plus 
-              qu'une simple compétition sportive - c'est un rite initiatique qui marque le passage des jeunes hommes 
-              à l'âge adulte.
+          
+          <div className="max-w-4xl mx-auto text-white/90 space-y-8 font-montserrat">
+            <p className="text-base md:text-lg leading-relaxed text-center">
+              Les Evala constituent un rituel sacré de passage à l'âge adulte, profondément ancré dans la tradition Kabyè 
+              de la préfecture de Kozah, au nord du Togo.
             </p>
-            <p className="text-base md:text-lg leading-relaxed">
-              Pendant une semaine intense, les jeunes lutteurs s'affrontent dans des combats spectaculaires, 
-              démontrant non seulement leur force physique mais aussi leur courage et leur détermination. Ces luttes 
-              sont accompagnées de danses traditionnelles, de chants et de cérémonies qui célèbrent l'héritage culturel 
-              de la région.
-            </p>
+
+            <div className="relative space-y-6">
+              {/* Ligne verticale décorative */}
+              <div className="absolute left-[21px] top-8 bottom-8 w-[2px] bg-gradient-to-b from-red-500/50 via-red-500/20 to-red-500/50"></div>
+
+              {/* Étapes */}
+              <div className="relative pl-12 hover:pl-16 transition-all duration-300 group">
+                <div className="absolute left-0 top-3 w-11 h-11 rounded-full bg-black border-2 border-red-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-red-500 font-bold">01</span>
+                </div>
+                <div className="bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-sm p-6 rounded-2xl border-l-4 border-red-500">
+                  <h3 className="text-red-500 font-display text-xl mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                    Préparation Spirituelle
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Les jeunes initiés commencent par des rituels de purification et une préparation spirituelle intense. 
+                    Ils reçoivent les enseignements des anciens sur les valeurs traditionnelles et l'histoire de leur peuple.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative pl-12 hover:pl-16 transition-all duration-300 group">
+                <div className="absolute left-0 top-3 w-11 h-11 rounded-full bg-black border-2 border-red-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-red-500 font-bold">02</span>
+                </div>
+                <div className="bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-sm p-6 rounded-2xl border-l-4 border-red-500">
+                  <h3 className="text-red-500 font-display text-xl mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                    Entraînement Physique
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Un entraînement rigoureux de plusieurs mois forge leur corps et leur esprit. Les techniques de lutte 
+                    traditionnelle sont transmises par d'anciens champions, qui partagent leur expérience et leur sagesse.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative pl-12 hover:pl-16 transition-all duration-300 group">
+                <div className="absolute left-0 top-3 w-11 h-11 rounded-full bg-black border-2 border-red-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-red-500 font-bold">03</span>
+                </div>
+                <div className="bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-sm p-6 rounded-2xl border-l-4 border-red-500">
+                  <h3 className="text-red-500 font-display text-xl mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                    Épreuves de Courage
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Les candidats affrontent des épreuves physiques et mentales qui testent leur courage, leur endurance et leur détermination. 
+                    Ces défis transformateurs forgent leur caractère et leur résilience.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative pl-12 hover:pl-16 transition-all duration-300 group">
+                <div className="absolute left-0 top-3 w-11 h-11 rounded-full bg-black border-2 border-red-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-red-500 font-bold">04</span>
+                </div>
+                <div className="bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-sm p-6 rounded-2xl border-l-4 border-red-500">
+                  <h3 className="text-red-500 font-display text-xl mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                    Consécration
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Le festival culmine avec une semaine de combats rituels, accompagnés de danses et chants traditionnels. 
+                    Les participants qui triomphent sont célébrés et reconnus comme des hommes accomplis par toute la communauté.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative mt-12 p-6 bg-gradient-to-r from-red-500/10 to-transparent rounded-2xl border-l-4 border-red-500">
+              <div className="absolute -top-4 -right-4 w-12 h-12 bg-black rounded-full border-2 border-red-500 flex items-center justify-center">
+                <span className="text-red-500 text-2xl">"</span>
+              </div>
+              <p className="text-sm text-gray-300 italic">
+                "À travers les Evala, les jeunes garçons ne deviennent pas seulement des hommes, 
+                ils deviennent les gardiens de notre héritage culturel, perpétuant une tradition millénaire 
+                qui forge le caractère et unit la communauté."
+              </p>
+            </div>
           </div>
         </div>
       </section>

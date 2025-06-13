@@ -10,6 +10,9 @@
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
   --evala-red: #FF0000;
+  --togo-red: #FF0000;
+  --togo-yellow: #FFD700;
+  --togo-green: #008000;
 }
 
 body {
@@ -37,10 +40,11 @@ body {
   line-height: 1.7;
 }
 
-/* Effet de texte guerrier */
+/* Effet de texte guerrier avec jaune */
 .warrior-text {
   text-shadow: 
     0 0 10px var(--evala-red),
+    0 0 20px var(--togo-yellow),
     2px 2px 0px rgba(0, 0, 0, 0.8);
   letter-spacing: 0.05em;
 }
@@ -50,6 +54,7 @@ body {
   letter-spacing: 0.1em;
   text-shadow: 
     0 0 20px var(--evala-red),
+    0 0 30px var(--togo-yellow),
     2px 2px 0px rgba(0, 0, 0, 1);
 }
 
@@ -85,7 +90,7 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Styles de scroll personnalisés */
+/* Styles de scroll personnalisés avec jaune */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -95,12 +100,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--evala-red);
+  background: linear-gradient(to bottom, var(--evala-red), var(--togo-yellow));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 0, 0, 0.8);
+  background: linear-gradient(to bottom, var(--togo-yellow), var(--evala-red));
 }
 
 /* Masquer la barre de défilement horizontale tout en gardant la fonctionnalité */
@@ -113,7 +118,7 @@ body {
   display: none;  /* Pour Chrome, Safari et Opera */
 }
 
-/* Effets de survol élégants */
+/* Effets de survol élégants avec jaune */
 .hover-underline {
   position: relative;
 }
@@ -125,7 +130,7 @@ body {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: var(--evala-red);
+  background: linear-gradient(to right, var(--evala-red), var(--togo-yellow));
   transition: width 0.3s ease;
 }
 
@@ -160,6 +165,7 @@ html {
   border: 4px solid #0000;
   border-radius: 50%;
   border-right-color: var(--evala-red);
+  border-left-color: var(--togo-yellow);
   animation: l15 1s infinite linear;
 }
 
@@ -227,7 +233,7 @@ html {
   }
   50% {
     background-position: 100% 50%;
-    filter: hue-rotate(10deg);
+    filter: hue-rotate(20deg);
   }
   100% {
     background-position: 0% 50%;

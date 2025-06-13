@@ -10,81 +10,83 @@ export default function Programme() {
   const programme = [
     {
       day: 1,
-      date: "15 Juillet",
-      title: "Cérémonie d'Ouverture & Matchs de Poules",
+      date: "19 Juillet",
+      title: "Début des Evala",
       events: [
         { time: "07:00", title: "Rituels d'ouverture", description: "Cérémonies traditionnelles et bénédictions des lutteurs" },
         { time: "09:00", title: "Défilé des lutteurs", description: "Présentation des participants par canton" },
-        { time: "10:30", title: "Poule A - Session 1", description: "Premiers combats des groupes A1 vs A2" },
-        { time: "14:00", title: "Poule A - Session 2", description: "Suite des combats A3 vs A4" },
-        { time: "16:00", title: "Poule B - Session 1", description: "Premiers combats des groupes B1 vs B2" }
+        { time: "10:30", title: "Début des combats", description: "Premiers affrontements de la journée" },
+        { time: "17:00", title: "Cérémonie du soir", description: "Célébrations et rituels de clôture du premier jour" }
       ]
     },
     {
       day: 2,
-      date: "16 Juillet",
-      title: "Matchs de Poules - Suite",
+      date: "20 Juillet",
+      title: "Deuxième Journée",
       events: [
         { time: "08:00", title: "Rituels du matin", description: "Préparation spirituelle des lutteurs" },
-        { time: "09:30", title: "Poule B - Session 2", description: "Suite des combats B3 vs B4" },
-        { time: "14:00", title: "Poule C - Session 1", description: "Combats des groupes C1 vs C2" },
-        { time: "16:00", title: "Poule C - Session 2", description: "Suite des combats C3 vs C4" }
+        { time: "09:30", title: "Combats de la matinée", description: "Suite des affrontements" },
+        { time: "14:00", title: "Combats de l'après-midi", description: "Poursuite des luttes" },
+        { time: "17:00", title: "Célébrations", description: "Festivités de fin de journée" }
       ]
     },
     {
       day: 3,
-      date: "17 Juillet",
-      title: "Derniers Matchs de Poules",
+      date: "21 Juillet",
+      title: "Troisième Journée",
       events: [
-        { time: "09:00", title: "Poule D - Session 1", description: "Combats des groupes D1 vs D2" },
-        { time: "11:00", title: "Poule D - Session 2", description: "Suite des combats D3 vs D4" },
-        { time: "14:00", title: "Matchs de classement", description: "Derniers combats de poules" },
-        { time: "17:00", title: "Cérémonie du soir", description: "Annonce des qualifiés pour les phases finales" }
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
       ]
     },
     {
       day: 4,
-      date: "18 Juillet",
-      title: "Huitièmes de Finale",
+      date: "22 Juillet",
+      title: "Quatrième Journée",
       events: [
-        { time: "08:00", title: "Rituels préparatoires", description: "Cérémonies pour les phases finales" },
-        { time: "10:00", title: "Premiers huitièmes", description: "Combats 1 à 4" },
-        { time: "14:00", title: "Seconds huitièmes", description: "Combats 5 à 8" },
-        { time: "18:00", title: "Célébration", description: "Honneur aux qualifiés pour les quarts" }
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
       ]
     },
     {
       day: 5,
-      date: "19 Juillet",
-      title: "Quarts de Finale",
+      date: "23 Juillet",
+      title: "Cinquième Journée",
       events: [
-        { time: "09:00", title: "Cérémonie d'ouverture", description: "Rituels spéciaux pour les quarts de finale" },
-        { time: "10:30", title: "Premiers quarts", description: "Combats 1 et 2" },
-        { time: "14:30", title: "Seconds quarts", description: "Combats 3 et 4" },
-        { time: "17:00", title: "Festivités", description: "Célébration des demi-finalistes" }
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
       ]
     },
     {
       day: 6,
-      date: "20 Juillet",
-      title: "Demi-Finales",
+      date: "24 Juillet",
+      title: "Sixième Journée",
       events: [
-        { time: "08:00", title: "Rituels matinaux", description: "Préparation spirituelle des demi-finalistes" },
-        { time: "10:00", title: "Première demi-finale", description: "Combat entre les vainqueurs des quarts 1 et 2" },
-        { time: "15:00", title: "Seconde demi-finale", description: "Combat entre les vainqueurs des quarts 3 et 4" },
-        { time: "18:00", title: "Veillée traditionnelle", description: "Préparation spirituelle pour la finale" }
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
       ]
     },
     {
       day: 7,
-      date: "21 Juillet",
+      date: "25 Juillet",
+      title: "Septième Journée",
+      events: [
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
+      ]
+    },
+    {
+      day: 8,
+      date: "26 Juillet",
+      title: "Huitième Journée",
+      events: [
+        { time: "À déterminer", title: "Village de Lutte", description: "Le lieu et le programme exact seront communiqués ultérieurement" }
+      ]
+    },
+    {
+      day: 9,
+      date: "27 Juillet",
       title: "Grande Finale",
       events: [
         { time: "07:00", title: "Rituels sacrés", description: "Cérémonies traditionnelles pour la finale" },
-        { time: "10:00", title: "Match pour la 3ème place", description: "Combat entre les perdants des demi-finales" },
-        { time: "14:00", title: "Cérémonie pré-finale", description: "Rituels et préparation des finalistes" },
-        { time: "15:00", title: "GRANDE FINALE", description: "Combat ultime pour le titre de champion des Evala" },
-        { time: "17:00", title: "Cérémonie de clôture", description: "Couronnement du champion et célébrations finales" },
+        { time: "10:00", title: "Préparatifs", description: "Derniers préparatifs pour les finales" },
+        { time: "14:00", title: "Finales", description: "Combats finaux des Evala" },
+        { time: "17:00", title: "Cérémonie de clôture", description: "Couronnement des vainqueurs et célébrations finales" },
         { time: "19:00", title: "Grande fête traditionnelle", description: "Célébration avec tout le village" }
       ]
     }
@@ -160,7 +162,7 @@ export default function Programme() {
           className="text-center mb-12"
         >
           <motion.h2 
-            className="text-4xl md:text-6xl font-display mb-4 text-evala tracking-wider"
+            className="text-4xl md:text-6xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent tracking-wider"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -168,7 +170,7 @@ export default function Programme() {
             Programme des Combats
           </motion.h2>
           <motion.div 
-            className="w-24 h-1 bg-evala mx-auto mb-4"
+            className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-4"
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -185,7 +187,7 @@ export default function Programme() {
 
         {/* Navigation des jours avec animation */}
         <div className="overflow-x-auto mb-12">
-          <div className="flex gap-3 md:justify-center min-w-max px-4 pb-4">
+          <div className="flex gap-4 md:justify-center min-w-max px-4 pb-4">
             {programme.map((day) => (
               <motion.button
                 key={day.day}
@@ -194,14 +196,25 @@ export default function Programme() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: day.day * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className={`px-6 py-4 min-w-[140px] transition-all duration-300 ${
+                whileTap={{ scale: 0.95 }}
+                className={`relative px-6 py-4 min-w-[160px] rounded-2xl transition-all duration-300 overflow-hidden ${
                   activeDay === day.day
-                    ? "bg-evala text-white border-2 border-evala shadow-lg shadow-evala/20"
-                    : "bg-black text-gray-400 border-2 border-evala/20 hover:border-evala/50 hover:text-gray-200"
+                    ? "bg-gradient-to-br from-festival-red to-festival-yellow text-white shadow-lg shadow-festival-red/20"
+                    : "bg-black/80 text-gray-400 border border-festival-red/20 hover:border-festival-red/50 hover:text-gray-200"
                 }`}
               >
-                <div className="text-2xl font-display mb-1">Jour {day.day}</div>
-                <div className="text-sm opacity-80">{day.date}</div>
+                <div className="relative z-10">
+                  <div className="text-2xl font-display mb-1">Jour {day.day}</div>
+                  <div className="text-sm opacity-80">{day.date}</div>
+                </div>
+                {activeDay === day.day && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-festival-red/20 to-black/20"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "100%" }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                  />
+                )}
               </motion.button>
             ))}
           </div>
@@ -228,33 +241,33 @@ export default function Programme() {
                   <h3 className="text-3xl md:text-4xl font-display text-white mb-4">{day.title}</h3>
                   <div className="flex items-center justify-center gap-4">
                     <motion.div 
-                      className="w-12 h-[2px] bg-evala"
+                      className="h-[2px] bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red flex-1 max-w-[100px]"
                       initial={{ width: 0 }}
-                      animate={{ width: 48 }}
+                      animate={{ width: "100%" }}
                       transition={{ duration: 0.5, delay: 0.2 }}
                     ></motion.div>
                     <motion.div 
-                      className="w-2 h-2 bg-evala rotate-45"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
+                      className="w-3 h-3 bg-black border-2 border-festival-red rotate-45 ring-4 ring-festival-red/20"
+                      initial={{ scale: 0, rotate: 0 }}
+                      animate={{ scale: 1, rotate: 45 }}
                       transition={{ duration: 0.5, delay: 0.3 }}
                     ></motion.div>
                     <motion.div 
-                      className="w-12 h-[2px] bg-evala"
+                      className="h-[2px] bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red flex-1 max-w-[100px]"
                       initial={{ width: 0 }}
-                      animate={{ width: 48 }}
+                      animate={{ width: "100%" }}
                       transition={{ duration: 0.5, delay: 0.2 }}
                     ></motion.div>
                   </div>
                 </motion.div>
 
                 <motion.div 
-                  className="space-y-6"
+                  className="space-y-8"
                   variants={containerVariants}
                   initial="hidden"
                   animate="show"
                 >
-                  {day.events.map((event) => (
+                  {day.events.map((event, ) => (
                     <motion.div
                       key={event.time}
                       variants={eventVariants}
@@ -263,34 +276,34 @@ export default function Programme() {
                       className="relative group"
                     >
                       <motion.div 
-                        className="absolute -left-2 top-0 bottom-0 w-[2px] bg-evala/30"
+                        className="absolute -left-2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-festival-red via-festival-red to-festival-red opacity-30"
                         variants={timelineVariants}
                       ></motion.div>
                       <motion.div 
-                        className="absolute -left-[11px] top-[28px] w-5 h-5 border-2 border-evala bg-black rotate-45"
+                        className="absolute -left-[11px] top-[28px] w-5 h-5 border-2 border-festival-red bg-black rotate-45 shadow-[0_0_10px_rgba(255,68,68,0.2)]"
                         whileHover={{ scale: 1.2, rotate: 90 }}
                         transition={{ duration: 0.3 }}
                       ></motion.div>
                       <motion.div 
-                        className="pl-8 py-4 transition-all duration-300 hover:bg-black/20 rounded-lg"
+                        className="pl-8 py-6 transition-all duration-300 hover:bg-gradient-to-r hover:from-black/40 hover:to-transparent rounded-2xl"
                         whileHover={{ x: 10 }}
                       >
                         <motion.time 
-                          className="text-evala text-xl font-display inline-block mb-2 px-3 py-1 bg-black/40 rounded relative z-10"
+                          className="text-festival-yellow text-xl font-display inline-block mb-3 px-4 py-1.5 bg-black/80 rounded-xl relative z-10 border border-festival-red/20"
                           animate={hoveredEvent === event.time ? { 
                             scale: 1.05,
-                            backgroundColor: "rgba(0, 0, 0, 0.6)"
+                            backgroundColor: "rgba(0, 0, 0, 0.9)"
                           } : { 
                             scale: 1,
-                            backgroundColor: "rgba(0, 0, 0, 0.4)"
+                            backgroundColor: "rgba(0, 0, 0, 0.8)"
                           }}
                           transition={{ duration: 0.2 }}
                         >
                           {event.time}
                         </motion.time>
                         <motion.h4 
-                          className="text-xl text-white mb-2 font-display tracking-wide"
-                          animate={hoveredEvent === event.time ? { x: 10 } : { x: 0 }}
+                          className="text-2xl text-white mb-3 font-display tracking-wide"
+                          animate={hoveredEvent === event.time ? { x: 10, color: "#FF4444" } : { x: 0, color: "#FFFFFF" }}
                         >
                           {event.title}
                         </motion.h4>

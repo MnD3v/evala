@@ -10,8 +10,11 @@ import Footer from "./components/footer";
 import GradientBackground from "./components/GradientBackground";
 import Traditions from "./components/traditions";
 import Programme from "./components/programme";
+import Promotions from "./components/Promotions";
 import Blog from "./blog/page";
+import Contact from "./components/contact";
 import Loader from "./components/Loader";
+import DecorativeEvala from "./components/DecorativeEvala";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
@@ -36,16 +39,19 @@ export default function Home() {
           <>
             <GradientBackground />
             <div className="relative z-0">
+              <DecorativeEvala />
               <Navbar />
               <main className="flex-grow">
                 <Hero />
                 <JobRegistration />
                 <Programme />
+                <Promotions />
                 <LiveStream />
                 <Traditions />
                 <Gallery />
                 <History />
                 <Blog />
+                <Contact />
               </main>
               <Footer />
             </div>

@@ -48,7 +48,7 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-6">
               <span className="text-2xl font-bold font-bricolage">EVALA</span>
             </Link>
-            <p className="text-gray-400 mb-6 font-poppins">
+            <p className="text-gray-400 mb-6 font-sans">
               Créons ensemble des expériences numériques exceptionnelles.
             </p>
             {/* Social Links */}
@@ -57,7 +57,7 @@ export default function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="text-gray-400 hover:text-green-400 transition-colors duration-300"
+                  className="text-gray-400 hover:text-green-400 transition-colors duration-300 font-sans"
                   aria-label={social.label}
                 >
                   <svg
@@ -81,7 +81,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-green-400 transition-colors duration-300 font-poppins"
+                      className="text-gray-400 hover:text-green-400 transition-colors duration-300 font-sans"
                     >
                       {link.label}
                     </Link>
@@ -95,19 +95,19 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0 font-poppins">
+            <p className="text-gray-400 text-sm mb-4 md:mb-0 font-sans">
               © {currentYear} EVALA. Tous droits réservés.
             </p>
             <div className="flex space-x-6">
               <Link
                 href="/privacy"
-                className="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300 font-poppins"
+                className="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300 font-sans"
               >
                 Politique de confidentialité
               </Link>
               <Link
                 href="/terms"
-                className="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300 font-poppins"
+                className="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300 font-sans"
               >
                 Conditions d'utilisation
               </Link>

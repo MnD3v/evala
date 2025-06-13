@@ -45,7 +45,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           <div className="absolute inset-0 -left-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 group-hover:left-full transition-all duration-1000 ease-out" />
 
           {/* Date */}
-          <p className="text-sm text-gray-400 mb-3 font-medium font-poppins">
+          <p className="text-sm text-gray-400 mb-3 font-medium font-sans">
             {new Date(post.publishedAt).toLocaleDateString('fr-FR', {
               day: 'numeric',
               month: 'long',
@@ -60,14 +60,14 @@ export default function BlogCard({ post }: BlogCardProps) {
 
           {/* Description if available */}
           {post.excerpt && (
-            <p className="text-gray-400 mb-4 line-clamp-3 font-poppins">
+            <p className="text-gray-400 mb-4 line-clamp-3 font-sans">
               {post.excerpt}
             </p>
           )}
 
           {/* Footer */}
           <div className="flex items-center justify-between pt-4 border-t border-white/10">
-            <span className="text-red-400 font-semibold group-hover:text-red-300 transition-colors duration-300 font-poppins">
+            <span className="text-red-400 font-semibold group-hover:text-red-300 transition-colors duration-300 font-sans">
               Lire l'article
             </span>
             

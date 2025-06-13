@@ -33,6 +33,13 @@ export default {
           'red': 'var(--togo-red)',
           'yellow': 'var(--togo-yellow)',
           'green': 'var(--togo-green)',
+        },
+        'festival': {
+          'red': 'var(--evala-red)',
+          'yellow': '#FFD700',
+          'yellow-light': 'rgba(255, 215, 0, 0.1)',
+          'yellow-medium': 'rgba(255, 215, 0, 0.5)',
+          'yellow-dark': 'rgba(255, 215, 0, 0.8)',
         }
       },
       animation: {

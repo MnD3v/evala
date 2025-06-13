@@ -64,7 +64,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               className="text-2xl font-bold text-white flex items-center"
             >
-              <img src="/icons/logo.png" alt="Evala" className="h-16 md:h-24 mr-3" />
+              <img src="/icons/logo.png" alt="Evala" className="h-12 md:h-16 mr-3" />
             </motion.a>
 
             {/* Navigation desktop */}

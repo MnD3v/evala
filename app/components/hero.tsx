@@ -66,7 +66,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
       {/* Background avec effet de particules */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-yellow-500/5 to-black/50 z-10"></div>
         {isClient && <ParticlesEffect />}
       </div>
 
@@ -80,7 +80,7 @@ export default function Hero() {
         transition={{ type: "spring", stiffness: 75, damping: 15 }}
       >
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-evala/10 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-evala/10 via-yellow-500/10 to-evala/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.6, 0.8, 0.6],
@@ -92,7 +92,7 @@ export default function Hero() {
           }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-evala/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-yellow-500/10 via-evala/10 to-yellow-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.8, 0.6, 0.8],
@@ -116,13 +116,13 @@ export default function Hero() {
           >
             <div className="relative inline-block">
               <motion.h1 
-                className="text-[6rem] md:text-[12rem] lg:text-[16rem] font-display text-transparent bg-clip-text bg-gradient-to-r from-evala via-white to-evala leading-none tracking-tighter mb-4"
+                className="text-[6rem] md:text-[12rem] lg:text-[16rem] font-display text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
                 animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               >
                 EVALA
               </motion.h1>
-              <div className="absolute -inset-2 bg-evala/20 blur-2xl -z-10 rounded-full"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-evala/20 via-yellow-500/20 to-evala/20 blur-2xl -z-10 rounded-full"></div>
             </div>
             
             <motion.p

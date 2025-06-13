@@ -53,31 +53,31 @@ const portableTextComponents: PortableTextComponents = {
     }
   },
   block: {
-    h1: ({ children }) => <h1 className="text-4xl font-bold mt-12 mb-6 text-white font-poppins">{children}</h1>,
-    h2: ({ children }) => <h2 className="text-3xl font-bold mt-10 mb-4 text-white font-poppins">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-2xl font-bold mt-8 mb-3 text-white font-poppins">{children}</h3>,
-    normal: ({ children }) => <p className="mb-6 leading-relaxed text-gray-300 font-poppins tracking-wide">{children}</p>,
+    h1: ({ children }) => <h1 className="text-4xl font-bold mt-12 mb-6 text-white font-sans">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-3xl font-bold mt-10 mb-4 text-white font-sans">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-2xl font-bold mt-8 mb-3 text-white font-sans">{children}</h3>,
+    normal: ({ children }) => <p className="mb-6 leading-relaxed text-gray-300 font-sans tracking-wide">{children}</p>,
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-green-500 pl-6 py-4 my-8 italic text-gray-300 bg-gray-800/50 rounded-r-lg font-poppins text-lg">{children}</blockquote>
+      <blockquote className="border-l-4 border-green-500 pl-6 py-4 my-8 italic text-gray-300 bg-gray-800/50 rounded-r-lg font-sans text-lg">{children}</blockquote>
     )
   },
   marks: {
-    strong: ({ children }) => <strong className="font-bold text-white font-poppins">{children}</strong>,
-    em: ({ children }) => <em className="italic text-gray-300 font-poppins">{children}</em>,
+    strong: ({ children }) => <strong className="font-bold text-white font-sans">{children}</strong>,
+    em: ({ children }) => <em className="italic text-gray-300 font-sans">{children}</em>,
     link: ({ value, children }) => (
       <a
         href={value?.href}
         target={value?.blank ? '_blank' : '_self'}
         rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-green-400 hover:text-green-300 underline transition-colors font-poppins"
+        className="text-green-400 hover:text-green-300 underline transition-colors font-sans"
       >
         {children}
       </a>
     )
   },
   list: {
-    bullet: ({ children }) => <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300 font-poppins text-lg pl-4">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300 font-poppins text-lg pl-4">{children}</ol>
+    bullet: ({ children }) => <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300 font-sans text-lg pl-4">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300 font-sans text-lg pl-4">{children}</ol>
   },
   listItem: {
     bullet: ({ children }) => <li className="mb-2">{children}</li>,
@@ -163,12 +163,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </div>
             )}
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-poppins leading-tight">{post.title}</h1>
-            <p className="text-gray-400 mb-12 font-poppins text-lg">{new Date(post.publishedAt).toLocaleDateString('fr-FR', {
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-sans leading-tight">{post.title}</h1>
+            <p className="text-gray-400 mb-12 font-sans text-lg">{new Date(post.publishedAt).toLocaleDateString('fr-FR', {
               day: 'numeric', month: 'long', year: 'numeric'
             })}</p>
 
-            <article className="prose prose-lg max-w-none prose-invert font-poppins">
+            <article className="prose prose-lg max-w-none prose-invert font-sans">
               <PortableText value={post.body} components={portableTextComponents} />
             </article>
 
@@ -184,9 +184,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   />
                 )}
                 <div>
-                  <p className="font-semibold text-white font-poppins">{post.author.name}</p>
+                  <p className="font-semibold text-white font-sans">{post.author.name}</p>
                   {post.author.bio && (
-                    <div className="text-sm text-gray-400 font-poppins">
+                    <div className="text-sm text-gray-400 font-sans">
                       <PortableText value={post.author.bio} components={portableTextComponents} />
                     </div>
                   )}
@@ -196,7 +196,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
             {relatedPosts.length > 0 && (
               <section className="mt-16 pt-8 border-t border-gray-800">
-                <h2 className="text-3xl font-bold mb-8 text-center text-white font-poppins">Autres articles</h2>
+                <h2 className="text-3xl font-bold mb-8 text-center text-white font-sans">Autres articles</h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedPosts.map((relatedPost) => (
                     <Link
@@ -215,10 +215,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                         </div>
                       )}
                       <div className="p-4">
-                        <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-white group-hover:text-green-400 transition-colors font-poppins">
+                        <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-white group-hover:text-green-400 transition-colors font-sans">
                           {relatedPost.title}
                         </h3>
-                        <p className="text-sm text-gray-400 mb-3 font-poppins">
+                        <p className="text-sm text-gray-400 mb-3 font-sans">
                           {new Date(relatedPost.publishedAt).toLocaleDateString('fr-FR', {
                             day: 'numeric', month: 'long', year: 'numeric'
                           })}

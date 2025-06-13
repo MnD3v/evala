@@ -15,7 +15,7 @@ export default function Loader() {
         className="text-center"
       >
         <div className="loader mx-auto mb-4"></div>
-        <p className="text-gray-400 font-poppins animate-pulse">Chargement...</p>
+        <p className="text-gray-400 font-sans animate-pulse">Chargement...</p>
       </motion.div>
     </motion.div>
   );
