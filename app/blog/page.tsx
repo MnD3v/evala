@@ -34,6 +34,7 @@ export default function Blog() {
   const [posts, setPosts] = useState<SanityDocument[]>([]);
   const [showAll, setShowAll] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options)
@@ -43,6 +44,7 @@ export default function Blog() {
       })
       .catch((error) => {
         console.error("Erreur lors du chargement des posts :", error);
+        setError(error instanceof Error ? error.message : "Une erreur est survenue lors du chargement des articles.");
         setIsLoading(false);
       });
   }, []);
@@ -74,14 +76,40 @@ export default function Blog() {
         </div>
 
         {/* Loading State */}
-        {isLoading && (
+        {isLoading ? (
           <div className="flex justify-center items-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
           </div>
-        )}
-
-        {/* Posts Grid */}
-        {!isLoading && (
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400 mb-6">Une erreur est survenue lors du chargement des articles.</p>
+            <button
+              onClick={() => {
+                setError(null);
+                client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options)
+                  .then((data) => {
+                    setPosts(data);
+                    setIsLoading(false);
+                  })
+                  .catch((error) => {
+                    console.error("Erreur lors du chargement des posts :", error);
+                    setError(error instanceof Error ? error.message : "Une erreur est survenue lors du chargement des articles.");
+                    setIsLoading(false);
+                  });
+              }}
+              className="bg-black hover:bg-gray-900 text-red-500 font-semibold py-4 px-8 rounded-full border-2 border-red-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(239,68,68,0.3)] inline-flex items-center space-x-2"
+            >
+              <span>Réessayer</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400">Aucun article disponible pour le moment.</p>
+          </div>
+        ) : (
           <motion.div
             variants={container}
             initial="hidden"
@@ -104,7 +132,7 @@ export default function Blog() {
           >
             <button
               onClick={() => setShowAll(!showAll)}
-              className="bg-black hover:bg-gray-900 text-green-500 font-semibold py-4 px-8 rounded-full border-2 border-green-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] inline-flex items-center space-x-2"
+              className="bg-black hover:bg-gray-900 text-red-500 font-semibold py-4 px-8 rounded-full border-2 border-red-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(239,68,68,0.3)] inline-flex items-center space-x-2"
             >
               <span>{showAll ? "Voir moins d'articles" : "Charger plus d'articles"}</span>
               <svg

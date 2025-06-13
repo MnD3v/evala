@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { type SanityDocument } from "next-sanity";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 interface BlogCardProps {
   post: SanityDocument;
@@ -53,7 +54,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           </p>
 
           {/* Title */}
-          <h2 className="text-xl font-bold mb-4 line-clamp-2 text-white group-hover:text-green-400 transition-colors duration-300 font-bricolage">
+          <h2 className="text-xl font-bold mb-4 line-clamp-2 text-white group-hover:text-red-400 transition-colors duration-300 font-bricolage">
             {post.title}
           </h2>
 
@@ -66,28 +67,18 @@ export default function BlogCard({ post }: BlogCardProps) {
 
           {/* Footer */}
           <div className="flex items-center justify-between pt-4 border-t border-white/10">
-            <span className="text-green-400 font-semibold group-hover:text-green-300 transition-colors duration-300 font-poppins">
+            <span className="text-red-400 font-semibold group-hover:text-red-300 transition-colors duration-300 font-poppins">
               Lire l'article
             </span>
             
             {/* Animated Arrow */}
-            <svg
-              className="w-6 h-6 text-green-400 transform group-hover:translate-x-2 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            <ArrowRight
+              className="w-6 h-6 text-red-400 transform group-hover:translate-x-2 transition-transform duration-300"
+            />
           </div>
 
           {/* Progress Bar */}
-          <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-green-500/50 via-green-400/50 to-green-500/50 w-0 group-hover:w-full transition-all duration-700 ease-out" />
+          <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-red-500/50 via-red-400/50 to-red-500/50 w-0 group-hover:w-full transition-all duration-700 ease-out" />
         </div>
       </Link>
     </motion.div>

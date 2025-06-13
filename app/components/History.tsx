@@ -2,51 +2,76 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { Play, Trophy } from "lucide-react";
 
 export default function History() {
-  const champions = [
+  const eventsHistory = [
     {
       year: "2023",
-      champion: "Koffi Sama",
-      canton: "Pya",
-      details: "Victoire mémorable après un combat intense de 45 minutes",
-      photo: "/images/Champion-1.png" // À remplacer par la vraie photo
+      eventDescription: "Une édition marquée par une participation record de 300 lutteurs et une affluence exceptionnelle. Les cérémonies traditionnelles ont été particulièrement riches avec la présence de dignitaires de toute la région.",
+      champion: {
+        name: "Koffi Sama",
+        canton: "Pya",
+        details: "Victoire mémorable après un combat intense de 45 minutes",
+        photo: "/images/Champion-1.png",
+      },
+      hasHighlights: true
     },
     {
       year: "2022",
-      champion: "Essowavana Pali",
-      canton: "Tchitchao",
-      details: "Champion pour la deuxième fois consécutive",
-        photo: "/images/Champion-2.png" // À remplacer par la vraie photo
-     
+      eventDescription: "Une édition placée sous le signe de l'innovation avec l'introduction de nouvelles cérémonies tout en respectant les traditions ancestrales. Plus de 5000 visiteurs ont fait le déplacement.",
+      champion: {
+        name: "Essowavana Pali",
+        canton: "Tchitchao",
+        details: "Champion pour la deuxième fois consécutive",
+        photo: "/images/Champion-2.png",
+      },
+      hasHighlights: true
     },
     {
       year: "2021",
-      champion: "Essowavana Pali",
-      canton: "Tchitchao",
-      details: "Premier titre après trois finales",
-      photo: "/images/Champion-3.png"
+      eventDescription: "Retour triomphal des Evala après la pandémie. Cette édition a été marquée par un retour aux sources avec un accent particulier sur la transmission des valeurs traditionnelles.",
+      champion: {
+        name: "Essowavana Pali",
+        canton: "Tchitchao",
+        details: "Premier titre après trois finales",
+        photo: "/images/Champion-3.png",
+      },
+      hasHighlights: true
     },
     {
       year: "2020",
-      champion: "-",
-      canton: "-",
-      details: "Annulé en raison de la pandémie de COVID-19",
-      photo: null
+      eventDescription: "En raison de la pandémie de COVID-19, les Evala n'ont pas pu se tenir. Cette année a été consacrée à la préservation et à la documentation de notre héritage culturel.",
+      champion: {
+        name: "-",
+        canton: "-",
+        details: "Annulé en raison de la pandémie de COVID-19",
+        photo: null,
+      },
+      hasHighlights: false
     },
     {
       year: "2019",
-      champion: "Komlan Agbéko",
-      canton: "Kouméa",
-      details: "Plus jeune champion de l'histoire des Evala",
-      photo: "/images/Champion-5.png"
+      eventDescription: "Une édition historique qui a vu l'intronisation du plus jeune champion de l'histoire des Evala. Les cérémonies ont attiré des visiteurs internationaux et des médias du monde entier.",
+      champion: {
+        name: "Komlan Agbéko",
+        canton: "Kouméa",
+        details: "Plus jeune champion de l'histoire des Evala",
+        photo: "/images/Champion-5.png",
+      },
+      hasHighlights: true
     },
     {
       year: "2018",
-      champion: "Yawo Dzidula",
-      canton: "Pya",
-      details: "Champion après un parcours sans défaite",
-      photo: "/images/Champion-6.png"
+      eventDescription: "L'édition du renouveau qui a vu l'introduction de nouvelles technologies pour la retransmission des combats, tout en préservant l'authenticité des rituels traditionnels.",
+      champion: {
+        name: "Yawo Dzidula",
+        canton: "Pya",
+        details: "Champion après un parcours sans défaite",
+        photo: "/images/Champion-6.png",
+      },
+      hasHighlights: true
     }
   ];
 
@@ -68,6 +93,7 @@ export default function History() {
   return (
     <section id="histoire" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,14 +102,25 @@ export default function History() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-display mb-4 text-evala tracking-wider">
-            Palmarès des Champions
+            Histoire & Tradition
           </h2>
           <div className="w-24 h-1 bg-evala mx-auto mb-8"></div>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto font-montserrat">
-            L'histoire s'écrit à travers leurs victoires
+        </motion.div>
+
+        {/* Description de la cérémonie */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16 text-center"
+        >
+          <p className="text-lg text-gray-300 mb-8 leading-relaxed font-montserrat">
+            Les Evala sont bien plus qu'une simple compétition de lutte traditionnelle. C'est un rite initiatique sacré qui marque le passage à l'âge adulte des jeunes Kabyè. Pendant une semaine intense, les initiés, appelés "Evala", s'affrontent dans des combats qui symbolisent leur courage, leur force et leur détermination. Cette tradition ancestrale, transmise de génération en génération, est accompagnée de chants, de danses et de cérémonies rituelles qui renforcent les liens communautaires et perpétuent l'héritage culturel du peuple Kabyè.
           </p>
         </motion.div>
 
+        {/* Liste des années */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -91,12 +128,12 @@ export default function History() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          {champions.map((champion, index) => (
+          {eventsHistory.map((event, index) => (
             <motion.div
-              key={champion.year}
+              key={event.year}
               variants={itemVariants}
               className={`relative pl-8 pb-12 ${
-                index !== champions.length - 1 ? "border-l-2 border-evala/20" : ""
+                index !== eventsHistory.length - 1 ? "border-l-2 border-evala/20" : ""
               }`}
             >
               <motion.div
@@ -107,41 +144,63 @@ export default function History() {
                 <div className="absolute inset-0.5 bg-evala/20 rounded-full"></div>
               </motion.div>
 
-              <div className="bg-black/20 rounded-lg p-6 ml-6">
-                <div className="flex items-start gap-6">
-                  {champion.photo && (
-                    <div className="flex-shrink-0">
-                      <div className="w-[70px] h-[70px] relative rounded-lg overflow-hidden border-2 border-evala/50">
-                        <Image
-                          src={champion.photo}
-                          alt={`Champion ${champion.year} - ${champion.champion}`}
-                          className="object-cover"
-                          height={70}
-                          width={70  }
-                       
-                        />
+              <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 ml-6 hover:bg-black/30 transition-all duration-300">
+                {/* Année et Description */}
+                <div className="mb-6">
+                  <h3 className="text-4xl font-display text-evala mb-4">
+                    {event.year}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    {event.eventDescription}
+                  </p>
+                  {event.hasHighlights && (
+                    <Link
+                      href={`/moments-forts/${event.year}`}
+                      className="inline-flex items-center gap-2 text-sm bg-evala/10 text-evala hover:bg-evala/20 px-4 py-2 rounded-full transition-all duration-300"
+                    >
+                      <Play className="w-4 h-4" />
+                      <span>Voir les moments forts {event.year}</span>
+                    </Link>
+                  )}
+                </div>
+
+                {/* Informations du Champion */}
+                {event.champion.name !== "-" && (
+                  <div className="border-t border-evala/10 pt-6">
+                    <div className="flex items-center gap-2 text-evala mb-3">
+                      <Trophy className="w-5 h-5" />
+                      <span className="font-display text-lg">Champion</span>
+                    </div>
+                    <div className="flex items-start gap-6">
+                      {event.champion.photo && (
+                        <div className="flex-shrink-0">
+                          <div className="w-[70px] h-[70px] relative rounded-lg overflow-hidden border-2 border-evala/50">
+                            <Image
+                              src={event.champion.photo}
+                              alt={`Champion ${event.year} - ${event.champion.name}`}
+                              className="object-cover"
+                              height={70}
+                              width={70}
+                            />
+                          </div>
+                        </div>
+                      )}
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="text-xl text-white font-display">
+                            {event.champion.name}
+                          </h4>
+                          <span className="text-sm text-gray-400 bg-black/40 px-3 py-1 rounded">
+                            {event.champion.canton}
+                          </span>
+                        </div>
+                        <p className="text-gray-400">
+                          {event.champion.details}
+                        </p>
                       </div>
                     </div>
-                  )}
-                  <div className="flex-grow">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-2xl font-display text-evala">
-                        {champion.year}
-                      </h3>
-                      <span className="text-sm text-gray-400 bg-black/40 px-3 py-1 rounded">
-                        {champion.canton}
-                      </span>
-                    </div>
-                    
-                    <h4 className="text-xl text-white mb-2 font-display">
-                      {champion.champion}
-                    </h4>
-                    
-                    <p className="text-gray-400">
-                      {champion.details}
-                    </p>
                   </div>
-                </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -154,12 +213,12 @@ export default function History() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <a
-            href="#"
+          <Link
+            href="/histoire"
             className="inline-block text-evala hover:text-evala-dark transition-colors"
           >
             Voir plus d'histoire →
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
