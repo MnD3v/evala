@@ -97,7 +97,7 @@ export default function Promotions() {
         </motion.div>
 
         {/* Grille des promotions */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 justify-items-center">
           {promotions.map((promo, index) => (
             <motion.div
               key={promo._id}
@@ -105,12 +105,12 @@ export default function Promotions() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative"
+              className="group relative w-full max-w-[200px]"
             >
               <Link href={`/promotions/${promo.slug.current}`}>
                 <div className="group relative">
                   {/* Carte principale */}
-                  <div className="relative flex h-[400px] transform-gpu flex-col overflow-hidden rounded-[40px] bg-gradient-to-br from-black to-gray-900 p-6 transition-all duration-500 hover:scale-[1.02]">
+                  <div className="relative flex h-[300px] transform-gpu flex-col overflow-hidden rounded-[40px] bg-gradient-to-br from-black to-gray-900 p-3 transition-all duration-500 hover:scale-[1.02]">
                     {/* Image de fond avec effet parallaxe */}
                     <div className="absolute inset-0 z-0">
                       {promo.mainImage?.asset?.url ? (
@@ -146,19 +146,19 @@ export default function Promotions() {
                       <div className="space-y-6">
                         {/* Titre avec effet de soulignement */}
                         <div className="relative">
-                          <h3 className="text-3xl font-bold text-white">
+                          <h3 className="text-lg font-bold text-white line-clamp-2">
                             {promo.title}
                           </h3>
-                          <div className="mt-2 h-1 w-12 bg-festival-red transition-all duration-300 group-hover:w-full"></div>
+                          <div className="mt-2 h-0.5 w-8 bg-festival-red transition-all duration-300 group-hover:w-full"></div>
                         </div>
 
                         {/* Informations et bouton */}
                         <div className="flex items-center justify-between">
                           {/* Auteur avec avatar */}
                           {promo.author && (
-                            <div className="flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-festival-red/20 backdrop-blur-sm">
-                                <svg className="h-5 w-5 text-festival-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="flex items-center gap-2">
+                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-festival-red/20 backdrop-blur-sm">
+                                <svg className="h-4 w-4 text-festival-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                               </div>

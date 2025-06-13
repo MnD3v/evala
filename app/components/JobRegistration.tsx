@@ -9,8 +9,8 @@ export default function JobRegistration() {
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-4xl mx-auto text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-display mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
-                        Inscrivez-vous dans notre base de talents
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+                        Job EVALA
                     </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-8"></div>
                     <p className="text-xl text-gray-300 mb-8">

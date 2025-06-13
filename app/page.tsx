@@ -3,6 +3,7 @@
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import JobRegistration from "./components/JobRegistration";
+import Services from "./components/Services";
 import Gallery from "./components/gallery";
 import LiveStream from "./components/live-stream";
 import History from "./components/History";
@@ -44,6 +45,7 @@ export default function Home() {
               <main className="flex-grow">
                 <Hero />
                 <JobRegistration />
+                <Services />
                 <Programme />
                 <Promotions />
                 <LiveStream />

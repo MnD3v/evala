@@ -1,134 +1,95 @@
-import { motion } from 'framer-motion'
-import React from 'react'
-import Animations from './utils/item'
+"use client";
 
-const Services = () => {
-    const projectPhases = [
-        {
-            title: "L’Administration",
-            description:
-                "L'administration joue un rôle clé dans la gestion des ressources, la coordination et la prise de décision stratégique.",
-        },
-        {
-            title: "La Gérance de projet",
-            description:
-                "La gérance de projet assure la planification, l'organisation et le suivi des différentes étapes du projet.",
-        },
-        {
-            title: "L’Estimation",
-            description:
-                "L'estimation permet d'évaluer les coûts, les délais et les ressources nécessaires pour mener à bien le projet.",
-        },
-        {
-            title: "La Construction (exécution)",
-            description:
-                "La phase de construction (exécution) consiste à mettre en œuvre les travaux conformément aux plans et aux spécifications.",
-        },
-    ];
-    const fonctionnalites = [
-        {
-            icon: "/icons/service-icon-1-1.svg",
-            title: "Genie civil",
-            description: "Nous mettons à votre disposition une équipe complète de spécialiste pour la réalisation de vos projets de construction de batiment garantissant qualité, pérennité  et respect de délai d'exécution.",
-        },
-        {
-            icon: "/icons/forage.png",
-            title: "Forage",
-            description: "De l'étude géotechnique et hydrogéologique a la foration et équipement adapté de vos forages, laissez vous guider par nos experts.",
-        },
-        {
-            icon: "/icons/espace-vert.png",
-            title: "ESPACE VERT",
-            description: "Es ce que vous saviez que l'espace vert réduit le stress et améliore le bien être? Et bien ne ratez pas l'opportunité d'avoir un petit jardin dans votre maison avec des plantes a vertu spéciale que nos jardinier porterons a votre connaissance pour une mise en œuvre.",
-        },
-        {
-            icon: "/icons/service-icon-1-3.svg",
-            title: "MATERIEL ET EQUIPEMENT",
-            description: "Le matériel a une importance capital dans la réussite des projets.. c'est pour ça qu'à CEGEC nous mettrons a la disposition des projets que vous nous confierait un matériel adapté, suffisent et de pointe.",
-        }
-    ];
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-    return (
-        <section id='fonctionnalites' className='flex justify-center text-center bg-orange-100/30 py-6 md:py-16'>
+const services = [
+  {
+    title: "Logement",
+    description: "Trouvez l'hébergement idéal pendant le festival : hôtels, gîtes, et hébergements chez l'habitant.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+    href: "/logement"
+  },
+  {
+    title: "Tourisme",
+    description: "Découvrez les sites touristiques de la région : visites guidées, excursions et activités culturelles.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    href: "/tourisme"
+  },
+  {
+    title: "Bons Plans Evala",
+    description: "Les meilleures offres pour profiter du festival : packages, réductions et offres spéciales.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    href: "/bonsplans"
+  }
+];
 
-            <div className='max flex flex-col items-center'>
-                <p
+export default function Services() {
+  return (
+    <section className="py-24 relative overflow-hidden" id="services">
+      {/* Fond décoratif */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-6xl font-display mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text text-transparent">
+            Vous souhaitez quelque chose ?
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-festival-red to-white mx-auto mb-8"></div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Découvrez nos services pour rendre votre expérience Evala inoubliable
+          </p>
+        </motion.div>
 
-                    className='md:text-xl font-roboto text-e_orange text-center font-rubik'>OPPORTUNITÉ DE SERVICE DE QUALITÉ
-                </p>
-                <motion.div
-                    variants={Animations.scale({ duration: 0.7, })}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-
-                    className=' flex items-center gap-2 my-4 font-rubik'>
-
-
-                    <p
-
-                        className='text-3xl md:text-5xl font-roboto text-e_orange font-black'>NOS SERVICES
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Link href={service.href} className="block group">
+                <div className="bg-black/40 backdrop-blur-sm border border-festival-red/20 rounded-2xl p-8 transition-all duration-300 hover:border-festival-red/50 hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] relative overflow-hidden">
+                  {/* Effet de survol */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-festival-red/0 via-festival-red/5 to-festival-red/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="text-festival-red mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-2xl font-display text-white mb-4 group-hover:text-festival-red transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                      {service.description}
                     </p>
-
-                </motion.div>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-                    {
-                        fonctionnalites.map((element) =>
-                        (
-                            <motion.div
-                                key={element.icon}
-                                variants={Animations.scale({ duration: 0.1 })}
-                                style={{ backgroundImage: "url('./images/service-block-bg.png/')" }}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-
-                                className='m-2 flex flex-col items-center  px-4 py-9 gap-7 border'
-                            >
-
-                                <img src={element.icon} alt="" className='h-16' />
-
-                                <p className='text-xl font-bold'>
-                                    {element.title}
-
-                                </p>
-
-                                {element.description}
-                            </motion.div>
-                        ))
-                    }
-
-
-
+                  </div>
                 </div>
-                <motion.p 
-                 variants={Animations.scale({ duration: 0.6, delay: .6 })}
-                 initial="hidden"
-                 whileInView="show"
-                 viewport={{ once: true }}
-                className='text-3xl md:text-5xl self-start mt-9 mb-6 font-rubik font-black'>DIVISIONS</motion.p>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-              {projectPhases.map((phase, index) => (
-                    <motion.div
-                    variants={Animations.leftToRight({ duration: 0.3*index, delay: .6 })}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    key={index} className="relative text-start">
-                      
-                     <div className='p-6 flex flex-col items-start'>   <p className='text-6xl font-rubik font-bold text-black/30'>{index+1}</p>
-                       <h2 className="text-lg font-bold font-rubik">{phase.title}</h2>
-                     
-                        <p className="text-gray-700">{phase.description}</p></div>
-                   <div className='border-l-4 border-t-4 w-12 h-6 absolute top-0 border-eorange'>
-
-                   </div>
-                    </motion.div>
-                ))}
-              </div>
-            </div>
-        </section>
-    )
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-export default Services
