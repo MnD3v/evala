@@ -105,7 +105,7 @@ export default function Promotions() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative w-full max-w-[200px]"
+              className="group relative w-full max-w-[270px]"
             >
               <Link href={`/promotions/${promo.slug.current}`}>
                 <div className="group relative">
@@ -153,19 +153,7 @@ export default function Promotions() {
                         </div>
 
                         {/* Informations et bouton */}
-                        <div className="flex items-center justify-between">
-                          {/* Auteur avec avatar */}
-                          {promo.author && (
-                            <div className="flex items-center gap-2">
-                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-festival-red/20 backdrop-blur-sm">
-                                <svg className="h-4 w-4 text-festival-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                              </div>
-                              <span className="text-sm font-medium text-gray-300">{promo.author.name}</span>
-                            </div>
-                          )}
-
+                        <div className="flex items-center justify-end">
                           {/* Bouton avec effet de glissement */}
                           <div className="relative overflow-hidden rounded-full bg-festival-red p-3 transition-transform duration-300 group-hover:scale-105">
                             <svg

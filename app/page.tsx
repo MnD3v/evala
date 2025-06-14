@@ -3,7 +3,6 @@
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import JobRegistration from "./components/JobRegistration";
-import Services from "./components/Services";
 import Gallery from "./components/gallery";
 import LiveStream from "./components/live-stream";
 import History from "./components/History";
@@ -18,6 +17,7 @@ import Loader from "./components/Loader";
 import DecorativeEvala from "./components/DecorativeEvala";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import Services from "./components/services";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

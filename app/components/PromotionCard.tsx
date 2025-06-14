@@ -17,7 +17,7 @@ const item = {
 export default function PromotionCard({ promotion }: PromotionCardProps) {
   return (
     <motion.div variants={item}>
-      <Link href={`/promotions/${promotion.slug.current}`} className="block w-full max-w-[200px]">
+      <Link href={`/promotions/${promotion.slug.current}`} className="block w-full max-w-[270px]">
         <div className="group relative">
           {/* Carte principale */}
           <div className="relative flex h-[300px] transform-gpu flex-col overflow-hidden rounded-[40px] bg-gradient-to-br from-black to-gray-900 p-3 transition-all duration-500 hover:scale-[1.02]">
@@ -63,19 +63,7 @@ export default function PromotionCard({ promotion }: PromotionCardProps) {
                 </div>
 
                 {/* Informations et bouton */}
-                <div className="flex items-center justify-between">
-                  {/* Auteur avec avatar */}
-                  {promotion.author && (
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-festival-red/20 backdrop-blur-sm">
-                        <svg className="h-4 w-4 text-festival-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium text-gray-300">{promotion.author.name}</span>
-                    </div>
-                  )}
-
+                <div className="flex items-center justify-end">
                   {/* Bouton avec effet de glissement */}
                   <div className="relative overflow-hidden rounded-full bg-festival-red p-3 transition-transform duration-300 group-hover:scale-105">
                     <svg
