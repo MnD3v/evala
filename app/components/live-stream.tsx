@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function LiveStream() {
   return (
@@ -37,7 +38,7 @@ export default function LiveStream() {
           {/* Iframe YouTube avec overlay */}
           <div className="relative bg-black aspect-video overflow-hidden">
             {/* Overlay permanent */}
-            <div className="absolute inset-0 bg-black z-10 flex items-center justify-center">
+            <Link href="/live" className="absolute inset-0 bg-black z-10 flex items-center justify-center">
               {/* Bordure décorative */}
               <div className="absolute inset-0 border-[3px] border-evala/30"></div>
               <div className="absolute inset-[6px] border border-evala/20"></div>
@@ -60,23 +61,15 @@ export default function LiveStream() {
                 <div className="absolute bottom-0 right-0 w-[3px] h-full bg-evala"></div>
               </div>
 
-              {/* Contenu centré */}
-              <div className="flex flex-col items-center justify-center">
-                <div className="relative w-24 h-24 mb-6">
-                  {/* Cercle de fond */}
-                  <div className="absolute inset-0 rounded-full border-2 border-evala bg-evala/5"></div>
-                  {/* Conteneur de l'icône parfaitement centré */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-12 h-12 text-evala" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
+              {/* Bouton play parfaitement centré */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="w-24 h-24 rounded-full border-2 border-evala flex items-center justify-center bg-evala/5 hover:bg-evala/20 transition-colors duration-300">
+                  <svg className="w-12 h-12 text-evala" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
                 </div>
-                <p className="text-evala text-3xl font-display tracking-wider text-center">
-                  19 juillet à 14h
-                </p>
               </div>
-            </div>
+            </Link>
 
             <iframe
               width="100%"

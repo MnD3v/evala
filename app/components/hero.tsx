@@ -152,18 +152,23 @@ export default function Hero() {
           >
             <a
               href="#programme"
-              className="group relative bg-transparent overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center"
+              className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-white rounded-full"
             >
-              <span className="relative z-10 text-white">Voir le Programme</span>
-              <div className="absolute inset-0 bg-evala transform transition-transform duration-300 group-hover:scale-110"></div>
+              <span className="relative z-10 text-white">
+                Voir le Programme
+              </span>
+              <div className="absolute inset-0 bg-white/10 transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100 rounded-full"></div>
             </a>
             
             <a
               href="#live"
-              className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-evala/30"
+              className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-evala rounded-full bg-evala"
             >
-              <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-black">Suivre en Direct</span>
-              <div className="absolute inset-0 bg-white transform origin-left -translate-x-full transition-transform duration-300 group-hover:translate-x-0"></div>
+              <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                <span>Suivre en Direct</span>
+              </span>
+              <div className="absolute inset-0 bg-white/10 transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 rounded-full"></div>
             </a>
           </motion.div>
         </div>

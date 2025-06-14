@@ -5,61 +5,26 @@ import { GlobalStateProvider } from "./context/GlobalStateContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const cinzel = Cinzel({ subsets: ["latin"], variable: "--font-cinzel" });
-
 export const metadata: Metadata = {
   title: "Evala - Festival traditionnel Kabyè",
   description: "Découvrez le festival Evala, un rituel sacré de passage à l'âge adulte dans la tradition Kabyè. Luttes traditionnelles, cérémonies et célébrations culturelles au nord du Togo.",
-  keywords: "Evala, Kabyè, Togo, lutte traditionnelle, festival, culture africaine, Kozah, rite initiatique",
-  authors: [{ name: "Evala Team" }],
-  creator: "Evala Team",
-  publisher: "Evala Team",
   openGraph: {
-    title: "Evala - Festival traditionnel Kabyè",
-    description: "Découvrez le festival Evala, un rituel sacré de passage à l'âge adulte dans la tradition Kabyè. Luttes traditionnelles, cérémonies et célébrations culturelles au nord du Togo.",
-    url: "https://evala.tg",
-    siteName: "Evala Festival",
+    type: 'website',
+    url: 'https://www.evala.tg',
+    title: 'Evala - Festival traditionnel Kabyè',
+    description: 'Découvrez le festival Evala, un rituel sacré de passage à l\'âge adulte dans la tradition Kabyè. Luttes traditionnelles, cérémonies et célébrations culturelles au nord du Togo.',
     images: [
       {
-        url: "https://drive.google.com/file/d/1maQJa2-GmnT2hrVDk83u-yTydCrRpZsI/view",
+        url: 'https://drive.google.com/file/d/1maQJa2-GmnT2hrVDk83u-yTydCrRpZsI/view',
         width: 1200,
         height: 630,
-        alt: "Festival Evala - Lutte traditionnelle Kabyè",
+        alt: 'Evala - Festival traditionnel Kabyè',
       },
     ],
-    locale: "fr_FR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Evala - Festival traditionnel Kabyè",
-    description: "Découvrez le festival Evala, un rituel sacré de passage à l'âge adulte dans la tradition Kabyè. Luttes traditionnelles, cérémonies et célébrations culturelles au nord du Togo.",
-    images: ["https://drive.google.com/file/d/1maQJa2-GmnT2hrVDk83u-yTydCrRpZsI/view"],
-    creator: "@evala_festival",
-    site: "@evala_festival",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  themeColor: "#EF4444", // Rouge festival
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
+
+
 
 export default function RootLayout({
   children,

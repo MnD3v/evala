@@ -17,7 +17,6 @@ import Loader from "./components/Loader";
 import DecorativeEvala from "./components/DecorativeEvala";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import Services from "./components/services";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +44,7 @@ export default function Home() {
               <main className="flex-grow">
                 <Hero />
                 <JobRegistration />
-                <Services />
+                {/* <Services /> */}
                 <Programme />
                 <Promotions />
                 <LiveStream />
