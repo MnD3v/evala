@@ -52,8 +52,6 @@ const galleryImages: GalleryImage[] = [
 export default function Gallery() {
   return (
     <>
-
-
       <section className="py-16 px-4 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex justify-between items-center mb-12">

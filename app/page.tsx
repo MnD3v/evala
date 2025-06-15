@@ -16,6 +16,7 @@ import Contact from "./components/contact";
 import Loader from "./components/Loader";
 import DecorativeEvala from "./components/DecorativeEvala";
 import AboutEvala from "./components/about-evala";
+import Highlights from "./components/highlights";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
@@ -50,8 +51,8 @@ export default function Home() {
                 <Promotions />
                 <LiveStream />
                 <AboutEvala />
-
-                <Traditions />
+                <Highlights />
+                {/* <Traditions /> */}
                 <Gallery />
                 <History />
                 <Blog />
