@@ -15,14 +15,14 @@ const Contact = () => {
         {
             icon: <FaEnvelope className="text-4xl text-red-500" />,
             title: "Email",
-            description: "cegec2016togo@yahoo.com",
-            link: "mailto:cegec2016togo@yahoo.com"
+            description: "tg.evala@gmail.com",  
+            link: "mailto:tg.evala@gmail.com"
         },
         {
             icon: <FaPhone className="text-4xl text-red-500" />,
             title: "Téléphone",
-            description: "+228 90 73 73 74",
-            link: "tel:+22890737374"
+            description: "+228 98 78 45 89",
+            link: "tel:+22898784589"
         }
     ]
 

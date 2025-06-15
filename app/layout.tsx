@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: 'Découvrez le festival Evala, un rituel sacré de passage à l\'âge adulte dans la tradition Kabyè. Luttes traditionnelles, cérémonies et célébrations culturelles au nord du Togo.',
     images: [
       {
-        url: 'https://drive.google.com/file/d/1maQJa2-GmnT2hrVDk83u-yTydCrRpZsI/view',
+       url: 'https://i.ibb.co/Xk4J6ZnW/Group-6.png',
         width: 1200,
         height: 630,
         alt: 'Evala - Festival traditionnel Kabyè',
