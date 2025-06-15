@@ -8,7 +8,6 @@ import LiveStream from "./components/live-stream";
 import History from "./components/History";
 import Footer from "./components/footer";
 import GradientBackground from "./components/GradientBackground";
-import Traditions from "./components/traditions";
 import Programme from "./components/programme";
 import Promotions from "./components/Promotions";
 import Blog from "./blog/page";
