@@ -115,7 +115,7 @@ export default function Hero() {
           >
             <div className="relative inline-block">
               <motion.h1 
-                className="font-mercado text-[4rem] md:text-[8rem] lg:text-[12rem]  text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
+                className="font-mercado text-[5rem] md:text-[8rem] lg:text-[12rem]  text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
                 animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               >

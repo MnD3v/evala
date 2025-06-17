@@ -81,7 +81,7 @@ export default function AboutEvala() {
                   href="/about-evala"
                   className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-festival-red to-festival-red/80 rounded-full text-white font-medium text-lg transition-all duration-300 hover:scale-105"
                 >
-                  <span>Découvrir l'histoire complète</span>
+                  <span>Histoire complète</span>
                   <svg 
                     className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" 
                     fill="none" 
