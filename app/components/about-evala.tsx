@@ -32,7 +32,7 @@ export default function AboutEvala() {
           >
             {/* Contenu initial */}
             <div className="prose prose-lg prose-invert max-w-none">
-              <p className="text-xl text-gray-300 leading-relaxed mb-6">
+              <p className="text-base md:text-xl text-gray-300 leading-relaxed mb-6">
                 Les Évala sont des rites initiatiques ancestraux pratiqués en pays Kabyè, dans la région de Kara, au nord du Togo. 
                 Ces rites, marqués principalement par la lutte traditionnelle, représentent le passage sacré à l'âge adulte pour les jeunes de 18 à 20 ans.
                 Le mot "Évalou" (singulier d'Évala) désigne le jeune homme qui a commencé les rites traditionnels de la lutte.

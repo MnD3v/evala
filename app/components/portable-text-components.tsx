@@ -32,12 +32,12 @@ export const portableTextComponents: PortableTextComponents = {
         },
     },
     block: {
-        h1: ({ children }) => <h1 className="text-4xl font-bold mt-12 mb-6 text-white font-sans">{children}</h1>,
-        h2: ({ children }) => <h2 className="text-3xl font-bold mt-10 mb-4 text-white font-sans">{children}</h2>,
-        h3: ({ children }) => <h3 className="text-2xl font-bold mt-8 mb-3 text-white font-sans">{children}</h3>,
-        normal: ({ children }) => <p className="mb-6 leading-relaxed text-gray-300 font-sans tracking-wide">{children}</p>,
+        h1: ({ children }) => <h1 className="text-3xl md:text-4xl font-bold mt-12 mb-6 text-white font-sans">{children}</h1>,
+        h2: ({ children }) => <h2 className="text-2xl md:text-3xl font-bold mt-10 mb-4 text-white font-sans">{children}</h2>,
+        h3: ({ children }) => <h3 className="text-xl md:text-2xl font-bold mt-8 mb-3 text-white font-sans">{children}</h3>,
+        normal: ({ children }) => <p className="mb-6 leading-relaxed text-gray-300 font-sans tracking-wide text-base md:text-lg">{children}</p>,
         blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-green-500 pl-6 py-4 my-8 italic text-gray-300 bg-gray-800/50 rounded-r-lg font-sans text-lg">
+            <blockquote className="border-l-4 border-green-500 pl-6 py-4 my-8 italic text-gray-300 bg-gray-800/50 rounded-r-lg font-sans text-base md:text-lg">
                 {children}
             </blockquote>
         ),
@@ -57,8 +57,8 @@ export const portableTextComponents: PortableTextComponents = {
         ),
     },
     list: {
-        bullet: ({ children }) => <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300 font-sans text-lg pl-4">{children}</ul>,
-        number: ({ children }) => <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300 font-sans text-lg pl-4">{children}</ol>,
+        bullet: ({ children }) => <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300 font-sans text-base md:text-lg pl-4">{children}</ul>,
+        number: ({ children }) => <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300 font-sans text-base md:text-lg pl-4">{children}</ol>,
     },
     listItem: {
         bullet: ({ children }) => <li className="mb-2">{children}</li>,

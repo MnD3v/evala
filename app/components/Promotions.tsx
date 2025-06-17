@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Sparkles } from "lucide-react";
 
 const PROMOTIONS_QUERY = `*[
   _type == "promotion" && 
@@ -72,14 +73,15 @@ export default function Promotions() {
 
   return (
     <section className="relative overflow-hidden bg-black py-16 md:py-24" id="promotions">
-      {/* Fond avec effet de lueur */}
+      {/* Fond avec effets avancés */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-festival-red/5 to-black"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-festival-red/20 via-transparent to-transparent opacity-40"></div>
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
       </div>
       
       <div className="container relative z-10 mx-auto px-4">
-        {/* En-tête de section */}
+        {/* En-tête de section avec animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,17 +89,23 @@ export default function Promotions() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text font-display text-4xl text-transparent md:text-5xl">
-            Promotions en Cours
-          </h2>
-          <div className="mx-auto mb-6 h-1 w-24 bg-gradient-to-r from-festival-red to-white"></div>
-          <p className="mx-auto max-w-2xl text-gray-400">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
+            <h2 className="bg-gradient-to-r from-festival-red via-white to-festival-red bg-clip-text font-display text-3xl md:text-4xl lg:text-5xl text-transparent">
+              Promotions en Cours
+            </h2>
+            <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
+          </div>
+          <div className="relative mx-auto mb-4 md:mb-6 h-1 w-20 md:w-24 overflow-hidden rounded-full bg-gradient-to-r from-festival-red to-white">
+            <div className="absolute inset-0 bg-gradient-to-r from-festival-red via-white to-festival-red animate-[shimmer_2s_linear_infinite]"></div>
+          </div>
+          <p className="mx-auto max-w-2xl text-gray-400 text-base md:text-lg">
             Découvrez nos offres spéciales et événements du moment
           </p>
         </motion.div>
 
-        {/* Grille des promotions */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 justify-items-center">
+        {/* Grille des promotions avec effet de masonry */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000 max-w-6xl mx-auto">
           {promotions.map((promo, index) => (
             <motion.div
               key={promo._id}
@@ -105,13 +113,19 @@ export default function Promotions() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative w-full max-w-[270px]"
+              className="group relative w-full max-w-[320px] mx-auto"
             >
               <Link href={`/promotions/${promo.slug.current}`}>
-                <div className="group relative">
-                  {/* Carte principale */}
-                  <div className="relative flex h-[300px] transform-gpu flex-col overflow-hidden rounded-[40px] bg-gradient-to-br from-black to-gray-900 p-3 transition-all duration-500 hover:scale-[1.02]">
-                    {/* Image de fond avec effet parallaxe */}
+                <div className="relative">
+                  {/* Carte principale avec effet subtil */}
+                  <motion.div
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { duration: 0.3 }
+                    }}
+                    className="relative flex h-[320px] transform-gpu flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-black p-5 transition-all duration-300 border border-white/5 shadow-lg"
+                  >
+                    {/* Image de fond avec effets */}
                     <div className="absolute inset-0 z-0">
                       {promo.mainImage?.asset?.url ? (
                         <>
@@ -119,45 +133,44 @@ export default function Promotions() {
                             src={promo.mainImage.asset.url}
                             alt={promo.title}
                             fill
-                            className="object-cover transition-transform duration-1000 group-hover:scale-125"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 brightness-75"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
                         </>
                       ) : (
-                        <div className="h-full w-full bg-gradient-to-br from-festival-red to-black opacity-50"></div>
+                        <div className="h-full w-full bg-gradient-to-br from-festival-red/50 to-black"></div>
                       )}
                     </div>
 
                     {/* Contenu */}
                     <div className="relative z-10 flex h-full flex-col justify-between">
-                      {/* En-tête */}
-                      <div>
-                        {/* Badge de date flottant */}
-                        <div className="inline-flex items-center gap-2 rounded-full border border-festival-red/30 bg-black/30 px-4 py-2 backdrop-blur-md">
-                          <span className="h-2 w-2 animate-pulse rounded-full bg-festival-red"></span>
-                          <span className="text-sm font-medium text-white">
+                      {/* Badge de date */}
+                      <div className="relative">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-black/40 px-2.5 md:px-3 py-1 md:py-1.5 backdrop-blur-sm border border-white/10">
+                          <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-festival-red"></span>
+                          <span className="text-[10px] md:text-xs font-medium text-white">
                             {format(new Date(promo.startDate), 'dd MMMM yyyy', { locale: fr })}
                           </span>
                         </div>
                       </div>
 
-                      {/* Pied de carte */}
-                      <div className="space-y-6">
-                        {/* Titre avec effet de soulignement */}
+                      {/* Contenu principal */}
+                      <div className="space-y-3 md:space-y-4">
+                        {/* Titre */}
                         <div className="relative">
-                          <h3 className="text-lg font-bold text-white line-clamp-2">
+                          <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-festival-red transition-colors duration-300 line-clamp-2">
                             {promo.title}
                           </h3>
-                          <div className="mt-2 h-0.5 w-8 bg-festival-red transition-all duration-300 group-hover:w-full"></div>
+                          <div className="mt-2 h-0.5 w-10 md:w-12 bg-festival-red/50 group-hover:bg-festival-red transition-colors duration-300"></div>
                         </div>
 
-                        {/* Informations et bouton */}
-                        <div className="flex items-center justify-end">
-                          {/* Bouton avec effet de glissement */}
-                          <div className="relative overflow-hidden rounded-full bg-festival-red p-3 transition-transform duration-300 group-hover:scale-105">
+                        {/* Bouton */}
+                        <div className="flex items-center justify-between rounded-full bg-black/40 p-2.5 md:p-3 backdrop-blur-sm border border-white/5 group-hover:border-festival-red/20 transition-colors duration-300">
+                          <span className="text-xs md:text-sm text-white/90 font-medium">Voir l'offre</span>
+                          <div className="h-4 w-4 md:h-5 md:w-5 rounded-full bg-festival-red/10 p-1">
                             <svg
-                              className="h-6 w-6 transform text-white transition-transform duration-300 group-hover:translate-x-1"
+                              className="h-full w-full text-festival-red transform transition-transform duration-300 group-hover:translate-x-1"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -169,41 +182,35 @@ export default function Promotions() {
                                 d="M17 8l4 4m0 0l-4 4m4-4H3"
                               />
                             </svg>
-                            <div className="absolute inset-0 -translate-x-full transform bg-white opacity-20 transition-transform duration-300 group-hover:translate-x-0"></div>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    {/* Effet de brillance au survol */}
-                    <div className="pointer-events-none absolute -inset-px rounded-[40px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="absolute inset-0 bg-gradient-to-t from-festival-red/20 to-transparent"></div>
-                    </div>
-                  </div>
+                  </motion.div>
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* Bouton "Voir toutes les promotions" */}
+        {/* Bouton "Voir toutes les promotions" simplifié */}
         {totalPromotions > 6 && (
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
             viewport={{ once: true }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
             <Link href="/promotions" className="inline-block">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center space-x-2 rounded-full border-2 border-festival-red bg-black px-8 py-4 font-semibold text-festival-red transition-all duration-300 hover:bg-gray-900 hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                className="inline-flex items-center gap-2 md:gap-3 rounded-full border border-festival-red bg-black/40 px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold text-festival-red transition-all duration-300 hover:bg-festival-red/5"
               >
                 <span>Voir les {totalPromotions - 6} autres promotions</span>
                 <svg
-                  className="h-5 w-5"
+                  className="h-4 w-4 md:h-5 md:w-5 transform transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

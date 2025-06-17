@@ -50,11 +50,10 @@ export default function Hero() {
 
   useEffect(() => {
     setIsClient(true);
-    
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
-        x: (e.clientX / window.innerWidth) * 20,
-        y: (e.clientY / window.innerHeight) * 20,
+        x: e.clientX,
+        y: e.clientY,
       });
     };
 
@@ -63,7 +62,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
+    <section className="relative min-h-screen bg-black overflow-hidden">
       {/* Background avec effet de particules */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-yellow-500/5 to-black/50 z-10"></div>
@@ -116,7 +115,7 @@ export default function Hero() {
           >
             <div className="relative inline-block">
               <motion.h1 
-                className="text-[6rem] md:text-[12rem] lg:text-[16rem] font-display text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
+                className="text-[4rem] md:text-[8rem] lg:text-[12rem] font-display text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
                 animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               >
@@ -129,18 +128,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-2xl md:text-3xl lg:text-4xl text-white font-display tracking-wide mb-8"
+              className="text-xl md:text-2xl lg:text-3xl text-white font-display tracking-wide mb-8"
             >
-              La Tradition de la Lutte Togolaise
+              Festival de Lutte Traditionnelle Togolaise
             </motion.p>
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
             >
-              Plongez au cœur d'une tradition millénaire où force, honneur et spiritualité se rencontrent dans des combats épiques
+              Découvrez le Festival Evala 2024, le plus grand événement de lutte traditionnelle au Togo. Rite initiatique sacré des Kabyè, cérémonies ancestrales, et combats épiques dans la région de Kara.
             </motion.p>
           </motion.div>
 
@@ -154,8 +153,8 @@ export default function Hero() {
               href="#programme"
               className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-white rounded-full"
             >
-              <span className="relative z-10 text-white">
-                Voir le Programme
+              <span className="relative z-10 text-white text-base md:text-lg">
+                Programme Evala 2024
               </span>
               <div className="absolute inset-0 bg-white/10 transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100 rounded-full"></div>
             </a>
@@ -166,7 +165,7 @@ export default function Hero() {
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-white">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                <span>Suivre en Direct</span>
+                <span className="text-base md:text-lg">Suivre en Direct</span>
               </span>
               <div className="absolute inset-0 bg-white/10 transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 rounded-full"></div>
             </a>

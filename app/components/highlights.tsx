@@ -90,11 +90,11 @@ export default function Highlights() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
             Moments Forts
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-4"></div>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
             Découvrez les moments les plus intenses et émouvants des cérémonies Evala à travers ces vidéos sélectionnées
           </p>
         </motion.div>

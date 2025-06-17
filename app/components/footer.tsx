@@ -46,9 +46,9 @@ export default function Footer() {
           {/* Brand Section */}
           <div>
             <Link href="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold font-bricolage">EVALA</span>
+              <span className="text-xl md:text-2xl font-bold font-bricolage">EVALA</span>
             </Link>
-            <p className="text-gray-400 mb-6 font-sans">
+            <p className="text-sm md:text-base text-gray-400 mb-6 font-sans">
               Créons ensemble des expériences numériques exceptionnelles.
             </p>
             {/* Social Links */}
@@ -61,7 +61,7 @@ export default function Footer() {
                   aria-label={social.label}
                 >
                   <svg
-                    className="h-6 w-6"
+                    className="h-5 w-5 md:h-6 md:w-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >

@@ -4,20 +4,20 @@ import { motion } from "framer-motion";
 
 const traditions = [
   {
-    title: "Spiritualité",
-    description: "Les Evala sont avant tout un rituel sacré, une connexion profonde avec les ancêtres et les traditions ancestrales."
+    title: "Spiritualité Kabyè",
+    description: "Le Festival Evala est avant tout un rituel sacré, une connexion profonde avec les ancêtres et les traditions ancestrales des Kabyè du Togo."
   },
   {
-    title: "Initiation",
-    description: "Un rite de passage essentiel pour les jeunes hommes, marquant leur entrée dans l'âge adulte et leur place dans la société."
+    title: "Rite Initiatique",
+    description: "Un rite de passage essentiel pour les jeunes hommes Kabyè, marquant leur entrée dans l'âge adulte et leur place dans la société traditionnelle."
   },
   {
-    title: "Unité",
-    description: "Un moment de rassemblement qui renforce les liens entre les villages et célèbre l'identité culturelle de la région."
+    title: "Unité Communautaire",
+    description: "Un moment de rassemblement qui renforce les liens entre les villages Kabyè et célèbre l'identité culturelle de la région de Kozah au Togo."
   },
   {
-    title: "Transmission",
-    description: "Une tradition vivante qui perpétue les valeurs, les techniques et la sagesse des générations précédentes."
+    title: "Transmission Culturelle",
+    description: "Une tradition vivante qui perpétue les valeurs, les techniques de lutte traditionnelle et la sagesse des générations précédentes des Kabyè."
   }
 ];
 
@@ -32,11 +32,11 @@ export default function Traditions() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-white">
-            Traditions
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white">
+            Traditions du Festival Evala
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto mt-6">
-            Les piliers fondamentaux qui font des Evala une tradition unique et sacrée
+          <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mt-6">
+            Les piliers fondamentaux qui font du Festival Evala une tradition unique et sacrée des Kabyè au Togo
           </p>
         </motion.div>
 
@@ -50,10 +50,10 @@ export default function Traditions() {
               viewport={{ once: true }}
               className="text-center p-6"
             >
-              <h3 className="text-2xl md:text-3xl font-display text-evala mb-4">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-display text-evala mb-4">
                 {tradition.title}
               </h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                 {tradition.description}
               </p>
             </motion.div>
