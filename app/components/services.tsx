@@ -50,7 +50,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-display mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-gilroy mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text text-transparent">
             Vous souhaitez quelque chose ?
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-festival-red to-white mx-auto mb-8"></div>
@@ -77,7 +77,7 @@ export default function Services() {
                     <div className="text-festival-red mb-6 transform group-hover:scale-110 transition-transform duration-300">
                       {service.icon}
                     </div>
-                    <h3 className="text-2xl font-display text-white mb-4 group-hover:text-festival-red transition-colors duration-300">
+                    <h3 className="text-2xl font-gilroy text-white mb-4 group-hover:text-festival-red transition-colors duration-300">
                       {service.title}
                     </h3>
                     <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">

@@ -10,7 +10,7 @@ interface ComingSoonProps {
 
 export default function ComingSoon({ title, description }: ComingSoonProps) {
   return (
-    <section className="font-sans min-h-screen bg-black flex items-center justify-center relative overflow-hidden py-20">
+    <section className="font-poppins min-h-screen bg-black flex items-center justify-center relative overflow-hidden py-20">
       {/* Fond décoratif */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-festival-red/5 to-black"></div>
@@ -24,7 +24,7 @@ export default function ComingSoon({ title, description }: ComingSoonProps) {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-4xl md:text-6xl font-display mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-gilroy mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text text-transparent">
             {title}
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-festival-red to-white mx-auto mb-8"></div>

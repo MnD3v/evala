@@ -91,8 +91,11 @@ export default function Promotions() {
         >
           <div className="inline-flex items-center gap-3 mb-6">
             <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
-            <h2 className="bg-gradient-to-r from-festival-red via-white to-festival-red bg-clip-text font-display text-3xl md:text-4xl lg:text-5xl text-transparent">
-              Promotions en Cours
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-gilroy font-bold relative">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red animate-gradient">
+                Promotions en Cours
+              </span>
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></span>
             </h2>
             <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
           </div>

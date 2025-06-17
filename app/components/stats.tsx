@@ -40,8 +40,8 @@ export default function Stats() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <span className="block text-5xl md:text-6xl lg:text-7xl font-display text-evala mb-2">{stat.number}</span>
-              <span className="block text-xl md:text-2xl font-display text-white mb-1">{stat.label}</span>
+              <span className="block text-5xl md:text-6xl lg:text-7xl font-gilroy text-evala mb-2">{stat.number}</span>
+              <span className="block text-xl md:text-2xl font-gilroy text-white mb-1">{stat.label}</span>
               <span className="block text-base text-gray-400">{stat.description}</span>
             </motion.div>
           ))}
@@ -55,7 +55,7 @@ export default function Stats() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-gilroy text-white">
             L'Essence des <span className="text-evala">Evala</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto mt-8">

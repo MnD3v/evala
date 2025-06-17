@@ -8,7 +8,7 @@ import GradientBackground from "../components/GradientBackground";
 
 export default function AboutEvalaPage() {
   return (
-    <div className="flex min-h-screen flex-col text-white font-sans relative">
+    <div className="flex min-h-screen flex-col text-white font-poppins relative">
       <GradientBackground />
       <Navbar />
       
@@ -18,7 +18,7 @@ export default function AboutEvalaPage() {
           <div className="absolute inset-0 bg-[url('/images/evala-hero.jpg')] bg-cover bg-center bg-no-repeat"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <h1 className="text-5xl md:text-7xl font-display text-center bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-gilroy text-center bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
               L'Histoire des Evala
             </h1>
           </div>
@@ -34,7 +34,7 @@ export default function AboutEvalaPage() {
               transition={{ duration: 0.8 }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">Une Tradition Millénaire</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">Une Tradition Millénaire</h2>
               <p className="text-xl text-gray-300 leading-relaxed">
                 Les Évala sont des rites initiatiques ancestraux pratiqués en pays Kabyè, dans la région de Kara, au nord du Togo. 
                 Ces cérémonies, marquées principalement par la lutte traditionnelle, représentent le passage sacré à l'âge adulte 
@@ -54,7 +54,7 @@ export default function AboutEvalaPage() {
               viewport={{ once: true }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">Les Origines Historiques</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">Les Origines Historiques</h2>
               <p className="text-gray-300">
                 L'histoire des Evala remonte au XIIIe siècle, avec le légendaire combat entre Tchablime du village de Kpédaw et 
                 Fawokézié de Kolidè. Cette lutte historique, opposant deux lutteurs aux styles très différents, a donné naissance 
@@ -75,7 +75,7 @@ export default function AboutEvalaPage() {
               viewport={{ once: true }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">La Dimension Spirituelle</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">La Dimension Spirituelle</h2>
               <p className="text-gray-300">
                 Evala représente bien plus qu'une simple compétition sportive. C'est la première étape cruciale dans l'initiation 
                 à la vie d'homme de l'adolescent Kabiyé. Les jeunes sont préparés psychologiquement et physiquement pour cette 
@@ -96,7 +96,7 @@ export default function AboutEvalaPage() {
               viewport={{ once: true }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">Préparation et Rituels</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">Préparation et Rituels</h2>
               <p className="text-gray-300">
                 Avant les combats, les jeunes lutteurs suivent une préparation rigoureuse qui combine entraînement physique 
                 et spirituel. Cette période inclut des rituels de purification, des prières aux ancêtres et l'apprentissage 
@@ -117,7 +117,7 @@ export default function AboutEvalaPage() {
               viewport={{ once: true }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">Le Festival Culturel</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">Le Festival Culturel</h2>
               <p className="text-gray-300">
                 Les Evala se déroulent sur une période de huit jours, du deuxième au troisième samedi de juillet. 
                 Chaque canton organise ses propres cérémonies, créant une atmosphère festive qui englobe toute la région.
@@ -141,7 +141,7 @@ export default function AboutEvalaPage() {
               viewport={{ once: true }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <h2 className="text-3xl font-display text-festival-red mb-6">L'Héritage Moderne</h2>
+              <h2 className="text-3xl font-gilroy text-festival-red mb-6">L'Héritage Moderne</h2>
               <p className="text-gray-300">
                 Aujourd'hui, les Evala sont devenus un événement majeur qui attire des visiteurs du monde entier, 
                 contribuant au développement touristique et économique de la région. Tout en préservant leur essence 

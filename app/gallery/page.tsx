@@ -45,7 +45,7 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen bg-black font-sans">
+    <div className="min-h-screen bg-black font-poppins">
       {/* Header avec bouton retour */}
       <div className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-sm z-10">
         <div className="container mx-auto px-4 h-16 flex items-center">

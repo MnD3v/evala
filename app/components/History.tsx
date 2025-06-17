@@ -101,7 +101,7 @@ export default function History() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-display mb-4 text-evala tracking-wider">
+          <h2 className="text-4xl md:text-6xl font-gilroy mb-4 text-evala tracking-wider">
             Histoire & Tradition
           </h2>
           <div className="w-24 h-1 bg-evala mx-auto mb-8"></div>
@@ -147,7 +147,7 @@ export default function History() {
               <div>
                 {/* Année et Description */}
                 <div className="mb-6">
-                  <h3 className="text-4xl font-display text-evala mb-4">
+                  <h3 className="text-4xl font-gilroy text-evala mb-4">
                     {event.year}
                   </h3>
                   <p className="text-gray-300 leading-relaxed mb-4">
@@ -168,12 +168,12 @@ export default function History() {
                 <div className="border-t border-evala/10 pt-6">
                   <div className="flex items-center gap-2 text-evala mb-3">
                     <Trophy className="w-5 h-5" />
-                    <span className="font-display text-lg">Champion</span>
+                    <span className="font-gilroy text-lg">Champion</span>
                   </div>
                   <div className="flex items-start gap-6">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-xl text-white font-display">
+                        <h4 className="text-xl text-white font-gilroy">
                           {event.champion.name}
                         </h4>
                         <span className="text-sm text-gray-400 bg-black/40 px-3 py-1 rounded">

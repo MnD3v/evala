@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         }
 
         return (
-            <div className="font-sans">
+            <div className="font-poppins">
                 <Navbar />
                 <main className="min-h-screen bg-black pt-20 pb-16">
                     <BlogContent post={post} relatedPosts={relatedPosts} />

@@ -55,7 +55,7 @@ export default function Gallery() {
       <section className="py-16 px-4 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-4xl font-bebas text-red-600 tracking-wider">
+            <h2 className="text-4xl font-gilroy text-evala ">
               Galerie Photo
             </h2>
             <Link

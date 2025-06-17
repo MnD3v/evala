@@ -79,7 +79,7 @@ export default function Highlights() {
   }, [selectedVideo, closeVideo]);
 
   return (
-    <section className="py-16 md:py-24 bg-black relative overflow-hidden font-sans">
+    <section className="py-16 md:py-24 bg-black relative overflow-hidden font-poppins">
       <div className="absolute inset-0 opacity-5 bg-pattern"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -90,7 +90,7 @@ export default function Highlights() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-gilroy mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
             Moments Forts
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-4"></div>
@@ -183,7 +183,7 @@ export default function Highlights() {
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         </div>
-                        <h3 className="text-white font-display text-xl md:text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{video.title}</h3>
+                        <h3 className="text-white font-gilroy text-xl md:text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{video.title}</h3>
                       </div>
                       <p className="text-gray-200 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{video.description}</p>
                     </div>

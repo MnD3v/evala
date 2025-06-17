@@ -19,7 +19,7 @@ const jobOffers: JobOffer[] = [];
 
 export default function JobsPage() {
   return (
-    <div className="flex min-h-screen flex-col text-white font-sans relative">
+    <div className="flex min-h-screen flex-col text-white font-poppins relative">
       {/* Fond avec gradient */}
       <GradientBackground />
 
@@ -49,7 +49,7 @@ export default function JobsPage() {
                 className="text-center"
               >
                 <motion.h1 
-                  className="text-5xl md:text-7xl font-sans mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
+                  className="text-5xl md:text-7xl font-gilroy mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
                   animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                 >
@@ -84,7 +84,7 @@ export default function JobsPage() {
                   viewport={{ once: true }}
                   className="text-center mb-16"
                 >
-                  <h2 className="text-4xl font-sans text-white mb-4">
+                  <h2 className="text-4xl font-poppins text-white mb-4">
                     Offres Disponibles
                   </h2>
                   <div className="w-20 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto"></div>
@@ -102,7 +102,7 @@ export default function JobsPage() {
                     >
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="text-xl font-sans text-white mb-2">{job.title}</h3>
+                          <h3 className="text-xl font-poppins text-white mb-2">{job.title}</h3>
                           <div className="flex gap-4 text-sm text-gray-400">
                             <span>{job.type}</span>
                             <span>•</span>

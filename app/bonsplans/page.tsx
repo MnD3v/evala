@@ -43,7 +43,7 @@ const bonsPlans = [
 
 export default function BonsPlans() {
   return (
-    <div className=" font-sans min-h-screen bg-black py-24">
+    <div className=" font-poppins min-h-screen bg-black py-24">
       <div className="container mx-auto px-4">
         {/* En-tête */}
         <motion.div
@@ -52,7 +52,7 @@ export default function BonsPlans() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h1 className="mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text font-display text-4xl text-transparent md:text-5xl">
+          <h1 className="mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text font-gilroy text-4xl text-transparent md:text-5xl">
             Bons Plans
           </h1>
           <div className="mx-auto mb-6 h-1 w-24 bg-gradient-to-r from-festival-red to-white"></div>

@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col text-white font-sans relative">
+    <div className="flex min-h-screen flex-col text-white font-poppins relative">
       <AnimatePresence>
         {isLoading ? (
           <Loader key="loader" />

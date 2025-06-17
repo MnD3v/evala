@@ -55,7 +55,7 @@ const Contact = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-display mb-4 bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">
+                    <h2 className="text-4xl md:text-5xl font-gilroy mb-4 bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">
                         Contactez-nous
                     </h2>
                     <div className="w-20 h-1 bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 mx-auto mb-6"></div>

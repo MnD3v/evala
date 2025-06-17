@@ -62,7 +62,7 @@ export default function Promotions() {
   const hasMorePromotions = promotions.length > 6;
 
   return (
-    <section className="font-sans min-h-screen bg-black py-20">
+    <section className="font-poppins min-h-screen bg-black py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-16">

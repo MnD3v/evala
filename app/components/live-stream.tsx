@@ -18,7 +18,7 @@ export default function LiveStream() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-[var(--font-cinzel)] mb-6 text-evala">
+          <h2 className="text-4xl md:text-6xl font-gilroy mb-6 text-evala">
             Suivez En Direct
           </h2>
           <p className="text-base md:text-xl text-gray-300 max-w-3xl mx-auto font-montserrat">
@@ -30,7 +30,7 @@ export default function LiveStream() {
         <div className="relative max-w-5xl mx-auto">
           {/* Message d'attente */}
           <div className="bg-black/30 backdrop-blur-sm border border-festival-red/20 rounded-2xl p-8 text-center">
-            <h3 className="text-xl md:text-2xl font-display text-festival-red mb-4 inline-flex items-center justify-center gap-2">
+            <h3 className="text-xl md:text-2xl font-gilroy text-festival-red mb-4 inline-flex items-center justify-center gap-2">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -85,7 +85,7 @@ export default function LiveStream() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-6 text-center"
           >
-            <p className="text-gray-400 text-lg font-display tracking-wide">
+            <p className="text-gray-400 text-lg font-gilroy tracking-wide">
               La diffusion commencera pendant les cérémonies
             </p>
           </motion.div>

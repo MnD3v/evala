@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function AboutEvala() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-black to-black/95 relative overflow-hidden font-sans">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-black to-black/95 relative overflow-hidden font-poppins">
       <div className="absolute inset-0 opacity-5 bg-pattern"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -16,7 +16,7 @@ export default function AboutEvala() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-gilroy mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
             Qu'est-ce que l'Evala ?
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-4"></div>
@@ -41,15 +41,15 @@ export default function AboutEvala() {
               {/* Aperçu des sections */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-12">
                 <div className="text-center p-4 rounded-xl bg-white/5">
-                  <h3 className="text-festival-red font-display text-lg mb-2">Origines</h3>
+                  <h3 className="text-festival-red font-gilroy text-lg mb-2">Origines</h3>
                   <p className="text-sm text-gray-400">L'histoire remonte au XIIIe siècle, avec le légendaire combat entre Tchablime de Kpédaw et Fawokézié de Kolidè</p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5">
-                  <h3 className="text-festival-red font-display text-lg mb-2">Tradition</h3>
+                  <h3 className="text-festival-red font-gilroy text-lg mb-2">Tradition</h3>
                   <p className="text-sm text-gray-400">Une lutte traditionnelle entre deux jeunes garçons dont la finalité est de mettre à terre son adversaire</p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5">
-                  <h3 className="text-festival-red font-display text-lg mb-2">Spiritualité</h3>
+                  <h3 className="text-festival-red font-gilroy text-lg mb-2">Spiritualité</h3>
                   <p className="text-sm text-gray-400">Un rite supervisé par les sages et le grand prêtre "Tchodjo", avec des sacrifices et des cérémonies sacrées</p>
                 </div>
               </div>

@@ -53,7 +53,7 @@ export default function Footer() {
         {/* Logo et description */}
         <div className="text-center mb-16">
           <motion.h2 
-            className="text-4xl md:text-5xl font-sans mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
+            className="text-4xl md:text-5xl font-mercado mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
             animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
           >

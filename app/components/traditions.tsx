@@ -32,7 +32,7 @@ export default function Traditions() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-gilroy text-white">
             Traditions du Festival Evala
           </h2>
           <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mt-6">
@@ -50,7 +50,7 @@ export default function Traditions() {
               viewport={{ once: true }}
               className="text-center p-6"
             >
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-display text-evala mb-4">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-gilroy text-evala mb-4">
                 {tradition.title}
               </h3>
               <p className="text-sm md:text-base text-gray-400 leading-relaxed">

@@ -115,7 +115,7 @@ export default function Hero() {
           >
             <div className="relative inline-block">
               <motion.h1 
-                className="text-[4rem] md:text-[8rem] lg:text-[12rem] font-display text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
+                className="font-mercado text-[4rem] md:text-[8rem] lg:text-[12rem]  text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
                 animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               >
@@ -128,7 +128,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-white font-display tracking-wide mb-8"
+              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide mb-8"
             >
               Festival de Lutte Traditionnelle Togolaise
             </motion.p>
@@ -137,7 +137,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
+              className="text-base md:text-lg lg:text-xl  font-poppins text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
             >
               Découvrez le Festival Evala 2025, le plus grand événement de lutte traditionnelle au Togo. Rite initiatique sacré des Kabyè, cérémonies ancestrales, et combats épiques dans la région de Kara.
             </motion.p>
@@ -151,7 +151,7 @@ export default function Hero() {
           >
             <a
               href="#programme"
-              className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-white rounded-full"
+              className="group relative overflow-hidden px-8 py-4 text-xl font-gilroy tracking-wider uppercase w-full md:w-auto text-center border-2 border-white rounded-full"
             >
               <span className="relative z-10 text-white text-base md:text-lg">
                 Programme Evala 2025
@@ -161,7 +161,7 @@ export default function Hero() {
             
             <a
               href="#live"
-              className="group relative overflow-hidden px-8 py-4 text-xl font-display tracking-wider uppercase w-full md:w-auto text-center border-2 border-evala rounded-full bg-evala"
+              className="group relative overflow-hidden px-8 py-4 text-xl font-gilroy tracking-wider uppercase w-full md:w-auto text-center border-2 border-evala rounded-full bg-evala"
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-white">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>

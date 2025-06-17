@@ -36,7 +36,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text font-display text-4xl text-transparent md:text-5xl">
+          <h2 className="mb-6 bg-gradient-to-r from-festival-red to-white bg-clip-text font-gilroy text-4xl text-transparent md:text-5xl">
             Nos Services
           </h2>
           <div className="mx-auto mb-6 h-1 w-24 bg-gradient-to-r from-festival-red to-white"></div>

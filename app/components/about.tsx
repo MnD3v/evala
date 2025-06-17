@@ -15,7 +15,7 @@ export default function About() {
           className="text-center mb-16"
         >
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-display mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl lg:text-5xl font-gilroy mb-4 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -39,7 +39,7 @@ export default function About() {
             className="space-y-8"
           >
             <div className="prose prose-lg prose-invert">
-              <h3 className="text-xl md:text-2xl font-display text-festival-red mb-4">Le Rite de Passage des Jeunes Kabyè</h3>
+              <h3 className="text-xl md:text-2xl font-gilroy text-festival-red mb-4">Le Rite de Passage des Jeunes Kabyè</h3>
               <p className="text-base md:text-lg text-gray-300 mb-6">
                 Le Festival Evala est un rituel sacré de passage à l'âge adulte, transmis depuis des générations dans la préfecture de Kozah, au nord du Togo. Plus qu'une simple compétition de lutte traditionnelle, c'est un parcours initiatique complet qui forge les jeunes hommes à travers plusieurs étapes cruciales de leur développement personnel et social.
               </p>
@@ -80,7 +80,7 @@ export default function About() {
                   viewport={{ once: true }}
                   className="bg-black/40 border border-festival-red/20 rounded-2xl p-6 hover:border-festival-red/50 transition-all duration-300"
                 >
-                  <h4 className="text-lg md:text-xl font-display text-festival-red mb-2">{step.title}</h4>
+                  <h4 className="text-lg md:text-xl font-gilroy text-festival-red mb-2">{step.title}</h4>
                   <p className="text-sm md:text-base text-gray-300">{step.description}</p>
                 </motion.div>
               ))}
@@ -117,7 +117,7 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-lg font-display text-festival-red mb-2">Héritage Culturel Kabyè</h4>
+              <h4 className="text-lg font-gilroy text-festival-red mb-2">Héritage Culturel Kabyè</h4>
               <p className="text-gray-300 text-sm">
                 Le Festival Evala perpétue une tradition millénaire, préservant les valeurs et la sagesse ancestrale de la région de Kozah au Togo.
               </p>
