@@ -12,7 +12,6 @@ import Promotions from "./components/Promotions";
 import Blog from "./blog/page";
 import Contact from "./components/contact";
 import Loader from "./components/Loader";
-import DecorativeEvala from "./components/DecorativeEvala";
 import AboutEvala from "./components/about-evala";
 import Highlights from "./components/highlights";
 import { useState, useEffect } from "react";
@@ -47,7 +46,7 @@ export default function Home() {
         ) : (
           <>
             <div className="relative z-0">
-              <DecorativeEvala />
+              {/* <DecorativeEvala /> */}
               <Navbar />
               <main className="flex-grow">
                 <Hero />

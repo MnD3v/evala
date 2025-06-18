@@ -118,7 +118,7 @@ export default function Hero() {
                 initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
                 animate={{ opacity: 1, rotateY: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="font-mercado text-[6rem] md:text-[10rem] text-[#339999]"
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#339999] -mr-2 md:-mr-4"
               >
                 E
               </motion.span>
@@ -126,7 +126,7 @@ export default function Hero() {
                 initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
                 animate={{ opacity: 1, rotateY: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="font-mercado text-[6rem] md:text-[10rem] text-[#669933]"
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#669933] -mr-2 md:-mr-4"
               >
                 V
               </motion.span>
@@ -134,7 +134,7 @@ export default function Hero() {
                 initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
                 animate={{ opacity: 1, rotateY: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF9933]"
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF9933] -mr-2 md:-mr-4"
               >
                 A
               </motion.span>
@@ -142,7 +142,7 @@ export default function Hero() {
                 initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
                 animate={{ opacity: 1, rotateY: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF3333]"
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF3333] -mr-2 md:-mr-4"
               >
                 L
               </motion.span>
@@ -166,7 +166,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
+              className="text-2xl md:text-4xl lg:text-3xl text-white font-gilroy tracking-wide -mb-2"
             >
               Festival de
             </motion.p>
@@ -175,7 +175,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-orange-500 font-gilroy tracking-wide "
+              className="text-2xl md:text-4xl lg:text-3xl text-orange-500 font-gilroy tracking-t -mb-2"
             >
               Lutte Traditionnelle
             </motion.p>
@@ -184,7 +184,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
+              className="text-2xl md:text-4xl lg:text-3xl text-white font-gilroy tracking-tighter"
             >
               Togolaise
             </motion.p>
@@ -193,7 +193,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-base md:text-lg lg:text-xl  font-poppins text-gray-400 max-w-3xl mx-auto my-12 leading-tight"
+              className="text-base md:text-lg lg:text-xl  font-poppins text-white max-w-3xl mx-auto my-12 leading-tight tracking-tighter "
             >
               Découvrez le Festival Evala 2025, le plus grand événement de lutte traditionnelle au Togo. Rite initiatique sacré des Kabyè, cérémonies ancestrales, et combats épiques dans la région de Kara.
             </motion.p>
