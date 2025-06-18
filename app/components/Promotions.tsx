@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Sparkles } from "lucide-react";
 
 const PROMOTIONS_QUERY = `*[
   _type == "promotion" && 
@@ -90,17 +89,17 @@ export default function Promotions() {
           className="mb-16 text-center"
         >
           <div className="inline-flex items-center gap-3 mb-6">
-            <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
+          
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-gilroy font-bold relative">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red animate-gradient">
+              <span className="font-gilroy">
                 Promotions en Cours
               </span>
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></span>
             </h2>
-            <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-festival-red animate-pulse" />
+       
           </div>
-          <div className="relative mx-auto mb-4 md:mb-6 h-1 w-20 md:w-24 overflow-hidden rounded-full bg-gradient-to-r from-festival-red to-white">
-            <div className="absolute inset-0 bg-gradient-to-r from-festival-red via-white to-festival-red animate-[shimmer_2s_linear_infinite]"></div>
+          <div className="relative mx-auto mb-4 md:mb-6 h-px w-20 md:w-24 overflow-hidden rounded-full bg-white">
+          
           </div>
           <p className="mx-auto max-w-2xl text-gray-400 text-base md:text-lg">
             Découvrez nos offres spéciales et événements du moment

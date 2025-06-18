@@ -9,12 +9,12 @@ export default function JobRegistration() {
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-4xl mx-auto text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent">
+                    <h2 className="text-4xl md:text-5xl font-poppins font-bold  text-eorange m-4">
                         Job EVALA
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-8"></div>
-                    <p className="text-xl text-gray-300 mb-8">
-                        Rejoignez notre base de données de talents et soyez mis en relation avec les entreprises partenaires des Evala
+                    <div className="w-24 h-px bg-eorange mx-auto mb-8"></div>
+                    <p className="text-base md:text-lg text-gray-300 mb-8">
+                        Rejoignez notre base de données de talents et <span className="font-bold">soyez mis en relation avec les entreprises partenaires</span> des Evala
                     </p>
                 </div>
 
@@ -26,26 +26,26 @@ export default function JobRegistration() {
                         className="block w-full relative group"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                        <div className="relative bg-black/30 backdrop-blur-sm border border-white/10 p-8 rounded-xl hover:border-festival-yellow/30 transition-all duration-300">
+                        <div className="relative text-black bg-white backdrop-blur-sm border border-white/10 p-8 rounded-[3rem] hover:border-festival-yellow/30 transition-all duration-300">
                             <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-2xl font-semibold bg-gradient-to-r from-white via-festival-yellow to-white bg-clip-text text-transparent">
+                               <div style={{ maxWidth: 'calc(100vw - 180px)' }}>
+                               <h3 className="text-2xl font-bold  text-orange-700">
                                     Formulaire d'inscription
                                 </h3>
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-festival-red to-festival-yellow p-[2px]">
-                                    <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-                                        <svg className="w-6 h-6 text-festival-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </div>
-                                </div>
+                               </div>
+                              
                             </div>
-                            <p className="text-gray-400 mb-4">
+                            <p className="text-black/50 mb-4">
                                 Remplissez le formulaire pour rejoindre notre base de données de talents
                             </p>
-                            <div className="flex items-center text-sm text-gray-500">
-                                <span>Temps estimé: 5 minutes</span>
-                                <span className="mx-2">•</span>
-                                <span>Google Forms</span>
+                            <div className="flex items-center text-base text-black">
+                          <p>
+                          <span className="text-black font-gilroy">Google Forms</span>
+                            <span className="mx-2 text-black">•</span>
+
+                                <span className="text-black">Temps estimé: 5 '</span>
+                          </p>
+                                
                             </div>
                         </div>
                     </a>

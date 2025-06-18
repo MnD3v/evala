@@ -62,7 +62,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden">
+    <section className="relative min-h-screen bg-black/30 overflow-hidden">
       {/* Background avec effet de particules */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-yellow-500/5 to-black/50 z-10"></div>
@@ -105,22 +105,16 @@ export default function Hero() {
       </motion.div>
 
       {/* Contenu principal */}
-      <div className="container mx-auto px-4 relative z-30 py-20">
-        <div className="text-center">
+      <div className="container mx-auto px-4 relative z-30 min-h-screen flex items-center">
+        <div className="text-center w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="mb-8"
+            className=""
           >
-            <div className="relative inline-block">
-              <motion.h1 
-                className="font-mercado text-[5rem] md:text-[8rem] lg:text-[12rem]  text-transparent bg-clip-text bg-gradient-to-r from-evala via-yellow-500 to-evala leading-none tracking-tighter mb-4"
-                animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              >
-                EVALA
-              </motion.h1>
+            <div className="relative flex items-center justify-center">
+            <img src="/icons/logo.png" alt="Evala"  className="h-20 md:h-36  my-6 "/> 
               <div className="absolute -inset-2 bg-gradient-to-r from-evala/20 via-yellow-500/20 to-evala/20 blur-2xl -z-10 rounded-full"></div>
             </div>
             
@@ -128,16 +122,36 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide mb-8"
+              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
             >
-              Festival de Lutte Traditionnelle Togolaise
+              Festival de  
             </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-xl md:text-2xl lg:text-3xl text-orange-500 font-gilroy tracking-wide "
+            >
+              Lutte Traditionnelle 
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
+            >
+            Togolaise
+            </motion.p>
+
+            
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-base md:text-lg lg:text-xl  font-poppins text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
+              className="text-base md:text-lg lg:text-xl  font-poppins text-gray-400 max-w-3xl mx-auto my-12 leading-tight"
             >
               Découvrez le Festival Evala 2025, le plus grand événement de lutte traditionnelle au Togo. Rite initiatique sacré des Kabyè, cérémonies ancestrales, et combats épiques dans la région de Kara.
             </motion.p>

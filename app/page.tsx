@@ -7,7 +7,6 @@ import Gallery from "./components/gallery";
 import LiveStream from "./components/live-stream";
 import History from "./components/History";
 import Footer from "./components/footer";
-import GradientBackground from "./components/GradientBackground";
 import Programme from "./components/programme";
 import Promotions from "./components/Promotions";
 import Blog from "./blog/page";
@@ -32,13 +31,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col text-white font-poppins relative">
+    <div 
+      className="flex min-h-screen flex-col text-white font-poppins relative"
+      style={{
+        backgroundImage: "url('/images/bg.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <AnimatePresence>
         {isLoading ? (
           <Loader key="loader" />
         ) : (
           <>
-            <GradientBackground />
             <div className="relative z-0">
               <DecorativeEvala />
               <Navbar />

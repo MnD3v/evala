@@ -21,7 +21,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        eorange: "#FC7601",
+        eorange: "#FF9933",
         egreen:"#96E903",
         'evala': {
           DEFAULT: 'var(--evala-red)',
