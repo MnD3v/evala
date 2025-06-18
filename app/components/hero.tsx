@@ -78,7 +78,7 @@ export default function Hero() {
         }}
         transition={{ type: "spring", stiffness: 75, damping: 15 }}
       >
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-evala/10 via-yellow-500/10 to-evala/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
@@ -90,7 +90,7 @@ export default function Hero() {
             ease: "easeInOut"
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-yellow-500/10 via-evala/10 to-yellow-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
@@ -114,17 +114,61 @@ export default function Hero() {
             className=""
           >
             <div className="relative flex items-center justify-center">
-            <img src="/icons/logo.png" alt="Evala"  className="h-20 md:h-36  my-6 "/> 
-              <div className="absolute -inset-2 bg-gradient-to-r from-evala/20 via-yellow-500/20 to-evala/20 blur-2xl -z-10 rounded-full"></div>
+              <motion.span
+                initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#339999]"
+              >
+                E
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#669933]"
+              >
+                V
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF9933]"
+              >
+                A
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF3333]"
+              >
+                L
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, rotateY: -180, scale: 0.5 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.0 }}
+                className="font-mercado text-[6rem] md:text-[10rem] text-[#FF9933]"
+              >
+                A
+              </motion.span>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.2 }}
+                className="absolute -inset-2 bg-gradient-to-r from-evala/20 via-yellow-500/20 to-evala/20 blur-2xl -z-10 rounded-full"
+              ></motion.div>
             </div>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
             >
-              Festival de  
+              Festival de
             </motion.p>
 
             <motion.p
@@ -133,7 +177,7 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-xl md:text-2xl lg:text-3xl text-orange-500 font-gilroy tracking-wide "
             >
-              Lutte Traditionnelle 
+              Lutte Traditionnelle
             </motion.p>
 
             <motion.p
@@ -142,11 +186,9 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-xl md:text-2xl lg:text-3xl text-white font-gilroy tracking-wide "
             >
-            Togolaise
+              Togolaise
             </motion.p>
 
-            
-            
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -172,7 +214,7 @@ export default function Hero() {
               </span>
               <div className="absolute inset-0 bg-white/10 transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100 rounded-full"></div>
             </a>
-            
+
             <a
               href="#live"
               className="group relative overflow-hidden px-8 py-4 text-xl font-gilroy tracking-wider uppercase w-full md:w-auto text-center border-2 border-evala rounded-full bg-evala"
