@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
+import Navbar from '@/app/components/navbar';
+import Footer from '@/app/components/footer';
 
 const galleryImages = [
   {
@@ -45,32 +46,31 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen bg-black font-poppins">
-      {/* Header avec bouton retour */}
-      <div className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-sm z-10">
-        <div className="container mx-auto px-4 h-16 flex items-center">
-          <Link 
-            href="/"
-            className="flex items-center text-white hover:text-red-500 transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 mr-2" />
-            <span>Retour à l'accueil</span>
-          </Link>
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black font-poppins">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
+        <div className="absolute inset-0 bg-black/60 z-10" />
+   
+        <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
+            Galerie Photo
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
+            Découvrez les moments forts du Festival Evala à travers notre collection de photos
+          </p>
         </div>
       </div>
-
-      {/* Contenu principal */}
-      <div className="container mx-auto px-4 pt-24 pb-16">
-        <h1 className="text-4xl md:text-6xl font-[var(--font-cinzel)] mb-12 text-red-600">
-          Galerie Photo
-        </h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      {/* Gallery Grid */}
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {galleryImages.map((image) => (
             <Link
               key={image.id}
               href={`/gallery/${image.id}`}
-              className="group relative overflow-hidden rounded-2xl shadow-xl transform transition duration-500 hover:-translate-y-2"
+              className="group relative block overflow-hidden rounded-xl bg-black shadow-xl transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="relative aspect-[4/3]">
                 <Image
@@ -80,17 +80,25 @@ export default function GalleryPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-white font-teko text-xl mb-1">{image.alt}</h3>
-                    <p className="text-gray-200 text-sm font-montserrat line-clamp-2">{image.description}</p>
-                  </div>
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end transform transition-transform duration-500">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                    {image.alt}
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                    {image.description}
+                  </p>
                 </div>
               </div>
             </Link>
           ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 } 

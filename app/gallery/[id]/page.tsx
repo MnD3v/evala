@@ -1,242 +1,154 @@
-import { client } from "@/sanity/client";
-import { groq } from "next-sanity";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { PortableText, PortableTextBlock, PortableTextComponents } from "@portabletext/react";
-import type { Metadata } from "next";
-import Navbar from "@/app/components/navbar";
-import Footer from "@/app/components/footer";
+"use client";
 
-interface Post {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  publishedAt: string;
-  mainImage?: string;
-  body: PortableTextBlock[];
-  author?: {
-    name: string;
-    bio?: PortableTextBlock[];
-    image?: {
-      asset: {
-        url: string;
-      };
-    };
-  };
-}
+import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useCallback } from 'react';
+import { use } from 'react';
+import Footer from '@/app/components/footer';
 
-interface RelatedPost {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  publishedAt: string;
-  mainImage?: string;
-}
+const galleryImages = [
+  {
+    id: 1,
+    src: "/images/evala1.jpg",
+    alt: "Combat d'Evala",
+    description: "Deux lutteurs s'affrontent dans un combat traditionnel"
+  },
+  {
+    id: 2,
+    src: "/images/evala2.jpg",
+    alt: "Préparation Evala",
+    description: "Rituel de préparation avant le combat"
+  },
+  {
+    id: 3,
+    src: "/images/evala3.jpg",
+    alt: "Victoire Evala",
+    description: "Célébration de la victoire"
+  },
+  {
+    id: 4,
+    src: "/images/evala4.jpg",
+    alt: "Spectateurs Evala",
+    description: "La foule encourageant les lutteurs"
+  },
+  {
+    id: 5,
+    src: "/images/evala5.jpg",
+    alt: "Tradition Evala",
+    description: "Cérémonie traditionnelle"
+  },
+  {
+    id: 6,
+    src: "/images/evala6.jpg",
+    alt: "Festival Evala",
+    description: "Vue d'ensemble du festival"
+  }
+];
 
-const portableTextComponents: PortableTextComponents = {
-  types: {
-    image: ({ value }) => {
-      const ref = value?.asset?._ref;
-      if (!ref) return null;
+export default function GalleryImagePage({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter();
+  const resolvedParams = use(params);
+  const imageId = parseInt(resolvedParams.id);
+  const image = galleryImages.find(img => img.id === imageId);
 
-      const url = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${ref.replace('image-', '').replace(/-(jpg|png|webp)/, '.$1')}`;
-
-      return (
-        <figure className="my-8">
-          <img src={url} alt={url} className="w-full h-auto rounded-lg shadow-lg" loading="lazy" />
-          {value.caption && (
-            <figcaption className="text-center text-sm text-gray-400 mt-2 italic">{value.caption}</figcaption>
-          )}
-        </figure>
-      );
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft' && imageId > 1) {
+      router.push(`/gallery/${imageId - 1}`);
+    } else if (e.key === 'ArrowRight' && imageId < galleryImages.length) {
+      router.push(`/gallery/${imageId + 1}`);
+    } else if (e.key === 'Escape') {
+      router.push('/gallery');
     }
-  },
-  block: {
-    h1: ({ children }) => <h1 className="text-4xl font-bold mt-12 mb-6 text-white font-poppins">{children}</h1>,
-    h2: ({ children }) => <h2 className="text-3xl font-bold mt-10 mb-4 text-white font-poppins">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-2xl font-bold mt-8 mb-3 text-white font-poppins">{children}</h3>,
-    normal: ({ children }) => <p className="mb-6 leading-relaxed text-gray-300 font-poppins tracking-wide">{children}</p>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-green-500 pl-6 py-4 my-8 italic text-gray-300 bg-gray-800/50 rounded-r-lg font-poppins text-lg">{children}</blockquote>
-    )
-  },
-  marks: {
-    strong: ({ children }) => <strong className="font-bold text-white font-poppins">{children}</strong>,
-    em: ({ children }) => <em className="italic text-gray-300 font-poppins">{children}</em>,
-    link: ({ value, children }) => (
-      <a
-        href={value?.href}
-        target={value?.blank ? '_blank' : '_self'}
-        rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-green-400 hover:text-green-300 underline transition-colors font-poppins"
-      >
-        {children}
-      </a>
-    )
-  },
-  list: {
-    bullet: ({ children }) => <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300 font-poppins text-lg pl-4">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300 font-poppins text-lg pl-4">{children}</ol>
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="mb-2">{children}</li>,
-    number: ({ children }) => <li className="mb-2">{children}</li>
-  }
-};
+  }, [imageId, router]);
 
-const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
-  _id,
-  title,
-  slug,
-  publishedAt,
-  "mainImage": mainImage.asset->url,
-  body,
-  author->{
-    name,
-    image { asset->{ url } },
-    bio
-  }
-}`;
+  const handleWheel = useCallback((e: WheelEvent) => {
+    if (e.deltaY > 0 && imageId < galleryImages.length) {
+      router.push(`/gallery/${imageId + 1}`);
+    } else if (e.deltaY < 0 && imageId > 1) {
+      router.push(`/gallery/${imageId - 1}`);
+    }
+  }, [imageId, router]);
 
-const RELATED_POSTS_QUERY = groq`*[_type == "post" && slug.current != $slug && defined(slug.current)]|order(publishedAt desc)[0...3]{
-  _id,
-  title,
-  slug,
-  publishedAt,
-  "mainImage": mainImage.asset->url
-}`;
+  useEffect(() => {
+    if (!image) {
+      router.push('/gallery');
+      return;
+    }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  try {
-    const post = await client.fetch<Post | null>(POST_QUERY, { slug: params.slug });
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('wheel', handleWheel);
 
-    if (!post) return {};
-
-    const description = "Découvrez notre dernier article de blog.";
-
-    return {
-      title: post.title,
-      description,
-      openGraph: {
-        title: post.title,
-        description,
-        images: post.mainImage ? [{ url: post.mainImage }] : []
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: post.title,
-        description,
-        images: post.mainImage ? [post.mainImage] : []
-      }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleWheel);
     };
-  } catch (error) {
-    console.error("Error fetching metadata:", error);
-    return {
-      title: "Article de blog",
-      description: "Découvrez notre dernier article de blog."
-    };
+  }, [image, router, handleKeyDown, handleWheel]);
+
+  if (!image) {
+    return null;
   }
-}
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  try {
-    const [post, relatedPosts] = await Promise.all([
-      client.fetch<Post | null>(POST_QUERY, { slug: params.slug }),
-      client.fetch<RelatedPost[]>(RELATED_POSTS_QUERY, { slug: params.slug })
-    ]);
+  return (
+    <div className="min-h-screen bg-black font-poppins">
+      {/* Image Container */}
+      <div className="relative min-h-screen bg-black/95">
+        {/* Close Button */}
+        <Link
+          href="/gallery"
+          className="fixed top-6 right-4 md:right-8 z-50 p-2 bg-black/50 hover:bg-black/80 rounded-full transition-all duration-300 hover:scale-110"
+        >
+          <X className="w-6 h-6 text-white" />
+        </Link>
 
-    if (!post) return notFound();
-
-    return (
-      <div className="font-poppins">
-        <Navbar />
-        <main className="min-h-screen bg-black pt-20 pb-16">
-          <div className="max-w-4xl mx-auto p-3 md:p-8">
-            {post.mainImage && (
-              <div className="mb-8 overflow-hidden rounded-2xl shadow-2xl">
-                <img
-                  src={post.mainImage}
-                  alt={post.title}
-                  className="w-full h-[400px] md:h-[500px] object-cover"
-                />
-              </div>
+        {/* Navigation Buttons */}
+        <div className="fixed top-1/2 -translate-y-1/2 w-full z-40 px-4 pointer-events-none">
+          <div className="container mx-auto flex justify-between">
+            {imageId > 1 && (
+              <Link
+                href={`/gallery/${imageId - 1}`}
+                className="pointer-events-auto p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all duration-300 hover:scale-110 hover:-translate-x-2"
+              >
+                <ChevronLeft className="w-8 h-8" />
+                <span className="sr-only">Image précédente</span>
+              </Link>
             )}
-
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-poppins leading-tight">{post.title}</h1>
-            <p className="text-gray-400 mb-12 font-poppins text-lg">{new Date(post.publishedAt).toLocaleDateString('fr-FR', {
-              day: 'numeric', month: 'long', year: 'numeric'
-            })}</p>
-
-            <article className="prose prose-lg max-w-none prose-invert font-poppins">
-              <PortableText value={post.body} components={portableTextComponents} />
-            </article>
-
-            {post.author && (
-              <div className="flex items-center gap-4 mt-12 mb-16 p-6 bg-gray-900/50 rounded-xl backdrop-blur-sm border border-gray-800">
-                {post.author.image?.asset?.url && (
-                  <Image
-                    src={post.author.image.asset.url}
-                    alt={post.author.name}
-                    width={60}
-                    height={60}
-                    className="rounded-full object-cover border-2 border-green-500"
-                  />
-                )}
-                <div>
-                  <p className="font-semibold text-white font-poppins">{post.author.name}</p>
-                  {post.author.bio && (
-                    <div className="text-sm text-gray-400 font-poppins">
-                      <PortableText value={post.author.bio} components={portableTextComponents} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {relatedPosts.length > 0 && (
-              <section className="mt-16 pt-8 border-t border-gray-800">
-                <h2 className="text-3xl font-bold mb-8 text-center text-white font-poppins">Autres articles</h2>
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {relatedPosts.map((relatedPost) => (
-                    <Link
-                      href={`/blog/${relatedPost.slug.current}`}
-                      key={relatedPost._id}
-                      className="group block rounded-xl overflow-hidden bg-gray-900/50 backdrop-blur-sm border border-gray-800 transition-all duration-300 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] hover:-translate-y-1"
-                    >
-                      {relatedPost.mainImage && (
-                        <div className="relative h-48 w-full overflow-hidden">
-                          <img
-                            src={relatedPost.mainImage}
-                            alt={relatedPost.title}
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
-                        </div>
-                      )}
-                      <div className="p-4">
-                        <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-white group-hover:text-green-400 transition-colors font-poppins">
-                          {relatedPost.title}
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-3 font-poppins">
-                          {new Date(relatedPost.publishedAt).toLocaleDateString('fr-FR', {
-                            day: 'numeric', month: 'long', year: 'numeric'
-                          })}
-                        </p>
-                        <p className="text-green-400 text-sm font-medium group-hover:text-green-300 transition-colors">Lire l'article →</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </section>
+            {imageId < galleryImages.length && (
+              <Link
+                href={`/gallery/${imageId + 1}`}
+                className="pointer-events-auto p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all duration-300 hover:scale-110 hover:translate-x-2 ml-auto"
+              >
+                <ChevronRight className="w-8 h-8" />
+                <span className="sr-only">Image suivante</span>
+              </Link>
             )}
           </div>
-        </main>
-        <Footer />
+        </div>
+
+        {/* Main Image */}
+        <div className="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center justify-center">
+          <div className="relative w-full max-w-6xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
+              quality={100}
+            />
+          </div>
+          
+          {/* Image Info */}
+          <div className="mt-8 text-center max-w-2xl mx-auto bg-black/50 backdrop-blur-sm p-6 rounded-xl">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{image.alt}</h2>
+            <p className="text-gray-300 text-lg leading-relaxed">{image.description}</p>
+          </div>
+        </div>
       </div>
-    );
-  } catch (error) {
-    console.error('Error fetching post:', error);
-    return notFound();
-  }
+
+      <Footer />
+    </div>
+  );
 }
