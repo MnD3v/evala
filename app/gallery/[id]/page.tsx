@@ -2,11 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useCallback } from 'react';
+import { X } from 'lucide-react';
 import { use } from 'react';
 import Footer from '@/app/components/footer';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Keyboard, Mousewheel } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const galleryImages = [
   {
@@ -48,47 +50,9 @@ const galleryImages = [
 ];
 
 export default function GalleryImagePage({ params }: { params: Promise<{ id: string }> }) {
-  const router = useRouter();
   const resolvedParams = use(params);
   const imageId = parseInt(resolvedParams.id);
-  const image = galleryImages.find(img => img.id === imageId);
-
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft' && imageId > 1) {
-      router.push(`/gallery/${imageId - 1}`);
-    } else if (e.key === 'ArrowRight' && imageId < galleryImages.length) {
-      router.push(`/gallery/${imageId + 1}`);
-    } else if (e.key === 'Escape') {
-      router.push('/gallery');
-    }
-  }, [imageId, router]);
-
-  const handleWheel = useCallback((e: WheelEvent) => {
-    if (e.deltaY > 0 && imageId < galleryImages.length) {
-      router.push(`/gallery/${imageId + 1}`);
-    } else if (e.deltaY < 0 && imageId > 1) {
-      router.push(`/gallery/${imageId - 1}`);
-    }
-  }, [imageId, router]);
-
-  useEffect(() => {
-    if (!image) {
-      router.push('/gallery');
-      return;
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleWheel);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [image, router, handleKeyDown, handleWheel]);
-
-  if (!image) {
-    return null;
-  }
+  const initialSlide = imageId - 1;
 
   return (
     <div className="min-h-screen bg-black font-poppins">
@@ -102,49 +66,67 @@ export default function GalleryImagePage({ params }: { params: Promise<{ id: str
           <X className="w-6 h-6 text-white" />
         </Link>
 
-        {/* Navigation Buttons */}
-        <div className="fixed top-1/2 -translate-y-1/2 w-full z-40 px-4 pointer-events-none">
-          <div className="container mx-auto flex justify-between">
-            {imageId > 1 && (
-              <Link
-                href={`/gallery/${imageId - 1}`}
-                className="pointer-events-auto p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all duration-300 hover:scale-110 hover:-translate-x-2"
-              >
-                <ChevronLeft className="w-8 h-8" />
-                <span className="sr-only">Image précédente</span>
-              </Link>
-            )}
-            {imageId < galleryImages.length && (
-              <Link
-                href={`/gallery/${imageId + 1}`}
-                className="pointer-events-auto p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all duration-300 hover:scale-110 hover:translate-x-2 ml-auto"
-              >
-                <ChevronRight className="w-8 h-8" />
-                <span className="sr-only">Image suivante</span>
-              </Link>
-            )}
-          </div>
-        </div>
+        <style jsx global>{`
+          .swiper-button-next,
+          .swiper-button-prev {
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+          }
 
-        {/* Main Image */}
-        <div className="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center justify-center">
-          <div className="relative w-full max-w-6xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              priority
-              quality={100}
-            />
-          </div>
-          
-          {/* Image Info */}
-          <div className="mt-8 text-center max-w-2xl mx-auto bg-black/50 backdrop-blur-sm p-6 rounded-xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{image.alt}</h2>
-            <p className="text-gray-300 text-lg leading-relaxed">{image.description}</p>
-          </div>
+          .swiper-button-next:hover,
+          .swiper-button-prev:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+          }
+
+          .swiper-button-next::after,
+          .swiper-button-prev::after {
+            font-size: 24px;
+          }
+        `}</style>
+
+        {/* Swiper */}
+        <div className="h-screen w-full flex items-center justify-center">
+          <Swiper
+            modules={[Navigation, Keyboard, Mousewheel]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation
+            keyboard={{ enabled: true }}
+            mousewheel={{ forceToAxis: true }}
+            initialSlide={initialSlide}
+            className="w-full h-full"
+            onSlideChange={(swiper) => {
+              const newId = swiper.activeIndex + 1;
+              window.history.replaceState(null, '', `/gallery/${newId}`);
+            }}
+          >
+            {galleryImages.map((image) => (
+              <SwiperSlide key={image.id} className="flex flex-col items-center justify-center p-4">
+                <div className="relative w-full max-w-6xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 1024px"
+                    priority
+                    quality={100}
+                  />
+                </div>
+                
+                {/* Image Info */}
+                <div className="mt-8 text-center max-w-2xl mx-auto bg-black/50 backdrop-blur-sm p-6 rounded-xl">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{image.alt}</h2>
+                  <p className="text-gray-300 text-lg leading-relaxed">{image.description}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
 
