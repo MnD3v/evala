@@ -1,34 +1,9 @@
-# www.robotstxt.org/
-
-# Allow crawling of all content
+# *
 User-agent: *
 Allow: /
-Allow: /gallery
-Allow: /about
-Allow: /contact
 
-# Prevent crawling of non-public areas
-Disallow: /admin/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /private/
-Disallow: /*?*
-
-# Crawl-delay for all bots
-Crawl-delay: 10
+# Host
+Host: https://www.evala.tg
 
 # Sitemaps
-Sitemap: https://evala.tg/sitemap.xml
-
-# Social Media Bots
-User-agent: Twitterbot
-Allow: /images/
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.gif$
-
-User-agent: facebookexternalhit
-Allow: /images/
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.gif$
+Sitemap: https://www.evala.tg/sitemap.xml
