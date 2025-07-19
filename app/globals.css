@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('/fonts/Gilroy-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mercado';
+  src: url('/fonts/Mercado.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --evala-red: #FF0000;
+  --togo-red: #FF0000;
+  --togo-yellow: #FFD700;
+  --togo-green: #008000;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Teko', sans-serif;
+}
+
+.font-display {
+  font-family: 'Cinzel', serif;
+}
+
+.font-title {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.font-body {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.025em;
+  line-height: 1.7;
+}
+
+/* Effet de texte guerrier avec jaune */
+.warrior-text {
+  text-shadow: 
+    0 0 10px var(--evala-red),
+    0 0 20px var(--togo-yellow),
+    2px 2px 0px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.05em;
+}
+
+.warrior-title {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 
+    0 0 20px var(--evala-red),
+    0 0 30px var(--togo-yellow),
+    2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+/* Style pour les descriptions */
+.description-text {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.025em;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Style pour les sous-titres */
+.subtitle-text {
+  font-family: 'Teko', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+/* Animations personnalisées */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Styles de scroll personnalisés avec jaune */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--evala-red), var(--togo-yellow));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--togo-yellow), var(--evala-red));
+}
+
+/* Masquer la barre de défilement horizontale tout en gardant la fonctionnalité */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+  scrollbar-width: none;     /* Pour Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Pour Chrome, Safari et Opera */
+}
+
+/* Effets de survol élégants avec jaune */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(to right, var(--evala-red), var(--togo-yellow));
+  transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Effets de transition fluides */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  transition: all 400ms linear;
+  color: white;
+}
+
+.max {
+  max-width: 1020px;
+  padding: 12px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: var(--evala-red);
+  border-left-color: var(--togo-yellow);
+  animation: l15 1s infinite linear;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+
+@keyframes l15 {
+  100% {
+    transform: rotate(1turn)
+  }
+}
+
+/* Styles spécifiques aux couleurs */
+.text-evala {
+  color: var(--evala-red);
+}
+
+.bg-evala {
+  background-color: var(--evala-red);
+}
+
+.border-evala {
+  border-color: var(--evala-red);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .animate-gradient-x {
+    animation: gradient-x 8s ease infinite;
+    background-size: 200% 200%;
+  }
+  .animate-splash {
+    animation: splash 4s ease-in-out infinite;
+  }
+  .animate-splash-delayed {
+    animation: splash 4s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  .animate-shine {
+    animation: shine 3s ease-in-out infinite;
+  }
+  .animate-tilt {
+    animation: tilt 10s infinite linear;
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(20deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  50% {
+    transform: translateX(100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-15deg);
+  }
+}
+
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(-2deg) scale(1.15);
+  }
+  25% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.15);
+  }
+  75% {
+    transform: rotate(0deg) scale(1);
+  }
+}

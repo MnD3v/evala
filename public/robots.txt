@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.evala.tg
+
+# Sitemaps
+Sitemap: https://www.evala.tg/sitemap.xml
