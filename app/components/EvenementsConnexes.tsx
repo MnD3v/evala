@@ -84,6 +84,21 @@ const evenements = [
       "Concerts de musique traditionnelle",
       "Ateliers de formation pour jeunes"
     ]
+  },
+  {
+    id: 3,
+    nom: "Miss Evala",
+    description: "Concours de beauté célébrant la femme togolaise et la culture Evala, mettant en valeur l'élégance, l'intelligence et l'attachement aux traditions.",
+    date: "5-10 Septembre 2024",
+    lieu: "Kara, Togo",
+    participants: "30+ candidates",
+    image: "https://firebasestorage.googleapis.com/v0/b/moger-pro.appspot.com/o/images%2Fmiss.jpeg?alt=media&token=e0b84eb0-ddd3-4cc2-93e6-a794f8da3015",
+    highlights: [
+      "Défilé en tenues traditionnelles",
+      "Épreuves de culture générale",
+      "Présentation des traditions Evala",
+      "Gala de couronnement"
+    ]
   }
 ];
 
@@ -170,9 +185,7 @@ export default function EvenementsConnexes() {
                     </div>
 
                     {/* Bouton d'action */}
-                    <button className="w-full mt-6 bg-gradient-to-r from-evala to-orange-500 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg hover:shadow-evala/30 transition-all duration-300">
-                      En savoir plus
-                    </button>
+              
                   </div>
                 </div>
               </div>
@@ -189,9 +202,7 @@ export default function EvenementsConnexes() {
                 Ne manquez pas ces événements exceptionnels qui perpétuent la tradition 
                 de la lutte Evala et célèbrent notre patrimoine culturel.
               </p>
-              <button className="bg-gradient-to-r from-evala to-yellow-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-evala/30 transition-all duration-300">
-                Restez Informé
-              </button>
+           
             </div>
           </div>
         </div>
@@ -285,21 +296,11 @@ export default function EvenementsConnexes() {
                       ))}
                     </ul>
                   </div>
-
-                  {/* Bouton d'action */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full mt-6 bg-gradient-to-r from-evala to-orange-500 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg hover:shadow-evala/30 transition-all duration-300"
-                  >
-                    En savoir plus
-                  </motion.button>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
         {/* Section d'appel à l'action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -316,16 +317,10 @@ export default function EvenementsConnexes() {
               Ne manquez pas ces événements exceptionnels qui perpétuent la tradition 
               de la lutte Evala et célèbrent notre patrimoine culturel.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-evala to-yellow-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-evala/30 transition-all duration-300"
-            >
-              Restez Informé
-            </motion.button>
+      
           </div>
         </motion.div>
       </div>
     </section>
   );
-} 
+}
