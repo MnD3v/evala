@@ -119,24 +119,24 @@ export default function GalleryImagePage({ params }: { params: Promise<{ id: str
         {/* Swiper */}
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto overflow-hidden">
-            <Swiper
-              modules={[Navigation, Keyboard, Mousewheel]}
+          <Swiper
+            modules={[Navigation, Keyboard, Mousewheel]}
               spaceBetween={50}
-              slidesPerView={1}
-              navigation
-              keyboard={{ enabled: true }}
-              mousewheel={{ forceToAxis: true }}
-              initialSlide={initialSlide}
+            slidesPerView={1}
+            navigation
+            keyboard={{ enabled: true }}
+            mousewheel={{ forceToAxis: true }}
+            initialSlide={initialSlide}
               speed={600}
               allowTouchMove={true}
               grabCursor={true}
               className="w-full"
               style={{ height: 'auto', overflow: 'visible' }}
-              onSlideChange={(swiper) => {
-                const newId = swiper.activeIndex + 1;
-                window.history.replaceState(null, '', `/gallery/${newId}`);
-              }}
-            >
+            onSlideChange={(swiper) => {
+              const newId = swiper.activeIndex + 1;
+              window.history.replaceState(null, '', `/gallery/${newId}`);
+            }}
+          >
               {galleryImages.map((image, index) => (
                 <SwiperSlide key={image.id} className="pb-16">
                   <motion.div 
@@ -211,15 +211,15 @@ export default function GalleryImagePage({ params }: { params: Promise<{ id: str
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.4, duration: 0.6 }}
                         >
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
                             className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                            sizes="(max-width: 1024px) 100vw, 1024px"
-                            priority
-                            quality={100}
-                          />
+                    sizes="(max-width: 1024px) 100vw, 1024px"
+                    priority
+                    quality={100}
+                  />
                           {/* Overlay gradient au hover */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                           
@@ -241,8 +241,8 @@ export default function GalleryImagePage({ params }: { params: Promise<{ id: str
                               <div className="w-2 h-2 bg-evala rounded-full"></div>
                             </div>
                             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-evala/50 to-transparent"></div>
-                          </div>
-                          
+                </div>
+                
                           <div className="bg-gradient-to-r from-black/40 via-black/60 to-black/40 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                             <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-light text-center">
                               {image.description}
@@ -250,11 +250,11 @@ export default function GalleryImagePage({ params }: { params: Promise<{ id: str
                           </div>
                         </motion.div>
                       </div>
-                    </div>
+                </div>
                   </motion.div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
           </div>
         </div>
       </div>

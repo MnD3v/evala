@@ -84,29 +84,29 @@ export default function Loader({ isLoading = true }: LoaderProps) {
               {/* Arène de lutte traditionnelle */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 mb-6 md:mb-8">
                 {/* Sol de l'arène - terre battue */}
-                <motion.div
+              <motion.div
                   className="absolute inset-2 md:inset-4 rounded-full"
                   style={{
                     background: "radial-gradient(circle, #8B4513 0%, #654321 50%, #3E2723 100%)",
                     boxShadow: "inset 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(139, 69, 19, 0.3)",
                   }}
-                  animate={{
+                animate={{
                     boxShadow: [
                       "inset 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(139, 69, 19, 0.3)",
                       "inset 0 4px 20px rgba(0,0,0,0.3), 0 0 60px rgba(139, 69, 19, 0.5)",
                       "inset 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(139, 69, 19, 0.3)",
                     ],
-                  }}
-                  transition={{
+                }}
+                transition={{
                     duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
 
                 {/* Motifs traditionnels sur le bord */}
                 {[...Array(8)].map((_, i) => (
-                  <motion.div
+              <motion.div
                     key={i}
                     className="absolute w-2 h-2 md:w-4 md:h-4 bg-gradient-to-r from-evala to-yellow-600 rounded-sm"
                     style={{
@@ -114,17 +114,17 @@ export default function Loader({ isLoading = true }: LoaderProps) {
                       left: "50%",
                       transformOrigin: "0 0",
                     }}
-                    animate={{
+                animate={{
                       rotate: [i * 45, i * 45 + 360],
                       scale: [0.8, 1.2, 0.8],
-                    }}
-                    transition={{
+                }}
+                transition={{
                       duration: 4,
-                      repeat: Infinity,
+                  repeat: Infinity,
                       delay: i * 0.1,
-                      ease: "easeInOut",
-                    }}
-                  />
+                  ease: "easeInOut",
+                }}
+              />
                 ))}
 
                 {/* Lutteur 1 - Position gauche */}

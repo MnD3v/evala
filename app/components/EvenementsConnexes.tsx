@@ -99,6 +99,21 @@ const evenements = [
       "Présentation des traditions Evala",
       "Gala de couronnement"
     ]
+  },
+  {
+    id: 4,
+    nom: "Art & Evala : L'Exposition",
+    description: "Une exposition artistique unique mettant en lumière la richesse culturelle de la lutte Evala à travers différentes formes d'art contemporain et traditionnel.",
+    date: "1-30 Août 2024",
+    lieu: "Musée National, Lomé",
+    participants: "25+ artistes",
+    image: "https://firebasestorage.googleapis.com/v0/b/moger-pro.appspot.com/o/images%2Fc7472002-1a27-4207-8a5f-0b20fed52360.jpg?alt=media&token=54ab3ec4-dbae-4b6f-87bc-20daf9778662",
+    highlights: [
+      "Peintures et sculptures contemporaines",
+      "Installations artistiques immersives",
+      "Art traditionnel Kabyè",
+      "Performances artistiques live"
+    ]
   }
 ];
 
