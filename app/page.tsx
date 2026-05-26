@@ -2,10 +2,9 @@
 
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
-import JobRegistration from "./components/JobRegistration";
+import EmploisSection from "./components/EmploisSection";
 import Gallery from "./components/gallery";
 import LiveStream from "./components/live-stream";
-import History from "./components/History";
 import Footer from "./components/footer";
 import Programme from "./components/programme";
 import Promotions from "./components/Promotions";
@@ -18,6 +17,8 @@ import EvenementsConnexes from "./components/EvenementsConnexes";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import DecouvrirKaraClient from "./components/Decouvrir-Kara";
+import LogementEvala from "./components/LogementEvala";
+import ActivitesBonsCoins from "./components/ActivitesBonsCoins";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,14 +34,7 @@ export default function Home() {
 
   return (
     <div 
-      className="flex min-h-screen flex-col text-white font-poppins relative"
-      style={{
-        backgroundImage: "url('/images/bg.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
+      className="flex min-h-screen flex-col text-gray-900 font-poppins relative bg-white"
     >
       <AnimatePresence>
         {isLoading ? (
@@ -52,18 +46,19 @@ export default function Home() {
               <Navbar />
               <main className="flex-grow">
                 <Hero />
-                <JobRegistration />
+                <LogementEvala />
+                <AboutEvala />
+                <EmploisSection />
                 {/* <Services /> */}
                 <Programme />
                 <EvenementsConnexes />
 
                 <Promotions />
+                <ActivitesBonsCoins />
                 <LiveStream />
-                <AboutEvala />
                 {/* <Highlights /> */}
                 {/* <Traditions /> */}
                 <Gallery />
-                <History />
                 <DecouvrirKaraClient />
                 <Blog />
                 <Contact />

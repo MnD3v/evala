@@ -1,112 +1,111 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-interface GalleryImage {
-  id: number;
-  src: string;
-  alt: string;
-  description: string;
-}
-
-const galleryImages: GalleryImage[] = [
-  {
-    id: 1,
-    src: "/images/evala1.jpg",
-    alt: "Combat d'Evala",
-    description: "Deux lutteurs s'affrontent dans un combat traditionnel"
-  },
-  {
-    id: 2,
-    src: "/images/evala2.jpg",
-    alt: "Préparation Evala",
-    description: "Rituel de préparation avant le combat"
-  },
-  {
-    id: 3,
-    src: "/images/evala3.jpg",
-    alt: "Victoire Evala",
-    description: "Célébration de la victoire"
-  },
-  {
-    id: 4,
-    src: "/images/evala4.jpg",
-    alt: "Spectateurs Evala",
-    description: "La foule encourageant les lutteurs"
-  },
-  {
-    id: 5,
-    src: "/images/evala5.jpg",
-    alt: "Tradition Evala",
-    description: "Cérémonie traditionnelle"
-  },
-  {
-    id: 6,
-    src: "/images/evala6.jpg",
-    alt: "Festival Evala",
-    description: "Vue d'ensemble du festival"
-  }
+const images = [
+  { id: 1, src: "/images/evala1.jpg",    caption: "Combat traditionnel",        year: "Kara" },
+  { id: 2, src: "/images/evala2.jpg",    caption: "Rituel de préparation",      year: "Kara" },
+  { id: 3, src: "/images/evala3.jpg",    caption: "Célébration de la victoire", year: "Kara" },
+  { id: 4, src: "/images/evala4.jpg",    caption: "La foule des cérémonies",    year: "Kara" },
+  { id: 5, src: "/images/evala2022.jpg", caption: "Festival Evala 2022",        year: "2022" },
+  { id: 6, src: "/images/evala2023.jpg", caption: "Festival Evala 2023",        year: "2023" },
+  { id: 7, src: "/images/evala2024.jpg", caption: "Festival Evala 2024",        year: "2024" },
 ];
+
+const ROMAN_COLORS = ["#CE1126", "#FFCD00", "#006A4E", "#CE1126", "#FFCD00", "#006A4E", "#CE1126"];
+const roman = ["I", "II", "III", "IV", "V", "VI", "VII"];
+
+function PhotoCard({ image, index, className = "" }: { image: (typeof images)[0]; index: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.07 }}
+      viewport={{ once: true }}
+      className={`group relative overflow-hidden rounded-xl bg-gray-100 ${className}`}
+    >
+      <span
+        className="absolute top-3 left-3 z-20 text-xs select-none leading-none font-bold drop-shadow-sm"
+        style={{ color: ROMAN_COLORS[index] }}
+      >
+        {roman[index]}
+      </span>
+      <Image src={image.src} alt={image.caption} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-10">
+        <p className="text-white/90 text-sm italic leading-snug">{image.caption}</p>
+        <p className="text-white/50 text-xs mt-0.5 uppercase">{image.year}</p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Gallery() {
   return (
-    <>
-      <section className="py-16 px-4 bg-black/40 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-4xl font-gilroy text-evala ">
-              Galerie Photo
-            </h2>
-            <Link
-              href="/gallery"
-              className="px-6 py-2 bg-red-600 text-white rounded-full font-montserrat text-sm hover:bg-red-700 transition-colors"
-            >
-              Voir tout
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {galleryImages.map((image) => (
-              <Link
-                key={image.id}
-                href={`/gallery/${image.id}`}
-                className="relative group overflow-visible rounded-2xl shadow-2xl transform transition-all duration-500 hover:-translate-y-2 hover:shadow-red-500/20"
-              >
-                {/* Cadre décoratif avec effet de base et transition au hover */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-gray-500/0 via-gray-500/20 to-gray-500/0 rounded-2xl transition-all duration-500 blur-sm group-hover:from-red-500/0 group-hover:via-red-500/30 group-hover:to-red-500/0"></div>
-                
-                {/* Coins décoratifs avec transition de couleur et forme */}
-                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-gray-400 rounded-tr-xl transition-all duration-500 group-hover:w-8 group-hover:h-8 group-hover:border-red-500 group-hover:rounded-tr-2xl"></div>
-                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-gray-400 rounded-bl-xl transition-all duration-500 group-hover:w-8 group-hover:h-8 group-hover:border-red-500 group-hover:rounded-bl-2xl"></div>
-                
-                {/* Points décoratifs avec transition de taille et couleur */}
-                <div className="absolute -top-1 -left-1 w-1.5 h-1.5 bg-gray-400 rounded-full transition-all duration-500 group-hover:w-2 group-hover:h-2 group-hover:bg-red-500"></div>
-                <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-gray-400 rounded-full transition-all duration-500 group-hover:w-2 group-hover:h-2 group-hover:bg-red-500"></div>
+    <section className="py-24 md:py-32 bg-gray-50 relative overflow-hidden" id="galerie">
 
-                <div className="aspect-w-16 aspect-h-9 relative h-[250px] md:h-[300px] bg-gradient-to-br from-black/5 to-black/20 rounded-2xl p-1">
-                  <div className="relative w-full h-full rounded-xl overflow-hidden">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority
-                      className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                        <h3 className="text-white font-teko text-xl md:text-2xl mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{image.alt}</h3>
-                        <p className="text-gray-200 text-xs md:text-sm font-montserrat opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{image.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+      <div className="container mx-auto px-6 md:px-8 relative z-10 max-w-6xl">
+
+        {/* En-tête */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="flex flex-col items-center text-center mb-14">
+          <p className="text-xs font-medium uppercase mb-4" style={{ color: "#006A4E" }}>Photographie</p>
+          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-6">
+            L'âme du festival <em className="not-italic" style={{ color: "#006A4E" }}>en images</em>
+          </h2>
+          <Link href="/gallery" className="group inline-flex items-center gap-2 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85" style={{ background: "#00FF7F", color: "#111" }}>
+            <span>Voir toute la galerie</span>
+            <ArrowRight className="w-4 h-4 -rotate-45" />
+          </Link>
+        </motion.div>
+
+        {/* Grille éditoriale */}
+        <div className="grid grid-cols-2 md:grid-cols-12 grid-rows-[auto] gap-2 md:gap-3">
+
+          <div className="col-span-2 md:col-span-5 md:row-span-2 relative h-[280px] md:h-auto min-h-0 md:min-h-[520px]">
+            <PhotoCard image={images[0]} index={0} className="absolute inset-0 h-full w-full" />
           </div>
+
+          <div className="col-span-1 md:col-span-4 relative h-[180px] md:h-[252px]">
+            <PhotoCard image={images[1]} index={1} className="absolute inset-0 h-full w-full" />
+          </div>
+
+          <div className="col-span-1 md:col-span-3 relative h-[180px] md:h-[252px]">
+            <PhotoCard image={images[2]} index={2} className="absolute inset-0 h-full w-full" />
+          </div>
+
+          <div className="col-span-1 md:col-span-3 relative h-[180px] md:h-[256px]">
+            <PhotoCard image={images[3]} index={3} className="absolute inset-0 h-full w-full" />
+          </div>
+
+          <div className="col-span-1 md:col-span-4 relative h-[180px] md:h-[256px]">
+            <PhotoCard image={images[4]} index={4} className="absolute inset-0 h-full w-full" />
+          </div>
+
+          <div className="col-span-2 md:col-span-12 relative h-[200px] md:h-[260px]">
+            <PhotoCard image={images[5]} index={5} className="absolute inset-0 h-full w-full" />
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.4 }} viewport={{ once: true }} className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              <p className="text-3xl md:text-5xl text-white/10 tracking-[0.3em] uppercase select-none">Evala</p>
+            </motion.div>
+          </div>
+
         </div>
-      </section>
-    </>
+
+        {/* Bande tricolore + caption */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} className="mt-8 flex flex-col items-center gap-3">
+          <div className="flex w-24 h-0.5 overflow-hidden rounded-full">
+            <div className="flex-1" style={{ background: "#CE1126" }} />
+            <div className="flex-1" style={{ background: "#FFCD00" }} />
+            <div className="flex-1" style={{ background: "#006A4E" }} />
+          </div>
+          <p className="text-center text-black text-xs uppercase">
+            Festival Evala — Kara, Togo
+          </p>
+        </motion.div>
+
+      </div>
+    </section>
   );
-} 
+}

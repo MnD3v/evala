@@ -8,15 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { ArrowRight, Tag } from "lucide-react";
 
 const PROMOTIONS_QUERY = `*[
-  _type == "promotion" && 
-  defined(slug.current) && 
-  publishedAt != null && 
-  isActive == true &&
-  dateTime(now()) >= dateTime(startDate) &&
-  dateTime(now()) <= dateTime(endDate)
-]|order(publishedAt desc)[0...6]{
+  _type == "promotion" &&
+  defined(slug.current) &&
+  isActive == true
+]|order(_createdAt desc)[0...6]{
   _id,
   title,
   slug,
@@ -34,201 +32,154 @@ const PROMOTIONS_QUERY = `*[
 
 export default function Promotions() {
   const [promotions, setPromotions] = useState<SanityDocument[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [totalPromotions, setTotalPromotions] = useState(0);
+  const [isLoading, setIsLoading]   = useState(true);
+  const [total, setTotal]           = useState(0);
 
   useEffect(() => {
-    // Requête pour les promotions affichées
     client.fetch(PROMOTIONS_QUERY)
-      .then((data) => {
-        setPromotions(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Erreur lors du chargement des promotions :", error);
-        setIsLoading(false);
-      });
+      .then((data) => { setPromotions(data); setIsLoading(false); })
+      .catch(() => setIsLoading(false));
 
-    // Requête pour compter le total des promotions
-    client.fetch(`count(*[
-      _type == "promotion" && 
-      defined(slug.current) && 
-      publishedAt != null && 
-      isActive == true &&
-      dateTime(now()) >= dateTime(startDate) &&
-      dateTime(now()) <= dateTime(endDate)
-    ])`)
-      .then((total) => {
-        setTotalPromotions(total);
-      })
-      .catch((error) => {
-        console.error("Erreur lors du comptage des promotions :", error);
-      });
+    client.fetch(`count(*[_type == "promotion" && defined(slug.current) && isActive == true])`)
+      .then(setTotal)
+      .catch(() => {});
   }, []);
 
-  if (promotions.length === 0 && !isLoading) {
-    return null;
-  }
 
   return (
-    <section className="relative overflow-hidden bg-black py-16 md:py-24" id="promotions">
-      {/* Fond avec effets avancés */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-festival-red/5 to-black"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-festival-red/20 via-transparent to-transparent opacity-40"></div>
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
-      </div>
-      
-      <div className="container relative z-10 mx-auto px-4">
-        {/* En-tête de section avec animation */}
+    <section id="promotions" className="relative overflow-hidden bg-gray-50 py-24 md:py-32">
+
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(255,205,0,0.07),transparent)] pointer-events-none" />
+
+      <div className="container relative z-10 mx-auto px-6 md:px-8 max-w-6xl">
+
+        {/* En-tête */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="mb-16 text-center"
+          className="flex flex-col items-center text-center mb-14"
         >
-          <div className="inline-flex items-center gap-3 mb-6">
-          
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-gilroy font-bold relative">
-              <span className="font-gilroy">
-                Promotions en Cours
-              </span>
-              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></span>
-            </h2>
-       
-          </div>
-          <div className="relative mx-auto mb-4 md:mb-6 h-px w-20 md:w-24 overflow-hidden rounded-full bg-white">
-          
-          </div>
-          <p className="mx-auto max-w-2xl text-gray-400 text-base md:text-lg">
-            Découvrez nos offres spéciales et événements du moment
+          <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "#006A4E" }}>
+            Offres & Deals
+          </p>
+          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-4">
+            Promotions <em className="not-italic" style={{ color: "#006A4E" }}>en cours</em>
+          </h2>
+          <p className="text-black/60 text-base max-w-lg leading-relaxed">
+            Offres spéciales, réductions et événements à saisir autour du festival Evala.
           </p>
         </motion.div>
 
-        {/* Grille des promotions avec effet de masonry */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000 max-w-6xl mx-auto">
-          {promotions.map((promo, index) => (
-            <motion.div
-              key={promo._id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative w-full max-w-[320px] mx-auto"
-            >
-              <Link href={`/promotions/${promo.slug.current}`}>
-                <div className="relative">
-                  {/* Carte principale avec effet subtil */}
-                  <motion.div
-                    whileHover={{
-                      scale: 1.02,
-                      transition: { duration: 0.3 }
-                    }}
-                    className="relative flex h-[320px] transform-gpu flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-black p-5 transition-all duration-300 border border-white/5 shadow-lg"
-                  >
-                    {/* Image de fond avec effets */}
-                    <div className="absolute inset-0 z-0">
-                      {promo.mainImage?.asset?.url ? (
-                        <>
-                          <Image
-                            src={promo.mainImage.asset.url}
-                            alt={promo.title}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105 brightness-75"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
-                        </>
-                      ) : (
-                        <div className="h-full w-full bg-gradient-to-br from-festival-red/50 to-black"></div>
-                      )}
-                    </div>
+        {/* Séparateur tricolore */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-0 mb-12 origin-left overflow-hidden rounded-full"
+          style={{ height: "2px" }}
+        >
+          <div className="w-24" style={{ background: "#FFCD00" }} />
+          <div className="w-24" style={{ background: "#006A4E" }} />
+          <div className="flex-1" style={{ background: "linear-gradient(to right, #CE1126, transparent)" }} />
+        </motion.div>
 
-                    {/* Contenu */}
-                    <div className="relative z-10 flex h-full flex-col justify-between">
-                      {/* Badge de date */}
-                      <div className="relative">
-                        <div className="inline-flex items-center gap-2 rounded-full bg-black/40 px-2.5 md:px-3 py-1 md:py-1.5 backdrop-blur-sm border border-white/10">
-                          <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-festival-red"></span>
-                          <span className="text-[10px] md:text-xs font-medium text-white">
-                            {format(new Date(promo.startDate), 'dd MMMM yyyy', { locale: fr })}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Contenu principal */}
-                      <div className="space-y-3 md:space-y-4">
-                        {/* Titre */}
-                        <div className="relative">
-                          <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-festival-red transition-colors duration-300 line-clamp-2">
-                            {promo.title}
-                          </h3>
-                          <div className="mt-2 h-0.5 w-10 md:w-12 bg-festival-red/50 group-hover:bg-festival-red transition-colors duration-300"></div>
-                        </div>
-
-                        {/* Bouton */}
-                        <div className="flex items-center justify-between rounded-full bg-black/40 p-2.5 md:p-3 backdrop-blur-sm border border-white/5 group-hover:border-festival-red/20 transition-colors duration-300">
-                          <span className="text-xs md:text-sm text-white/90 font-medium">Voir l'offre</span>
-                          <div className="h-4 w-4 md:h-5 md:w-5 rounded-full bg-festival-red/10 p-1">
-                            <svg
-                              className="h-full w-full text-festival-red transform transition-transform duration-300 group-hover:translate-x-1"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bouton "Voir toutes les promotions" simplifié */}
-        {totalPromotions > 6 && (
+        {/* Grille */}
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="h-[280px] rounded-2xl bg-black/[0.04] animate-pulse" />
+            ))}
+          </div>
+        ) : promotions.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center text-center py-20 gap-4"
           >
-            <Link href="/promotions" className="inline-block">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 md:gap-3 rounded-full border border-festival-red bg-black/40 px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold text-festival-red transition-all duration-300 hover:bg-festival-red/5"
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255,205,0,0.1)", border: "1px solid rgba(255,205,0,0.3)" }}>
+              <Tag className="w-6 h-6" style={{ color: "#8a6d00" }} />
+            </div>
+            <p className="text-black/50 text-sm">Aucune promotion active pour le moment.</p>
+          </motion.div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {promotions.map((promo, i) => (
+              <motion.div
+                key={promo._id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                viewport={{ once: true }}
               >
-                <span>Voir les {totalPromotions - 6} autres promotions</span>
-                <svg
-                  className="h-4 w-4 md:h-5 md:w-5 transform transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <Link
+                  href={`/promotions/${promo.slug.current}`}
+                  className="group relative block rounded-2xl overflow-hidden h-[280px] shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.18)] transition-all duration-500"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </motion.button>
+                  {/* Image */}
+                  {promo.mainImage?.asset?.url ? (
+                    <Image
+                      src={promo.mainImage.asset.url}
+                      alt={promo.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+                    />
+                  ) : (
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #006A4E, #FFCD00)" }} />
+                  )}
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Badge date */}
+                  {promo.endDate && (
+                    <div className="absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-3 py-1 backdrop-blur-sm" style={{ background: "rgba(255,205,0,0.85)" }}>
+                      <Tag className="w-3 h-3 text-black" />
+                      <span className="text-[11px] font-semibold text-black">
+                        jusqu'au {format(new Date(promo.endDate), 'dd MMM', { locale: fr })}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Contenu bas */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 className="font-fjalla text-white text-lg leading-snug mb-3 line-clamp-2">
+                      {promo.title}
+                    </h3>
+                    <span className="inline-flex items-center gap-2 text-white text-xs font-medium px-4 py-1.5 rounded-full border border-white/50 group-hover:bg-white group-hover:text-black transition-all duration-300">
+                      Voir l'offre
+                      <ArrowRight className="w-3 h-3 -rotate-45" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Voir toutes */}
+        {total > 6 && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-12 flex justify-center"
+          >
+            <Link
+              href="/promotions"
+              className="inline-flex items-center gap-2 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
+              style={{ background: "#00FF7F", color: "#111" }}
+            >
+              <span>Voir toutes les promotions</span>
+              <ArrowRight className="w-4 h-4 -rotate-45" />
             </Link>
           </motion.div>
         )}
+
       </div>
     </section>
   );
-} 
+}

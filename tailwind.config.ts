@@ -16,33 +16,28 @@ export default {
         gilroy: ['Gilroy-Bold', 'sans-serif'],
         title: ['Bebas Neue', 'sans-serif'],
         subtitle: ['Teko', 'sans-serif'],
+        fjalla: ['Fjalla One', 'sans-serif'],
+        newsport: ['Newsport', 'sans-serif'],
       },
       
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         eorange: "#FF9933",
-        egreen:"#96E903",
+        egreen: "#96E903",
         'evala': {
           DEFAULT: 'var(--evala-red)',
-          light: 'rgba(255, 0, 0, 0.1)',
-          medium: 'rgba(255, 0, 0, 0.5)',
-          dark: 'rgba(255, 0, 0, 0.8)',
+          light: 'rgba(206,17,38,0.1)',
+          medium: 'rgba(206,17,38,0.5)',
+          dark: 'rgba(206,17,38,0.8)',
         },
-        'primary': '#dc2626',
-        'primary-dark': '#b91c1c',
         'togo': {
-          'red': 'var(--togo-red)',
+          'red':    'var(--togo-red)',
           'yellow': 'var(--togo-yellow)',
-          'green': 'var(--togo-green)',
+          'green':  'var(--togo-green)',
         },
-        'festival': {
-          'red': 'var(--evala-red)',
-          'yellow': '#FFD700',
-          'yellow-light': 'rgba(255, 215, 0, 0.1)',
-          'yellow-medium': 'rgba(255, 215, 0, 0.5)',
-          'yellow-dark': 'rgba(255, 215, 0, 0.8)',
-        }
+        'primary': '#CE1126',
+        'primary-dark': '#a50e1e',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

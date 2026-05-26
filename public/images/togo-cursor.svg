@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="arrow">
+      <polygon points="2,2 2,26 9,19 13,30 17,28 13,17 22,17"/>
+    </clipPath>
+  </defs>
+  <!-- Flèche remplie avec les 3 bandes du drapeau togolais -->
+  <rect x="0" y="0" width="32" height="11" fill="#006A4E" clip-path="url(#arrow)"/>
+  <rect x="0" y="11" width="32" height="10" fill="#FFCD00" clip-path="url(#arrow)"/>
+  <rect x="0" y="21" width="32" height="11" fill="#CE1126" clip-path="url(#arrow)"/>
+  <!-- Contour noir pour lisibilité -->
+  <polygon points="2,2 2,26 9,19 13,30 17,28 13,17 22,17" fill="none" stroke="#111" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Étoile blanche au centre -->
+  <polygon points="12,10 12.9,12.8 15.8,12.8 13.5,14.5 14.3,17.2 12,15.6 9.7,17.2 10.5,14.5 8.2,12.8 11.1,12.8" fill="white" stroke="#111" stroke-width="0.4"/>
+</svg>

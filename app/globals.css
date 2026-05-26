@@ -15,28 +15,43 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Newsport';
+  src: url('/fonts/NewsportDemoItalic.ttf');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+*, *::before, *::after {
+  cursor: url('/images/togo-cursor.svg') 2 2, auto !important;
+}
+
+a, button, [role="button"], input[type="submit"], input[type="button"], label[for], select {
+  cursor: url('/images/togo-pointer.svg') 8 2, pointer !important;
+}
+
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-  --evala-red: #FF0000;
-  --togo-red: #FF0000;
-  --togo-yellow: #FFD700;
-  --togo-green: #008000;
+  --foreground-rgb: 17, 17, 17;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+  --evala-red: #CE1126;
+  --evala-rgb: 206,17,38;
+  --togo-red: #CE1126;
+  --togo-yellow: #FFCD00;
+  --togo-yellow-rgb: 255,205,0;
+  --togo-green: #006A4E;
+  --togo-green-rgb: 0,106,78;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
   font-family: 'Teko', sans-serif;
 }
 
@@ -110,7 +125,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -162,8 +177,7 @@ html {
 }
 
 * {
-  transition: all 400ms linear;
-  color: white;
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease, opacity 200ms ease;
 }
 
 .max {

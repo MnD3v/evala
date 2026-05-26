@@ -10,79 +10,90 @@ export default function Footer() {
   const footerSections = [
     {
       title: "Festival Evala",
+      color: "#CE1126",
       links: [
-        { label: "Programme", href: "/#programme" },
+        { label: "Programme",  href: "/#programme" },
         { label: "Traditions", href: "/#traditions" },
-        { label: "Histoire", href: "/#histoire" },
-        { label: "Galerie", href: "/#galerie" },
+        { label: "Histoire",   href: "/#histoire" },
+        { label: "Galerie",    href: "/#galerie" },
       ],
     },
     {
       title: "Informations",
+      color: "#006A4E",
       links: [
         { label: "Hébergement", href: "/hebergement" },
-        { label: "Transport", href: "/transport" },
-        { label: "Emplois", href: "/jobs" },
-        { label: "Blog", href: "/blog" },
+        { label: "Transport",   href: "/transport" },
+        { label: "Emplois",     href: "/jobs" },
+        { label: "Blog",        href: "/blog" },
       ],
     },
     {
       title: "Contact",
+      color: "#FFCD00",
       links: [
-        { label: "WhatsApp: +228 92 87 10 01", href: "https://wa.me/22892871001" },
-        { label: "Email: tg.evala@gmail.com", href: "mailto:tg.evala@gmail.com" },
-        { label: "Tél: +228 98 78 45 89", href: "tel:+22898784589" },
+        { label: "WhatsApp: +228 90 77 88 80", href: "https://wa.me/22890778880" },
+        { label: "Email: tg.evala@gmail.com",  href: "mailto:tg.evala@gmail.com" },
+        { label: "Tél: +228 98 78 45 89",      href: "tel:+22898784589" },
       ],
     },
   ];
 
   const socialLinks = [
-    { icon: FaFacebook, href: "https://facebook.com/evala", label: "Facebook" },
-    { icon: FaInstagram, href: "https://instagram.com/evala", label: "Instagram" },
-    { icon: FaYoutube, href: "https://youtube.com/evala", label: "YouTube" },
-    { icon: FaWhatsapp, href: "https://wa.me/22892871001", label: "WhatsApp" },
+    { icon: FaFacebook,  href: "https://facebook.com/evala",  label: "Facebook",  hoverColor: "#1877F2" },
+    { icon: FaInstagram, href: "https://instagram.com/evala", label: "Instagram", hoverColor: "#CE1126" },
+    { icon: FaYoutube,   href: "https://youtube.com/evala",   label: "YouTube",   hoverColor: "#CE1126" },
+    { icon: FaWhatsapp,  href: "https://wa.me/22890778880",   label: "WhatsApp",  hoverColor: "#006A4E" },
   ];
 
   return (
-    <footer className="bg-black relative overflow-hidden">
-      {/* Cercles décoratifs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-festival-red/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-festival-yellow/10 rounded-full blur-3xl"></div>
+    <footer className="bg-gray-50 relative overflow-hidden">
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Logo et description */}
+      {/* Bande tricolore en haut */}
+      <div className="flex h-1">
+        <div className="flex-1" style={{ background: "#CE1126" }} />
+        <div className="flex-1" style={{ background: "#FFCD00" }} />
+        <div className="flex-1" style={{ background: "#006A4E" }} />
+      </div>
+
+      <div className="container mx-auto px-6 md:px-8 py-16 relative z-10 max-w-6xl">
+
+        {/* Logo */}
         <div className="text-center mb-16">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-mercado mb-6 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red bg-clip-text text-transparent"
-            animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          >
-            EVALA
-          </motion.h2>
-          <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-festival-red via-festival-yellow to-festival-red mx-auto mb-6"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
-            transition={{ duration: 0.8 }}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-          />
-          <p className="text-gray-400 max-w-2xl mx-auto">
+            className="mb-4"
+          >
+            <span className="font-mercado font-bold text-4xl md:text-5xl" style={{ color: "#CE1126" }}>E</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl" style={{ color: "#FFCD00" }}>V</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl" style={{ color: "#006A4E" }}>A</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl" style={{ color: "#FFCD00" }}>L</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl" style={{ color: "#CE1126" }}>A</span>
+          </motion.div>
+          <div className="flex justify-center mb-6">
+            <div className="flex w-16 h-0.5 overflow-hidden rounded-full">
+              <div className="flex-1" style={{ background: "#CE1126" }} />
+              <div className="flex-1" style={{ background: "#FFCD00" }} />
+              <div className="flex-1" style={{ background: "#006A4E" }} />
+            </div>
+          </div>
+          <p className="text-black max-w-2xl mx-auto text-sm leading-relaxed">
             Le Festival Evala, un rite initiatique sacré des Kabyè, célèbre la tradition de la lutte togolaise dans la région de Kozah.
           </p>
         </div>
 
-        {/* Sections de liens */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+        {/* Liens */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-white text-lg font-semibold mb-4">{section.title}</h3>
+              <h3 className="text-sm font-semibold mb-4" style={{ color: section.color }}>{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-400 hover:text-festival-red transition-colors duration-300"
-                    >
+                    <Link href={link.href} className="text-black hover:text-black transition-colors duration-200 text-sm">
                       {link.label}
                     </Link>
                   </li>
@@ -93,37 +104,32 @@ export default function Footer() {
         </div>
 
         {/* Réseaux sociaux */}
-        <div className="flex justify-center space-x-6 mb-8">
+        <div className="flex justify-center space-x-5 mb-10">
           {socialLinks.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-festival-red transition-colors duration-300"
+            <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-black/[0.04] border border-black/[0.06] flex items-center justify-center text-black transition-all duration-200 hover:scale-110"
               aria-label={social.label}
+              style={{} as React.CSSProperties}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = social.hoverColor; (e.currentTarget as HTMLAnchorElement).style.borderColor = social.hoverColor + "40"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = ""; (e.currentTarget as HTMLAnchorElement).style.borderColor = ""; }}
             >
-              <social.icon className="w-6 h-6" />
+              <social.icon className="w-4 h-4" />
             </a>
           ))}
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-gray-500 text-sm">
+        <div className="text-center text-black text-xs">
           <p>© {currentYear} Festival Evala. Tous droits réservés.</p>
-          <p className="mt-2">
+          <p className="mt-1.5">
             Développé avec passion par{" "}
-            <a
-              href="https://equilibre.tg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-festival-red hover:text-festival-yellow transition-colors duration-300"
-            >
+            <a href="https://equilibre.tg" target="_blank" rel="noopener noreferrer" style={{ color: "#CE1126" }} className="hover:opacity-70 transition-opacity duration-200">
               Equilibre
             </a>
           </p>
         </div>
+
       </div>
     </footer>
   );
-} 
+}
