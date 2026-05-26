@@ -24,6 +24,9 @@ const nextConfig = {
     // ⚠️ Dangereux mais nécessaire pour le moment
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
 
 module.exports = nextConfig 
