@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Cinzel } from "next/font/google";
+import { Cinzel } from "next/font/google";
 import "./globals.css";
 import { GlobalStateProvider } from "./context/GlobalStateContext";
 
-const inter = Inter({ subsets: ["latin"] });
 const cinzel = Cinzel({ subsets: ["latin"], variable: "--font-cinzel" });
 export const metadata: Metadata = {
   title: "Evala - Festival traditionnel Kabyè",
@@ -32,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.className} ${cinzel.variable}`}>
+    <html lang="fr" className={cinzel.variable}>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
       </head>

@@ -14,21 +14,20 @@ export default function LogementEvala() {
 
   useEffect(() => {
     const fetchLogements = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("logements")
-          .select("*")
-          .eq("approuve", true)
-          .eq("disponible", true)
-          .order("created_at", { ascending: false })
-          .limit(6);
-        if (error) throw error;
+      const { data, error } = await supabase
+        .from("logements")
+        .select("*")
+        .eq("approuve", true)
+        .eq("disponible", true)
+        .order("created_at", { ascending: false })
+        .limit(6);
+
+      if (error) {
+        console.error("Erreur chargement logements:", error.message, error.code, error.details);
+      } else {
         setLogements((data as Logement[]) ?? []);
-      } catch (err) {
-        console.error("Erreur chargement logements:", err);
-      } finally {
-        setIsLoading(false);
       }
+      setIsLoading(false);
     };
     fetchLogements();
   }, []);
@@ -46,13 +45,13 @@ export default function LogementEvala() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex flex-col items-center text-center mb-14"
         >
           <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "#006A4E" }}>
             Hébergement
           </p>
-          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-clash font-bold text-black leading-tight mb-4">
             Logements <em className="not-italic" style={{ color: "#006A4E" }}>pour le festival</em>
           </h2>
           <p className="text-black/60 text-base max-w-lg leading-relaxed mb-6">
@@ -73,7 +72,7 @@ export default function LogementEvala() {
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex items-center gap-0 mb-12 origin-left overflow-hidden rounded-full"
           style={{ height: "2px" }}
         >
@@ -119,7 +118,7 @@ export default function LogementEvala() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="mt-12 flex justify-center"
           >
             <Link

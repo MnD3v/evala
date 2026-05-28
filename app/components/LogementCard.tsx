@@ -64,7 +64,7 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.07 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
     >
       <Link
         href={`/logement/${logement.id}`}
@@ -79,6 +79,7 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
               <img
                 src={imageUrl}
                 alt={titre}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] mix-blend-multiply opacity-70"
               />
               <div className="absolute inset-0" style={{ background: `${typeColor.header}99` }} />

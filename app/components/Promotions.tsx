@@ -58,13 +58,13 @@ export default function Promotions() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex flex-col items-center text-center mb-14"
         >
           <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "#006A4E" }}>
             Offres & Deals
           </p>
-          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-clash font-bold text-black leading-tight mb-4">
             Promotions <em className="not-italic" style={{ color: "#006A4E" }}>en cours</em>
           </h2>
           <p className="text-black/60 text-base max-w-lg leading-relaxed">
@@ -77,7 +77,7 @@ export default function Promotions() {
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex items-center gap-0 mb-12 origin-left overflow-hidden rounded-full"
           style={{ height: "2px" }}
         >
@@ -112,7 +112,7 @@ export default function Promotions() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               >
                 <Link
                   href={`/promotions/${promo.slug.current}`}
@@ -145,7 +145,7 @@ export default function Promotions() {
 
                   {/* Contenu bas */}
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="font-fjalla text-white text-lg leading-snug mb-3 line-clamp-2">
+                    <h3 className="font-clash text-white text-lg leading-snug mb-3 line-clamp-2">
                       {promo.title}
                     </h3>
                     <span className="inline-flex items-center gap-2 text-white text-xs font-medium px-4 py-1.5 rounded-full border border-white/50 group-hover:bg-white group-hover:text-black transition-all duration-300">
@@ -165,7 +165,7 @@ export default function Promotions() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="mt-12 flex justify-center"
           >
             <Link

@@ -1,23 +1,22 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const SLIDES = [
   {
     src: "/images/evala-2024.png",
     kenBurns: {
-      initial: { scale: 1.15, x: "3%",  y: "2%" },
-      animate: { scale: 1.28, x: "-3%", y: "-2%" },
+      initial: { scale: 1.12, x: "2%",  y: "1%" },
+      animate: { scale: 1.22, x: "-2%", y: "-1%" },
     },
   },
   {
     src: "/images/hero-bg2.png",
     kenBurns: {
-      initial: { scale: 1.2,  x: "-4%", y: "-3%" },
-      animate: { scale: 1.08, x: "4%",  y: "3%" },
+      initial: { scale: 1.15, x: "-3%", y: "-2%" },
+      animate: { scale: 1.06, x: "3%",  y: "2%" },
     },
   },
 ];
@@ -30,153 +29,57 @@ const LETTERS = [
   { char: "A", color: "#CE1126" },
 ];
 
-// Positions fixes pour éviter les erreurs d'hydration
-const PARTICLES = [
-  { left: "8%",  bottom: "12%", size: 3, delay: 0,   dur: 5.5 },
-  { left: "17%", bottom: "8%",  size: 2, delay: 1.2, dur: 4.2 },
-  { left: "25%", bottom: "20%", size: 4, delay: 0.5, dur: 6.1 },
-  { left: "33%", bottom: "5%",  size: 2, delay: 2.1, dur: 5.0 },
-  { left: "41%", bottom: "15%", size: 3, delay: 0.8, dur: 4.8 },
-  { left: "50%", bottom: "10%", size: 2, delay: 1.7, dur: 6.3 },
-  { left: "58%", bottom: "22%", size: 4, delay: 0.3, dur: 4.5 },
-  { left: "66%", bottom: "7%",  size: 2, delay: 2.5, dur: 5.8 },
-  { left: "74%", bottom: "18%", size: 3, delay: 1.0, dur: 4.9 },
-  { left: "82%", bottom: "12%", size: 2, delay: 0.6, dur: 5.2 },
-  { left: "90%", bottom: "25%", size: 3, delay: 1.9, dur: 6.0 },
-  { left: "14%", bottom: "28%", size: 2, delay: 3.1, dur: 4.3 },
-];
-
-const SLIDE_DURATION = 6000; // ms par slide
+const SLIDE_DURATION = 6000;
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const [current, setCurrent]     = useState(0);
-  const [flashing, setFlashing]   = useState(false);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFlashing(true);
-      setTimeout(() => {
-        setCurrent(prev => (prev + 1) % SLIDES.length);
-        setFlashing(false);
-      }, 300);
+      setCurrent(prev => (prev + 1) % SLIDES.length);
     }, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const imgY           = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const contentY       = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
-
   return (
-    <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-black">
+    <section className="relative min-h-screen overflow-hidden bg-black">
 
-      {/* ── Couche 1 : Ken Burns + crossfade cinématique ── */}
-      <motion.div className="absolute inset-0" style={{ y: imgY }}>
-        <AnimatePresence mode="sync">
+      {/* ── Slides : Ken Burns + crossfade ── */}
+      <div className="absolute inset-0">
+        {SLIDES.map((slide, i) => (
           <motion.div
-            key={current}
+            key={i}
             className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            animate={{ opacity: i === current ? 1 : 0 }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
           >
             <motion.div
               className="absolute inset-0"
-              initial={SLIDES[current].kenBurns.initial}
-              animate={SLIDES[current].kenBurns.animate}
-              transition={{ duration: SLIDE_DURATION / 1000 + 1, ease: "easeInOut" }}
+              initial={slide.kenBurns.initial}
+              animate={i === current ? slide.kenBurns.animate : slide.kenBurns.initial}
+              transition={{ duration: SLIDE_DURATION / 1000 + 1.5, ease: "easeInOut" }}
             >
               <Image
-                src={SLIDES[current].src}
+                src={slide.src}
                 alt="Festival Evala"
                 fill
-                priority={current === 0}
+                priority
                 className="object-cover object-center"
               />
             </motion.div>
           </motion.div>
-        </AnimatePresence>
-      </motion.div>
-
-      {/* ── Flash de transition entre slides ── */}
-      <AnimatePresence>
-        {flashing && (
-          <motion.div
-            className="absolute inset-0 bg-white pointer-events-none z-30"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.25 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* ── Flash d'impact à l'entrée ── */}
-      <motion.div
-        className="absolute inset-0 bg-white pointer-events-none z-50"
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      />
-
-      {/* ── Color grade dramatique feu ── */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-950/65 via-amber-950/25 to-black/55 mix-blend-multiply" />
-
-      {/* ── Voile sombre ── */}
-      <div className="absolute inset-0 bg-black/38" />
-
-      {/* ── Gradient narratif haut/bas ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/75" />
-
-      {/* ── Vignette circulaire ── */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_38%,rgba(0,0,0,0.72))]" />
-
-      {/* ── Orbes de chaleur ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-0 left-1/4 w-[650px] h-[650px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(220,38,38,0.32) 0%, transparent 65%)" }}
-          animate={{ x: [0, 70, 0], y: [0, 55, 0], scale: [1, 1.22, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-[750px] h-[750px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(251,146,60,0.28) 0%, transparent 65%)" }}
-          animate={{ x: [0, -55, 0], y: [0, -45, 0], scale: [1, 1.18, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/3 w-[400px] h-[400px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(234,179,8,0.18) 0%, transparent 65%)" }}
-          animate={{ scale: [1, 1.35, 1], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-
-      {/* ── Particules de poussière ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {PARTICLES.map((p, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-amber-300/35"
-            style={{ width: p.size, height: p.size, left: p.left, bottom: p.bottom }}
-            animate={{ y: [0, -280], opacity: [0, 0.7, 0], x: [0, i % 2 === 0 ? 25 : -25] }}
-            transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: "easeOut" }}
-          />
         ))}
       </div>
 
+      {/* ── Overlays ── */}
+      <div className="absolute inset-0 bg-gradient-to-br from-red-950/60 via-amber-950/20 to-black/50 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_38%,rgba(0,0,0,0.65))]" />
 
-      {/* ── Grain cinématique ── */}
+      {/* ── Grain cinématique (statique) ── */}
       <div
-        className="absolute inset-0 opacity-[0.055] pointer-events-none"
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
@@ -185,21 +88,16 @@ export default function Hero() {
       />
 
       {/* ── Contenu principal ── */}
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-20 min-h-screen flex flex-col items-center justify-center px-4 text-center"
-      >
+      <div className="relative z-20 min-h-screen flex flex-col items-center justify-center px-4 text-center">
 
-
-
-        {/* Titre EVALA — reveal avec impact */}
+        {/* Titre EVALA */}
         <div className="flex overflow-hidden mb-4">
           {LETTERS.map((letter, i) => (
             <motion.span
               key={i}
-              initial={{ y: 140, opacity: 0, scale: 1.4 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1], delay: 0.38 + i * 0.08 }}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.07 }}
               className="font-newsport font-bold italic text-[22vw] md:text-[18vw] lg:text-[14vw] leading-none tracking-tight"
               style={{
                 color: letter.color,
@@ -211,19 +109,19 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Séparateur animé */}
+        {/* Séparateur */}
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="w-28 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mb-7 origin-center"
         />
 
         {/* Description */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.65 }}
           className="text-white/75 text-base md:text-lg max-w-xl leading-relaxed mb-10 px-2"
         >
           Le plus grand festival de lutte traditionnelle au Togo.
@@ -232,9 +130,9 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.25 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <a
@@ -265,9 +163,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-
-      </motion.div>
-
+      </div>
 
     </section>
   );

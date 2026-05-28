@@ -182,7 +182,7 @@ export default function DashboardPage() {
               {profile?.full_name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase()}
             </div>
             <div>
-              <h1 className="text-black text-xl leading-tight font-bold">{profile?.full_name}</h1>
+              <h1 className="font-clash text-black text-2xl leading-tight">{profile?.full_name}</h1>
               <p className="text-black text-sm">{profile?.email}</p>
               <span className="inline-block mt-1 text-[11px] text-black rounded-full px-2.5 py-0.5 border"
                 style={{ background: "rgba(0,106,78,0.07)", borderColor: "rgba(0,106,78,0.2)", color: "#006A4E" }}>
@@ -343,7 +343,7 @@ function SectionHeader({ icon, title, color }: { icon: React.ReactNode; title: s
       className="flex items-center gap-2.5 mb-5"
     >
       <span style={{ color }}>{icon}</span>
-      <h2 className="font-bold text-black text-lg">{title}</h2>
+      <h2 className="font-clash font-bold text-black text-xl">{title}</h2>
       <div className="flex-1 h-px ml-2" style={{ background: `linear-gradient(to right, ${color}30, transparent)` }} />
     </motion.div>
   );
@@ -443,7 +443,7 @@ function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleti
 /* ─── Shell ─────────────────────────────────────────────────── */
 function PageShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-gray-50 font-poppins">
       <Navbar />
       <main className="flex-grow pt-24 pb-20 px-4">
         {children}

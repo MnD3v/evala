@@ -66,13 +66,13 @@ export default function Contact() {
         {/* En-tête */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }} viewport={{ once: true }}
+          transition={{ duration: 0.7 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="mb-14 text-center"
         >
           <p className="text-[10px] font-medium uppercase mb-4" style={{ color: "#006A4E" }}>
             Contact
           </p>
-          <h2 className="font-fjalla font-bold text-black leading-tight mb-5"
+          <h2 className="font-clash font-bold text-black leading-tight mb-5"
             style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
             Une question sur<br />
             <em className="not-italic" style={{ color: "#006A4E" }}>le festival ?</em>
@@ -102,7 +102,7 @@ export default function Contact() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                 className="group flex items-center gap-5 p-5 rounded-2xl transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.07)]"
                 style={{ border: `1px solid ${c.border}`, background: c.bg }}
               >
@@ -129,7 +129,7 @@ export default function Contact() {
             {/* Réseaux sociaux */}
             <motion.div
               initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               className="flex items-center gap-3 pt-4"
             >
               <span className="text-xs text-black/30 uppercase font-medium">Suivez-nous</span>
@@ -156,7 +156,7 @@ export default function Contact() {
           {/* ── Carte / Localisation ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="rounded-2xl overflow-hidden border border-black/[0.07]"
           >
             {/* En-tête carte */}

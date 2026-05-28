@@ -22,11 +22,11 @@ export default function AboutEvala() {
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           >
 
             <h2
-              className="font-fjalla font-bold leading-tight mb-6 text-white"
+              className="font-clash font-bold leading-tight mb-6 text-white"
               style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)" }}
             >
               Qu'est-ce que{" "}
@@ -55,7 +55,7 @@ export default function AboutEvala() {
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
@@ -63,6 +63,7 @@ export default function AboutEvala() {
                 src="/images/a-propos.png"
                 alt="Evala — lutte traditionnelle Kabyè"
                 fill
+                priority
                 className="object-cover object-center"
               />
             </div>

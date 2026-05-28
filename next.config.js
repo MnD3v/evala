@@ -4,7 +4,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['cdn.sanity.io', 'firebasestorage.googleapis.com'],
+    domains: ['cdn.sanity.io', 'firebasestorage.googleapis.com', 'i.ibb.co'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,6 +17,10 @@ const nextConfig = {
         hostname: 'firebasestorage.googleapis.com',
         port: '',
         pathname: '/v0/b/moger-pro.appspot.com/o/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
       },
     ],
   },

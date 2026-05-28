@@ -1,60 +1,69 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Utensils, Music, Coffee, ShoppingBag, Waves, Camera } from "lucide-react";
+import { Utensils, Music, Coffee, ShoppingBag, Waves, Camera, Sparkles, ExternalLink } from "lucide-react";
+import { client } from "@/sanity/client";
+import type { SanityDocument } from "next-sanity";
 
-const activites = [
-  {
-    icon: <Utensils className="w-6 h-6" />,
-    color: "#006A4E",
-    bg: "rgba(0,106,78,0.08)",
-    titre: "Restaurants & Maquis",
-    description: "Savourez la cuisine Kabyè authentique — fufu, gari foto, tchoukoutou — dans les maquis et restaurants locaux de Kara.",
-    tags: ["Cuisine locale", "Terrasse", "Ambiance"],
-  },
-  {
-    icon: <Music className="w-6 h-6" />,
-    color: "#CE1126",
-    bg: "rgba(206,17,38,0.07)",
-    titre: "Soirées & Animation",
-    description: "Chants traditionnels Kabyè, percussions et danses rituelles animent les nuits du festival dans toute la région.",
-    tags: ["Musique live", "Danses", "Nuit"],
-  },
-  {
-    icon: <Coffee className="w-6 h-6" />,
-    color: "#8a6d00",
-    bg: "rgba(255,205,0,0.10)",
-    titre: "Bars & Tchoukoutou",
-    description: "Le tchoukoutou, bière de mil traditionnelle des Kabyè, se déguste dans les cabarets au cœur des villages.",
-    tags: ["Bière locale", "Cabarets", "Convivialité"],
-  },
-  {
-    icon: <ShoppingBag className="w-6 h-6" />,
-    color: "#006A4E",
-    bg: "rgba(0,106,78,0.08)",
-    titre: "Marchés & Artisanat",
-    description: "Sculptures, tissages, poteries et bijoux traditionnels — le marché central de Kara regorge d'artisanat Kabyè.",
-    tags: ["Artisanat", "Souvenirs", "Grand marché"],
-  },
-  {
-    icon: <Waves className="w-6 h-6" />,
-    color: "#CE1126",
-    bg: "rgba(206,17,38,0.07)",
-    titre: "Nature & Randonnées",
-    description: "Les massifs Kabyè offrent des sentiers de trek époustouflants avec vue sur les villages perchés et vallées verdoyantes.",
-    tags: ["Trek", "Massifs", "Panorama"],
-  },
-  {
-    icon: <Camera className="w-6 h-6" />,
-    color: "#8a6d00",
-    bg: "rgba(255,205,0,0.10)",
-    titre: "Sites Culturels",
-    description: "Visitez les villages initiateurs, les lieux de cérémonie et les sites historiques qui racontent l'histoire du peuple Kabyè.",
-    tags: ["Patrimoine", "Villages", "Histoire"],
-  },
-];
+/* ── Mapping catégorie → icône + couleurs ── */
+const CATEGORIE_CONFIG: Record<string, { icon: React.ReactNode; color: string; bg: string }> = {
+  restaurants:    { icon: <Utensils className="w-6 h-6" />,   color: "#006A4E", bg: "rgba(0,106,78,0.08)" },
+  soirees:        { icon: <Music className="w-6 h-6" />,      color: "#CE1126", bg: "rgba(206,17,38,0.07)" },
+  bars:           { icon: <Coffee className="w-6 h-6" />,     color: "#8a6d00", bg: "rgba(255,205,0,0.10)" },
+  marches:        { icon: <ShoppingBag className="w-6 h-6" />,color: "#006A4E", bg: "rgba(0,106,78,0.08)" },
+  nature:         { icon: <Waves className="w-6 h-6" />,      color: "#CE1126", bg: "rgba(206,17,38,0.07)" },
+  sites_culturels:{ icon: <Camera className="w-6 h-6" />,     color: "#8a6d00", bg: "rgba(255,205,0,0.10)" },
+  autre:          { icon: <Sparkles className="w-6 h-6" />,   color: "#006A4E", bg: "rgba(0,106,78,0.08)" },
+};
+
+const QUERY = `*[_type == "activite" && actif == true] | order(ordre asc) {
+  _id,
+  titre,
+  categorie,
+  body,
+
+  lien,
+  publishedAt,
+  ordre,
+  "image": image.asset->url
+}`;
+
+interface Activite extends SanityDocument {
+  titre: string;
+  categorie: string;
+  body?: { _type: string; children?: { text: string }[] }[];
+
+  lien?: string;
+  publishedAt?: string;
+  ordre?: number;
+  image: string;
+}
+
+/** Extrait le premier paragraphe de texte d'un body PortableText */
+function extractExcerpt(body?: Activite["body"]): string {
+  if (!body) return "";
+  for (const block of body) {
+    if (block._type === "block" && block.children) {
+      const text = block.children.map((c) => c.text).join("").trim();
+      if (text) return text.length > 160 ? text.slice(0, 157) + "…" : text;
+    }
+  }
+  return "";
+}
+
 
 export default function ActivitesBonsCoins() {
+  const [activites, setActivites] = useState<Activite[]>([]);
+
+  useEffect(() => {
+    client.fetch<Activite[]>(QUERY)
+      .then((data) => setActivites(data ?? []))
+      .catch(() => {});
+  }, []);
+
+  if (!activites.length) return null;
+
   return (
     <section id="activites" className="py-24 md:py-32 bg-white relative overflow-hidden">
 
@@ -67,13 +76,13 @@ export default function ActivitesBonsCoins() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex flex-col items-center text-center mb-14"
         >
           <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "#006A4E" }}>
             À faire
           </p>
-          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-clash font-bold text-black leading-tight mb-4">
             Activités & <em className="not-italic" style={{ color: "#006A4E" }}>Bons coins</em>
           </h2>
           <p className="text-black/60 text-base max-w-lg leading-relaxed">
@@ -86,7 +95,7 @@ export default function ActivitesBonsCoins() {
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex items-center gap-0 mb-12 origin-left overflow-hidden rounded-full"
           style={{ height: "2px" }}
         >
@@ -97,37 +106,71 @@ export default function ActivitesBonsCoins() {
 
         {/* Grille */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {activites.map((a, i) => (
-            <motion.div
-              key={a.titre}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-black/[0.07] p-6 hover:border-black/[0.14] hover:shadow-[0_6px_24px_rgba(0,0,0,0.07)] transition-all duration-300 bg-white"
-            >
-              {/* Icône */}
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: a.bg, color: a.color }}>
-                {a.icon}
-              </div>
+          {activites.map((a, i) => {
+            const config = CATEGORIE_CONFIG[a.categorie] ?? CATEGORIE_CONFIG.autre;
+            return (
+              <motion.div
+                key={a._id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                viewport={{ once: true, margin: "0px 0px -80px 0px" }}
+                className="group rounded-2xl border border-black/[0.07] hover:border-black/[0.14] hover:shadow-[0_6px_24px_rgba(0,0,0,0.07)] transition-all duration-300 bg-white overflow-hidden flex flex-col"
+              >
+                {/* Image principale (obligatoire) */}
+                <div className="relative h-44 overflow-hidden shrink-0">
+                  <img
+                    src={a.image}
+                    alt={a.titre}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  {/* Badge numéro de classement */}
+                  {a.ordre !== undefined && (
+                    <div className="absolute top-3 left-3 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white"
+                      style={{ background: config.color }}>
+                      {a.ordre}
+                    </div>
+                  )}
+                </div>
 
-              <h3 className="font-fjalla font-bold text-black text-lg mb-2">{a.titre}</h3>
-              <p className="text-black/55 text-sm leading-relaxed mb-4">{a.description}</p>
+                <div className="p-5 flex flex-col flex-1">
+                  {/* Icône + date */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: config.bg, color: config.color }}>
+                      {config.icon}
+                    </div>
+                    {a.publishedAt && (
+                      <span className="text-[11px] text-black/35">
+                        {new Date(a.publishedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
+                      </span>
+                    )}
+                  </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5">
-                {a.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[11px] px-2.5 py-1 rounded-full"
-                    style={{ background: a.bg, color: a.color }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  <h3 className="font-clash font-bold text-black text-lg mb-2">{a.titre}</h3>
+
+                  {/* Extrait du body */}
+                  {extractExcerpt(a.body) && (
+                    <p className="text-black/55 text-sm leading-relaxed mb-4 flex-1">
+                      {extractExcerpt(a.body)}
+                    </p>
+                  )}
+
+                  {/* Lien Google Maps */}
+                  {a.lien && (
+                    <a href={a.lien} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium transition-opacity hover:opacity-70 mt-auto"
+                      style={{ color: config.color }}
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Voir sur Google Maps
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>

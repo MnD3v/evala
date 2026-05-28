@@ -54,13 +54,13 @@ export default function Blog() {
         {/* En-tête */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }} viewport={{ once: true }}
+          transition={{ duration: 0.7 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex flex-col items-center text-center mb-14"
         >
             <p className="text-[10px] font-medium uppercase mb-4" style={{ color: "#006A4E" }}>
               Actualités & Culture
             </p>
-            <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight">
+            <h2 className="text-4xl md:text-5xl font-clash font-bold text-black leading-tight">
               Le blog <em className="not-italic" style={{ color: "#006A4E" }}>d'Evala</em>
             </h2>
         </motion.div>
@@ -68,7 +68,7 @@ export default function Blog() {
         {/* Séparateur tricolore */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8 }} viewport={{ once: true }}
+          transition={{ duration: 0.8 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="flex items-center gap-0 mb-14 origin-left overflow-hidden rounded-full"
           style={{ height: "2px" }}
         >
@@ -101,7 +101,7 @@ export default function Blog() {
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
             className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
           >
@@ -115,7 +115,7 @@ export default function Blog() {
         {hasMore && !isLoading && (
           <motion.div
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3 }} viewport={{ once: true }}
+            transition={{ delay: 0.3 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="mt-12 flex justify-center"
           >
             <button

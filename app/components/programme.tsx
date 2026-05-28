@@ -12,13 +12,13 @@ export default function Programme() {
         {/* En-tête section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }} viewport={{ once: true }}
+          transition={{ duration: 0.6 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="mb-14 text-center"
         >
           <p className="text-[10px] font-medium uppercase mb-4" style={{ color: "#006A4E" }}>
             Programme
           </p>
-          <h2 className="font-fjalla font-bold text-black leading-tight"
+          <h2 className="font-clash font-bold text-black leading-tight"
             style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
             Festival Evala{" "}
             <em className="not-italic" style={{ color: "#006A4E" }}>2026</em>
@@ -28,7 +28,7 @@ export default function Programme() {
         {/* Carte "À venir" */}
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}
           className="max-w-xl mx-auto"
         >
           <div className="rounded-2xl overflow-hidden border border-black/[0.07] shadow-[0_4px_24px_rgba(0,0,0,0.07)]">

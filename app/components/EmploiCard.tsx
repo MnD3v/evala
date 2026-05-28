@@ -57,7 +57,7 @@ export default function EmploiCard({ offre, index }: EmploiCardProps) {
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.07 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
       className="group flex flex-col rounded-2xl overflow-hidden bg-white hover:bg-gray-50 border border-black/[0.07] hover:border-black/[0.12] transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.05)] h-full"
     >
       {/* En-tête */}

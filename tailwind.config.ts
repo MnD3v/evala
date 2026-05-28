@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
+        sans: ['ClashGrotesk', 'sans-serif'],
+        clash: ['ClashGrotesk', 'sans-serif'],
         display: ['Cinzel', 'serif'],
         mercado: ['Mercado', 'sans-serif'],
         poppins: ['Poppins', 'serif'],

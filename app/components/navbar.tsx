@@ -47,8 +47,6 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   };
 
-  /* Nom affiché — initiales pour l'avatar */
-  //const displayName = session?.user?.user_metadata?.full_name as string | undefined;
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

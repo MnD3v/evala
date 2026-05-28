@@ -24,7 +24,7 @@ function PhotoCard({ image, index, className = "" }: { image: (typeof images)[0]
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.07 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
       className={`group relative overflow-hidden rounded-xl bg-gray-100 ${className}`}
     >
       <span
@@ -50,9 +50,9 @@ export default function Gallery() {
       <div className="container mx-auto px-6 md:px-8 relative z-10 max-w-6xl">
 
         {/* En-tête */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="flex flex-col items-center text-center mb-14">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }} className="flex flex-col items-center text-center mb-14">
           <p className="text-xs font-medium uppercase mb-4" style={{ color: "#006A4E" }}>Photographie</p>
-          <h2 className="text-4xl md:text-5xl font-fjalla font-bold text-black leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-clash font-bold text-black leading-tight mb-6">
             L'âme du festival <em className="not-italic" style={{ color: "#006A4E" }}>en images</em>
           </h2>
           <Link href="/gallery" className="group inline-flex items-center gap-2 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85" style={{ background: "#00FF7F", color: "#111" }}>
@@ -86,7 +86,7 @@ export default function Gallery() {
 
           <div className="col-span-2 md:col-span-12 relative h-[200px] md:h-[260px]">
             <PhotoCard image={images[5]} index={5} className="absolute inset-0 h-full w-full" />
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.4 }} viewport={{ once: true }} className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.4 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }} className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
               <p className="text-3xl md:text-5xl text-white/10 tracking-[0.3em] uppercase select-none">Evala</p>
             </motion.div>
           </div>
@@ -94,7 +94,7 @@ export default function Gallery() {
         </div>
 
         {/* Bande tricolore + caption */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} className="mt-8 flex flex-col items-center gap-3">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }} className="mt-8 flex flex-col items-center gap-3">
           <div className="flex w-24 h-0.5 overflow-hidden rounded-full">
             <div className="flex-1" style={{ background: "#CE1126" }} />
             <div className="flex-1" style={{ background: "#FFCD00" }} />
