@@ -70,7 +70,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               className="text-2xl font-bold text-white flex items-center"
             >
-              <span className="font-newsport italic text-2xl md:text-3xl tracking-wide">
+              <span className="font-mercado font-bold text-2xl md:text-3xl tracking-[-0.06em]">
                 <span style={{ color: "#006A4E" }}>E</span>
                 <span style={{ color: "#FFCD00" }}>V</span>
                 <span style={{ color: "#CE1126" }}>A</span>

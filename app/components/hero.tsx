@@ -91,14 +91,14 @@ export default function Hero() {
       <div className="relative z-20 min-h-screen flex flex-col items-center justify-center px-4 text-center">
 
         {/* Titre EVALA */}
-        <div className="flex overflow-hidden mb-4">
+        <div className="flex mb-4" style={{ clipPath: "inset(-20% -5% -20% -5%)" }}>
           {LETTERS.map((letter, i) => (
             <motion.span
               key={i}
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.07 }}
-              className="font-newsport font-bold italic text-[22vw] md:text-[18vw] lg:text-[14vw] leading-none tracking-tight"
+              className="font-mercado font-bold text-[22vw] md:text-[18vw] lg:text-[14vw] leading-[1.1] tracking-[-0.12em]"
               style={{
                 color: letter.color,
                 textShadow: `0 0 60px ${letter.color}60, 0 4px 32px rgba(0,0,0,0.6)`,

@@ -67,11 +67,11 @@ export default function Footer() {
             viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             className="mb-4"
           >
-            <span className="font-newsport italic text-4xl md:text-5xl tracking-wide" style={{ color: "#006A4E" }}>E</span>
-            <span className="font-newsport italic text-4xl md:text-5xl tracking-wide" style={{ color: "#FFCD00" }}>V</span>
-            <span className="font-newsport italic text-4xl md:text-5xl tracking-wide" style={{ color: "#CE1126" }}>A</span>
-            <span className="font-newsport italic text-4xl md:text-5xl tracking-wide" style={{ color: "#006A4E" }}>L</span>
-            <span className="font-newsport italic text-4xl md:text-5xl tracking-wide" style={{ color: "#FFCD00" }}>A</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl tracking-[-0.06em]" style={{ color: "#006A4E" }}>E</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl tracking-[-0.06em]" style={{ color: "#FFCD00" }}>V</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl tracking-[-0.06em]" style={{ color: "#CE1126" }}>A</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl tracking-[-0.06em]" style={{ color: "#006A4E" }}>L</span>
+            <span className="font-mercado font-bold text-4xl md:text-5xl tracking-[-0.06em]" style={{ color: "#FFCD00" }}>A</span>
           </motion.div>
           <div className="flex justify-center mb-6">
             <div className="flex w-16 h-0.5 overflow-hidden rounded-full">

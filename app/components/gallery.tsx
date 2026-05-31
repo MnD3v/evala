@@ -6,13 +6,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const images = [
-  { id: 1, src: "/images/evala1.jpg",    caption: "Combat traditionnel",        year: "Kara" },
-  { id: 2, src: "/images/evala2.jpg",    caption: "Rituel de préparation",      year: "Kara" },
-  { id: 3, src: "/images/evala3.jpg",    caption: "Célébration de la victoire", year: "Kara" },
-  { id: 4, src: "/images/evala4.jpg",    caption: "La foule des cérémonies",    year: "Kara" },
-  { id: 5, src: "/images/evala2022.jpg", caption: "Festival Evala 2022",        year: "2022" },
-  { id: 6, src: "/images/evala2023.jpg", caption: "Festival Evala 2023",        year: "2023" },
-  { id: 7, src: "/images/evala2024.jpg", caption: "Festival Evala 2024",        year: "2024" },
+  { id: 1, src: "/images/evala1.jpg",      caption: "Combat traditionnel",        year: "Kara" },
+  { id: 2, src: "/images/evala2.jpg",      caption: "Rituel de préparation",      year: "Kara" },
+  { id: 3, src: "/images/evala3.jpg",      caption: "Célébration de la victoire", year: "Kara" },
+  { id: 4, src: "/images/evala4.jpg",      caption: "La foule des cérémonies",    year: "Kara" },
+  { id: 5, src: "/images/evala-2022.jpg",  caption: "Festival Evala 2022",        year: "2022" },
+  { id: 6, src: "/images/evala-2023.jpg",  caption: "Festival Evala 2023",        year: "2023" },
 ];
 
 const ROMAN_COLORS = ["#CE1126", "#FFCD00", "#006A4E", "#CE1126", "#FFCD00", "#006A4E", "#CE1126"];

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Radio, Bell } from "lucide-react";
+import Image from "next/image";
 
 export default function LiveStream() {
   return (
@@ -24,21 +25,44 @@ export default function LiveStream() {
 
         {/* Placeholder vidéo */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }}>
-          <div className="relative aspect-video rounded-2xl overflow-hidden bg-white border border-black/[0.06] shadow-sm">
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-sm">
+            {/* Image floutée */}
+            <Image
+              src="https://i.ibb.co/6JrL21w3/Chat-GPT-Image-31-mai-2026-02-27-27-1.png"
+              alt="Evala en direct"
+              fill
+              className="object-cover object-center"
+              style={{ filter: "blur(4px) brightness(0.5)", transform: "scale(1.06)" }}
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/30" />
+
             {/* Bande tricolore en haut */}
-            <div className="absolute top-0 left-0 right-0 flex h-1">
+            <div className="absolute top-0 left-0 right-0 flex h-1 z-10">
               <div className="flex-1" style={{ background: "#CE1126" }} />
               <div className="flex-1" style={{ background: "#FFCD00" }} />
               <div className="flex-1" style={{ background: "#006A4E" }} />
             </div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(206,17,38,0.04),transparent_70%)]" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "rgba(206,17,38,0.08)", border: "1px solid rgba(206,17,38,0.15)" }}>
-                <svg className="w-7 h-7" fill="#CE1126" viewBox="0 0 24 24">
+
+            {/* Contenu centré */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 z-10">
+              <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/15 backdrop-blur-sm border border-white/30">
+                <motion.span
+                  className="absolute inset-0 rounded-full border border-white/30"
+                  animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                />
+                <motion.span
+                  className="absolute inset-0 rounded-full border border-white/20"
+                  animate={{ scale: [1, 1.9], opacity: [0.3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 0.4 }}
+                />
+                <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
-              <p className="text-black text-sm font-medium">La diffusion débutera lors des cérémonies</p>
+              <p className="text-white/80 text-sm font-medium">La diffusion débutera lors des cérémonies</p>
             </div>
           </div>
         </motion.div>
