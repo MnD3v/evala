@@ -10,7 +10,6 @@ import Blog from "./blog/page";
 import Contact from "./components/contact";
 import AboutEvala from "./components/about-evala";
 import EvenementsConnexes from "./components/EvenementsConnexes";
-import DecouvrirKaraClient from "./components/Decouvrir-Kara";
 import LogementEvala from "./components/LogementEvala";
 import ActivitesBonsCoins from "./components/ActivitesBonsCoins";
 import WaveDivider from "./components/WaveDivider";
@@ -37,8 +36,6 @@ export default function Home() {
           <WaveDivider />
           <LiveStream />
           <Gallery />
-          <DecouvrirKaraClient />
-          <WaveDivider color="#FFCD00" />
           <Blog />
           <Contact />
         </main>
