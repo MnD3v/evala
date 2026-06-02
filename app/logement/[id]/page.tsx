@@ -49,6 +49,8 @@ export default function LogementDetailPage() {
       .from("logements")
       .select("*")
       .eq("id", id)
+      .eq("approuve", true)
+      .eq("disponible", true)
       .single()
       .then(({ data, error }) => {
         if (error || !data) { router.push("/logement"); return; }
