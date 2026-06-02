@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Plus, BedDouble, Briefcase, CheckCircle2, Clock,
-  Loader2, Trash2, Eye, EyeOff,
+  Loader2, Trash2, Eye, EyeOff, ShoppingBag, Pencil,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,9 @@ import { supabase } from "../lib/supabase";
 import { getSession, getUserProfile } from "../lib/auth";
 import type { Logement } from "../types/logement";
 import type { OffreEmploi } from "../types/emploi";
+import type { Boutique } from "../types/boutique";
 import { TYPE_LABELS } from "../types/logement";
+import { CATEGORIE_BOUTIQUE_LABELS } from "../types/boutique";
 
 /* ─── Helpers ───────────────────────────────────────────────── */
 
@@ -66,6 +68,7 @@ export default function DashboardPage() {
 
   const [logements, setLogements]     = useState<Logement[]>([]);
   const [offres, setOffres]           = useState<OffreEmploi[]>([]);
+  const [boutiques, setBoutiques]     = useState<Boutique[]>([]);
   const [isLoading, setIsLoading]     = useState(true);
 
   const [deletingId, setDeletingId]   = useState<string | null>(null);
@@ -94,12 +97,14 @@ export default function DashboardPage() {
     if (!userId) return;
     const load = async () => {
       setIsLoading(true);
-      const [{ data: logs }, { data: offs }] = await Promise.all([
+      const [{ data: logs }, { data: offs }, { data: bouts }] = await Promise.all([
         supabase.from("logements").select("*").eq("user_id", userId).order("created_at", { ascending: false }),
         supabase.from("offres_emploi").select("*").eq("user_id", userId).order("created_at", { ascending: false }),
+        supabase.from("boutiques").select("*").eq("user_id", userId).order("created_at", { ascending: false }),
       ]);
       setLogements((logs as Logement[]) ?? []);
       setOffres((offs as OffreEmploi[]) ?? []);
+      setBoutiques((bouts as Boutique[]) ?? []);
       setIsLoading(false);
     };
     load();
@@ -120,6 +125,24 @@ export default function DashboardPage() {
     const next = !l.disponible;
     await supabase.from("logements").update({ disponible: next }).eq("id", l.id);
     setLogements(prev => prev.map(x => x.id === l.id ? { ...x, disponible: next } : x));
+    setTogglingId(null);
+  };
+
+  /* Supprimer boutique */
+  const deleteBoutique = async (id: string) => {
+    if (!confirm("Supprimer cette boutique et tous ses produits ?")) return;
+    setDeletingId(id);
+    await supabase.from("boutiques").delete().eq("id", id);
+    setBoutiques(prev => prev.filter(b => b.id !== id));
+    setDeletingId(null);
+  };
+
+  /* Toggle boutique */
+  const toggleBoutique = async (b: Boutique) => {
+    setTogglingId(b.id);
+    const next = !b.actif;
+    await supabase.from("boutiques").update({ actif: next }).eq("id", b.id);
+    setBoutiques(prev => prev.map(x => x.id === b.id ? { ...x, actif: next } : x));
     setTogglingId(null);
   };
 
@@ -208,8 +231,106 @@ export default function DashboardPage() {
                 Offre d'emploi
               </motion.span>
             </Link>
+            <Link href="/boutique/creer">
+              <motion.span whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-all cursor-pointer"
+                style={{ background: "#8a6d00" }}>
+                <ShoppingBag className="w-3.5 h-3.5" />
+                Boutique
+              </motion.span>
+            </Link>
           </div>
         </motion.div>
+
+        {/* ── SECTION BOUTIQUES ── */}
+        <SectionHeader icon={<ShoppingBag className="w-4 h-4" />} title="Mes boutiques" color="#8a6d00" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+          className="grid grid-cols-3 gap-3 mb-6"
+        >
+          {[
+            { label: "Total",     value: boutiques.length,                                          color: "#000" },
+            { label: "Publiées",  value: boutiques.filter(b => b.approuve && b.actif).length,       color: "#006A4E" },
+            { label: "Attente",   value: boutiques.filter(b => !b.approuve).length,                 color: "#8a6d00" },
+          ].map(({ label, value, color }) => (
+            <div key={label} className="bg-white border border-black/[0.07] rounded-xl p-4 text-center shadow-sm">
+              <p className="text-2xl font-bold" style={{ color }}>{value}</p>
+              <p className="text-black text-xs mt-0.5">{label}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {isLoading ? <LoadingRow /> : boutiques.length === 0 ? (
+          <EmptyState
+            icon={<ShoppingBag className="w-6 h-6" />}
+            message="Aucune boutique créée"
+            sub="Ouvrez votre première boutique artisanale."
+            link="/boutique/creer"
+            linkLabel="Créer une boutique"
+            color="#8a6d00"
+          />
+        ) : (
+          <div className="space-y-3 mb-14">
+            {boutiques.map((b, i) => {
+              const st = !b.actif ? "inactive" : !b.approuve ? "pending" : "approved";
+              const s  = STATUS_STYLE[st];
+              return (
+                <motion.div
+                  key={b.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white border border-black/[0.07] rounded-xl p-4 hover:border-black/[0.13] transition-all shadow-sm"
+                >
+                  {/* Miniature */}
+                  <div className="w-full sm:w-16 h-12 sm:h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0 flex items-center justify-center">
+                    {b.image_couverture
+                      ? <img src={b.image_couverture} alt={b.nom} className="w-full h-full object-cover" />
+                      : <ShoppingBag className="w-5 h-5 text-black/20" />}
+                  </div>
+
+                  {/* Infos */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                      <Link href={`/boutique/${b.slug}`} className="text-black text-sm font-medium truncate hover:underline">{b.nom}</Link>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full border"
+                        style={{ color: s.color, background: s.bg, borderColor: s.border }}>
+                        {s.icon}{s.label}
+                      </span>
+                    </div>
+                    <p className="text-black text-xs">{CATEGORIE_BOUTIQUE_LABELS[b.categorie]} · {b.localite}</p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    {/* Modifier boutique */}
+                    <Link href={`/boutique/${b.slug}/modifier`} title="Modifier"
+                      className="p-2 rounded-lg transition-all text-black/30 hover:text-black/70 hover:bg-black/[0.05]">
+                      <Pencil className="w-4 h-4" />
+                    </Link>
+                  {/* Ajouter un produit */}
+                    <Link href={`/boutique/${b.slug}/ajouter`}
+                      className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all text-white"
+                      style={{ background: "#006A4E" }}>
+                      <Plus className="w-3.5 h-3.5" />
+                      Ajouter un produit
+                    </Link>
+                    <button onClick={() => toggleBoutique(b)} disabled={togglingId === b.id} title={b.actif ? "Désactiver" : "Activer"}
+                      className="p-2 rounded-lg transition-all disabled:opacity-40 text-black/30 hover:text-black/70 hover:bg-black/[0.05]">
+                      {togglingId === b.id ? <Loader2 className="w-4 h-4 animate-spin" /> : b.actif ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                    </button>
+                    <button onClick={() => deleteBoutique(b.id)} disabled={deletingId === b.id} title="Supprimer"
+                      className="p-2 rounded-lg transition-all disabled:opacity-40 text-black/30 hover:text-red-500 hover:bg-red-50">
+                      {deletingId === b.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
 
         {/* ── SECTION LOGEMENTS ── */}
         <SectionHeader icon={<BedDouble className="w-4 h-4" />} title="Mes logements" color="#006A4E" />
@@ -264,6 +385,7 @@ export default function DashboardPage() {
                   onDelete={() => deleteLogement(l.id)}
                   thumbnail={l.images?.[0]}
                   thumbnailFallback={<BedDouble className="w-5 h-5 text-black/20" />}
+                  editLink={`/logement/${l.id}/modifier`}
                 />
               );
             })}
@@ -322,6 +444,7 @@ export default function DashboardPage() {
                   onToggle={() => toggleOffre(o)}
                   onDelete={() => deleteOffre(o.id)}
                   thumbnailFallback={<Briefcase className="w-5 h-5 text-black/20" />}
+                  editLink={`/emplois/${o.id}/modifier`}
                 />
               );
             })}
@@ -381,7 +504,7 @@ function EmptyState({ icon, message, sub, link, linkLabel, color }: {
   );
 }
 
-function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleting, onToggle, onDelete, thumbnail, thumbnailFallback }: {
+function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleting, onToggle, onDelete, thumbnail, thumbnailFallback, link, editLink }: {
   index: number;
   title: string;
   meta: string;
@@ -393,6 +516,8 @@ function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleti
   onDelete: () => void;
   thumbnail?: string;
   thumbnailFallback: React.ReactNode;
+  link?: string;
+  editLink?: string;
 }) {
   return (
     <motion.div
@@ -411,7 +536,11 @@ function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleti
       {/* Infos */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap mb-0.5">
-          <p className="text-black text-sm font-medium truncate">{title}</p>
+          {link ? (
+            <Link href={link} className="text-black text-sm font-medium truncate hover:underline">{title}</Link>
+          ) : (
+            <p className="text-black text-sm font-medium truncate">{title}</p>
+          )}
           <span
             className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full border"
             style={{ color: statusStyle.color, background: statusStyle.bg, borderColor: statusStyle.border }}
@@ -424,13 +553,18 @@ function ItemRow({ index, title, meta, statusStyle, active, isToggling, isDeleti
 
       {/* Actions */}
       <div className="flex items-center gap-2 shrink-0">
+        {editLink && (
+          <Link href={editLink} title="Modifier"
+            className="p-2 rounded-lg transition-all text-black/30 hover:text-black/70 hover:bg-black/[0.05]">
+            <Pencil className="w-4 h-4" />
+          </Link>
+        )}
         <button onClick={onToggle} disabled={isToggling} title={active ? "Désactiver" : "Activer"}
           className="p-2 rounded-lg transition-all disabled:opacity-40 text-black/30 hover:text-black/70 hover:bg-black/[0.05]">
           {isToggling ? <Loader2 className="w-4 h-4 animate-spin" /> : active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
         </button>
         <button onClick={onDelete} disabled={isDeleting} title="Supprimer"
           className="p-2 rounded-lg transition-all disabled:opacity-40 text-black/30 hover:bg-red-50"
-          style={{ ["--tw-text-opacity" as string]: 1 }}
           onMouseEnter={e => (e.currentTarget.style.color = "#CE1126")}
           onMouseLeave={e => (e.currentTarget.style.color = "")}>
           {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}

@@ -59,7 +59,7 @@ export default function LogementEvala() {
           </p>
           <Link
             href="/logement/proposer"
-            className="inline-flex items-center gap-2 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
+            className="inline-flex items-center gap-2 text-base font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
             style={{ background: "#00FF7F", color: "#111", border: "none" }}
           >
             <span>Proposer mon logement</span>
@@ -95,10 +95,10 @@ export default function LogementEvala() {
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "rgba(0,106,78,0.06)", border: "1px solid rgba(0,106,78,0.15)" }}>
               <Home className="w-6 h-6" style={{ color: "#006A4E" }} />
             </div>
-            <p className="text-black text-sm">Aucun logement disponible pour l'instant.</p>
+            <p className="text-black text-base">Aucun logement disponible pour l'instant.</p>
             <Link
               href="/logement/proposer"
-              className="inline-flex items-center gap-2 text-sm transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-base transition-colors duration-200"
               style={{ color: "#006A4E" }}
             >
               <span>Soyez le premier à proposer un logement</span>
@@ -123,7 +123,7 @@ export default function LogementEvala() {
           >
             <Link
               href="/logement"
-              className="group inline-flex items-center gap-2.5 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
+              className="group inline-flex items-center gap-2.5 text-base font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
               style={{ background: "#00FF7F", color: "#111", border: "none" }}
             >
               <span>Voir tous les logements</span>

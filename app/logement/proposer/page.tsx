@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, Hotel, Building2, Home, Bed,
   Wifi, Wind, ChefHat, Waves, Car, Flame, Tv, Coffee,
-  Zap, Shield, Plus, Trash2, CheckCircle2, Loader2,
+  Zap, Shield, Plus, Trash2, CheckCircle2, Loader2, ImagePlus, X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { supabase } from "../../lib/supabase";
 import { getSession } from "../../lib/auth";
+import { alertNouveauLogement } from "../../lib/brevo";
 import type { LogementType, Equipement, LogementInsert } from "../../types/logement";
 import { TYPE_LABELS, EQUIPEMENT_LABELS } from "../../types/logement";
 
@@ -44,7 +45,7 @@ const INITIAL: LogementInsert = {
   contact_nom: "", contact_telephone: "", contact_email: "",
 };
 
-const INPUT_CLS = "w-full bg-white border border-black/[0.1] hover:border-black/20 focus:border-[#006A4E]/50 rounded-xl px-4 py-3 text-black text-sm placeholder:text-black/25 outline-none transition-all duration-200";
+const INPUT_CLS = "w-full bg-white border border-black/25 hover:border-black/40 focus:border-[#006A4E] rounded-xl px-4 py-3 text-black text-sm placeholder:text-black/25 outline-none transition-all duration-200";
 
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
@@ -68,6 +69,8 @@ export default function ProposerLogementPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess]     = useState(false);
   const [error, setError]             = useState<string | null>(null);
+  const [uploading, setUploading]     = useState(false);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
   useEffect(() => {
     getSession().then(session => {
@@ -78,6 +81,35 @@ export default function ProposerLogementPage() {
 
   const set = <K extends keyof LogementInsert>(key: K, value: LogementInsert[K]) =>
     setForm(prev => ({ ...prev, [key]: value }));
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length || !userId) return;
+    if (uploadedImages.length + files.length > 5) {
+      alert("Maximum 5 photos."); return;
+    }
+    setUploading(true);
+    const urls: string[] = [];
+    for (const file of files) {
+      const ext  = file.name.split(".").pop();
+      const path = `${userId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: upErr } = await supabase.storage.from("logements").upload(path, file, { upsert: false });
+      if (upErr) { console.error(upErr); continue; }
+      const { data } = supabase.storage.from("logements").getPublicUrl(path);
+      urls.push(data.publicUrl);
+    }
+    const next = [...uploadedImages, ...urls];
+    setUploadedImages(next);
+    set("images", next);
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  const removeImage = (url: string) => {
+    const next = uploadedImages.filter(u => u !== url);
+    setUploadedImages(next);
+    set("images", next);
+  };
 
   const toggleEq = (eq: Equipement) =>
     set("equipements", form.equipements.includes(eq)
@@ -104,6 +136,7 @@ export default function ProposerLogementPage() {
         approuve: false, disponible: true, user_id: userId,
       }]);
       if (err) throw err;
+      await alertNouveauLogement(form.titre, form.type, form.ville);
       setIsSuccess(true);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Une erreur est survenue.");
@@ -254,24 +287,38 @@ export default function ProposerLogementPage() {
                     <input className={INPUT_CLS} value={form.adresse} onChange={e => set("adresse", e.target.value)} placeholder="Quartier, rue, point de repère…" />
                   </div>
                   <div>
-                    <Label>Photos (URL) — max 5</Label>
-                    <div className="space-y-2">
-                      {form.images.map((url, i) => (
-                        <div key={i} className="flex gap-2">
-                          <input className={INPUT_CLS} type="url" value={url} onChange={e => updateImage(i, e.target.value)} placeholder={`https://… (photo ${i + 1})`} />
-                          {form.images.length > 1 && (
-                            <button onClick={() => set("images", form.images.filter((_, j) => j !== i))} className="text-black/20 hover:text-red-500 transition-colors p-2">
-                              <Trash2 className="w-4 h-4" />
+                    <Label>Photos — max 5</Label>
+
+                    {/* Aperçu des images uploadées */}
+                    {uploadedImages.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {uploadedImages.map(url => (
+                          <div key={url} className="relative w-20 h-20 rounded-xl overflow-hidden group border border-black/10">
+                            <img src={url} alt="" className="w-full h-full object-cover" />
+                            <button
+                              onClick={() => removeImage(url)}
+                              className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                            >
+                              <X className="w-4 h-4 text-white" />
                             </button>
-                          )}
-                        </div>
-                      ))}
-                      {form.images.length < 5 && (
-                        <button onClick={() => set("images", [...form.images, ""])} className="flex items-center gap-1.5 text-xs transition-colors mt-1" style={{ color: "#006A4E" }}>
-                          <Plus className="w-3.5 h-3.5" /> Ajouter une photo
-                        </button>
-                      )}
-                    </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Zone d'upload */}
+                    {uploadedImages.length < 5 && (
+                      <label className="flex flex-col items-center justify-center gap-2 w-full py-8 rounded-xl border-2 border-dashed border-black/20 hover:border-[#006A4E]/50 cursor-pointer transition-colors">
+                        {uploading
+                          ? <Loader2 className="w-6 h-6 animate-spin text-black/30" />
+                          : <ImagePlus className="w-6 h-6 text-black/30" />}
+                        <span className="text-sm text-black/40">
+                          {uploading ? "Envoi en cours…" : "Cliquer pour ajouter des photos"}
+                        </span>
+                        <span className="text-xs text-black/25">{uploadedImages.length}/5 — JPG, PNG, WEBP</span>
+                        <input type="file" accept="image/*" multiple className="hidden" onChange={handleImageUpload} disabled={uploading} />
+                      </label>
+                    )}
                   </div>
                 </div>
               )}

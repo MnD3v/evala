@@ -54,7 +54,7 @@ export default function PromotionCard({ promotion }: PromotionCardProps) {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-festival-red/20 to-white/5 px-4 py-2 backdrop-blur-xl border border-white/10 shadow-lg">
                   <span className="h-2 w-2 animate-[pulse_2s_ease-in-out_infinite] rounded-full bg-gradient-to-r from-festival-red to-red-400"></span>
-                  <span className="text-sm font-medium text-white">
+                  <span className="text-base font-medium text-white">
                     {format(new Date(promotion.startDate), 'dd MMMM yyyy', { locale: fr })}
                   </span>
                 </div>

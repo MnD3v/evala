@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { supabase } from "../../lib/supabase";
+import { alertNouvelleOffre } from "../../lib/brevo";
 import type { TypeContrat, DomaineEmploi } from "../../types/emploi";
 
 type StepId = 1 | 2 | 3;
@@ -31,12 +32,11 @@ interface FormData {
 }
 
 const CONTRATS: { id: TypeContrat; label: string; desc: string }[] = [
-  { id: "cdi",         label: "CDI",         desc: "Contrat à durée indéterminée" },
-  { id: "cdd",         label: "CDD",         desc: "Contrat à durée déterminée" },
-  { id: "freelance",   label: "Freelance",   desc: "Mission ponctuelle" },
-  { id: "stage",       label: "Stage",       desc: "Stage de formation" },
-  { id: "benevolat",   label: "Bénévolat",   desc: "Mission volontaire" },
-  { id: "temps_partiel", label: "Temps partiel", desc: "À temps partiel" },
+  { id: "mission",      label: "Mission ponctuelle", desc: "Durée limitée au festival" },
+  { id: "prestation",   label: "Prestation / Service", desc: "Prestation rémunérée" },
+  { id: "benevolat",    label: "Bénévolat",   desc: "Mission volontaire" },
+  { id: "journalier",   label: "Journalier",  desc: "Rémunéré à la journée" },
+  { id: "temps_partiel",label: "Temps partiel", desc: "Quelques heures par jour" },
 ];
 
 const DOMAINES: { id: DomaineEmploi; label: string }[] = [
@@ -60,7 +60,7 @@ const STEPS = [
 ];
 
 /* ── Input helpers ── */
-const inputClass = "w-full bg-white border border-black/[0.1] rounded-xl px-4 py-3 text-black text-sm placeholder-black/25 focus:outline-none focus:border-[#006A4E]/50 transition-colors";
+const inputClass = "w-full bg-white border border-black/25 rounded-xl px-4 py-3 text-black text-sm placeholder-black/25 focus:outline-none focus:border-[#006A4E] transition-colors";
 const inputIconClass = "absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black/25";
 const labelClass = "block text-black/45 text-xs mb-1.5 font-medium";
 
@@ -125,6 +125,7 @@ export default function ProposerEmploiPage() {
         user_id: sessionData.session?.user.id ?? null,
       }]);
       if (error) throw error;
+      await alertNouvelleOffre(form.titre, form.domaine, form.lieu);
       setSubmitted(true);
     } catch (err) {
       console.error("Erreur soumission offre:", err);

@@ -14,6 +14,7 @@ import LogementEvala from "./components/LogementEvala";
 import ActivitesBonsCoins from "./components/ActivitesBonsCoins";
 import WaveDivider from "./components/WaveDivider";
 import ProfilsLutteurs from "./components/ProfilsLutteurs";
+import BoutiqueEvala from "./components/BoutiqueEvala";
 
 export default function Home() {
   return (
@@ -35,6 +36,8 @@ export default function Home() {
           <ActivitesBonsCoins />
           <WaveDivider />
           <LiveStream />
+          <BoutiqueEvala />
+          <WaveDivider color="#CE1126" />
           <Gallery />
           <Blog />
           <Contact />

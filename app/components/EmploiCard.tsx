@@ -5,12 +5,11 @@ import { MapPin, Phone, Calendar, Tag } from "lucide-react";
 import type { OffreEmploi, TypeContrat, DomaineEmploi } from "../types/emploi";
 
 const CONTRAT_LABELS: Record<TypeContrat, string> = {
-  cdi:           "CDI",
-  cdd:           "CDD",
-  freelance:     "Freelance",
-  stage:         "Stage",
-  benevolat:     "Bénévolat",
-  temps_partiel: "Temps partiel",
+  mission:      "Mission ponctuelle",
+  prestation:   "Prestation / Service",
+  benevolat:    "Bénévolat",
+  journalier:   "Journalier",
+  temps_partiel:"Temps partiel",
 };
 
 const DOMAINE_LABELS: Record<DomaineEmploi, string> = {
@@ -27,14 +26,12 @@ const DOMAINE_LABELS: Record<DomaineEmploi, string> = {
   autre:          "Autre",
 };
 
-// Couleurs drapeau togolais pour les types de contrat
 const CONTRAT_STYLE: Record<TypeContrat, { color: string; bg: string; border: string }> = {
-  cdi:           { color: "#006A4E", bg: "rgba(0,106,78,0.08)",   border: "rgba(0,106,78,0.25)" },
-  cdd:           { color: "#CE1126", bg: "rgba(206,17,38,0.07)",  border: "rgba(206,17,38,0.22)" },
-  freelance:     { color: "#8a6d00", bg: "rgba(255,205,0,0.12)",  border: "rgba(255,205,0,0.35)" },
-  stage:         { color: "#CE1126", bg: "rgba(206,17,38,0.07)",  border: "rgba(206,17,38,0.22)" },
-  benevolat:     { color: "#006A4E", bg: "rgba(0,106,78,0.08)",   border: "rgba(0,106,78,0.25)" },
-  temps_partiel: { color: "#8a6d00", bg: "rgba(255,205,0,0.12)",  border: "rgba(255,205,0,0.35)" },
+  mission:      { color: "#006A4E", bg: "rgba(0,106,78,0.08)",   border: "rgba(0,106,78,0.25)" },
+  prestation:   { color: "#CE1126", bg: "rgba(206,17,38,0.07)",  border: "rgba(206,17,38,0.22)" },
+  benevolat:    { color: "#006A4E", bg: "rgba(0,106,78,0.08)",   border: "rgba(0,106,78,0.25)" },
+  journalier:   { color: "#8a6d00", bg: "rgba(255,205,0,0.12)",  border: "rgba(255,205,0,0.35)" },
+  temps_partiel:{ color: "#8a6d00", bg: "rgba(255,205,0,0.12)",  border: "rgba(255,205,0,0.35)" },
 };
 
 // Couleur tournante des tags de compétences
@@ -83,7 +80,7 @@ export default function EmploiCard({ offre, index }: EmploiCardProps) {
         </div>
 
         {/* Description */}
-        <p className="text-black text-sm leading-relaxed line-clamp-3 mb-4">
+        <p className="text-black text-base leading-relaxed line-clamp-3 mb-4">
           {offre.description}
         </p>
 

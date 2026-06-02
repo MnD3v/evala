@@ -60,7 +60,7 @@ export default function EmploisSection() {
           </p>
           <Link
             href="/emplois/proposer"
-            className="inline-flex items-center gap-2 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
+            className="inline-flex items-center gap-2 text-base font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
             style={{ background: "#00FF7F", color: "#111", border: "none" }}
           >
             <span>Publier une offre</span>
@@ -96,10 +96,10 @@ export default function EmploisSection() {
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "rgba(206,17,38,0.06)", border: "1px solid rgba(206,17,38,0.15)" }}>
               <Briefcase className="w-6 h-6" style={{ color: "#CE1126" }} />
             </div>
-            <p className="text-black text-sm">Aucune offre disponible pour l'instant.</p>
+            <p className="text-black text-base">Aucune offre disponible pour l'instant.</p>
             <Link
               href="/emplois/proposer"
-              className="inline-flex items-center gap-2 text-sm transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-base transition-colors duration-200"
               style={{ color: "#CE1126" }}
             >
               <span>Soyez le premier à publier une offre</span>
@@ -124,7 +124,7 @@ export default function EmploisSection() {
           >
             <Link
               href="/emplois"
-              className="group inline-flex items-center gap-2.5 text-sm font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
+              className="group inline-flex items-center gap-2.5 text-base font-normal px-8 py-5 rounded-full transition-opacity duration-200 hover:opacity-85"
               style={{ background: "#00FF7F", color: "#111", border: "none" }}
             >
               <span>Voir toutes les offres</span>

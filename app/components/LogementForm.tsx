@@ -42,7 +42,7 @@ const INITIAL_FORM: LogementInsert = {
   contact_nom: "", contact_telephone: "", contact_email: "",
 };
 
-const INPUT = "w-full bg-white border border-black/[0.1] rounded-xl px-4 py-2.5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:border-[#006A4E]/50 transition-colors";
+const INPUT = "w-full bg-white border border-black/25 rounded-xl px-4 py-2.5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:border-[#006A4E] transition-colors";
 
 export default function LogementForm({ onClose }: LogementFormProps) {
   const [form, setForm]             = useState<LogementInsert>(INITIAL_FORM);
@@ -108,7 +108,7 @@ export default function LogementForm({ onClose }: LogementFormProps) {
           exit={{ opacity: 0, scale: 0.96, y: 16 }}
           transition={{ duration: 0.22 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-xl bg-white border border-black/[0.08] rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.12)] overflow-hidden"
+          className="relative w-full max-w-xl bg-white border border-black/20 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.12)] overflow-hidden"
         >
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-black/[0.07]">
@@ -172,7 +172,7 @@ export default function LogementForm({ onClose }: LogementFormProps) {
                             className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all duration-200 text-left ${
                               form.type === t
                                 ? "border-[#006A4E]/40 text-black"
-                                : "border-black/[0.08] text-black/40 hover:border-black/20"
+                                : "border-black/20 text-black/40 hover:border-black/40"
                             }`}
                             style={form.type === t ? { background: "rgba(0,106,78,0.06)" } : {}}
                           >
@@ -259,7 +259,7 @@ export default function LogementForm({ onClose }: LogementFormProps) {
                             className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all duration-200 text-sm ${
                               form.equipements.includes(id)
                                 ? "border-[#006A4E]/40 text-black"
-                                : "border-black/[0.08] text-black/40 hover:border-black/20"
+                                : "border-black/20 text-black/40 hover:border-black/40"
                             }`}
                             style={form.equipements.includes(id) ? { background: "rgba(0,106,78,0.06)" } : {}}
                           >

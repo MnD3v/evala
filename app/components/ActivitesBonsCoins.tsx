@@ -152,7 +152,7 @@ export default function ActivitesBonsCoins() {
 
                   {/* Extrait du body */}
                   {extractExcerpt(a.body) && (
-                    <p className="text-black/55 text-sm leading-relaxed mb-4 flex-1">
+                    <p className="text-black/55 text-base leading-relaxed mb-4 flex-1">
                       {extractExcerpt(a.body)}
                     </p>
                   )}

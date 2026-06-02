@@ -1,4 +1,4 @@
-export type TypeContrat = "cdi" | "cdd" | "freelance" | "stage" | "benevolat" | "temps_partiel";
+export type TypeContrat = "mission" | "prestation" | "benevolat" | "journalier" | "temps_partiel";
 
 export type DomaineEmploi =
   | "securite"

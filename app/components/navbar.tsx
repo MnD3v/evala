@@ -98,7 +98,7 @@ export default function Navbar() {
                 /* ── Connecté : icône → dashboard ── */
                 <Link
                   href="/dashboard"
-                  className={`flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 border ${isScrolled ? "bg-black/[0.04] hover:bg-black/[0.09] border-black/[0.08]" : "bg-white/10 hover:bg-white/20 border-white/20"}`}
+                  className={`flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 border ${isScrolled ? "bg-black/[0.04] hover:bg-black/[0.09] border-black/20" : "bg-white/10 hover:bg-white/20 border-white/20"}`}
                 >
                   <User className={`w-4 h-4 ${isScrolled ? "text-black" : "text-white"}`} />
                 </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
                   <motion.span
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all duration-200 cursor-pointer border ${isScrolled ? "bg-black/[0.04] hover:bg-black/[0.08] border-black/[0.08] text-black" : "bg-white/10 hover:bg-white/15 border-white/20 text-white"}`}
+                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all duration-200 cursor-pointer border ${isScrolled ? "bg-black/[0.04] hover:bg-black/[0.08] border-black/20 text-black" : "bg-white/10 hover:bg-white/15 border-white/20 text-white"}`}
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     Se connecter

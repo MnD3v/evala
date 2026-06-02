@@ -160,13 +160,6 @@ export default function LogementDetailPage() {
         {/* ── Contenu ── */}
         <div className="container mx-auto px-6 md:px-8 max-w-5xl py-10">
 
-          {/* Retour */}
-          <Link href="/logement"
-            className="inline-flex items-center gap-1.5 text-black/35 hover:text-black text-xs transition-colors duration-200 mb-8">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Tous les logements
-          </Link>
-
           <div className="grid lg:grid-cols-[1fr_300px] gap-12">
 
             {/* ── Gauche ── */}

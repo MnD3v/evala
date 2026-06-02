@@ -71,11 +71,11 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
         className="group flex flex-col rounded-2xl overflow-hidden bg-white border border-black/[0.07] hover:border-black/[0.14] transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] cursor-pointer"
       >
         {/* ── En-tête coloré ── */}
-        <div className="relative" style={{ background: typeColor.header }}>
+        <div className="relative">
 
           {/* Image ou placeholder */}
           {imageUrl ? (
-            <div className="relative h-44 overflow-hidden">
+            <div className="relative h-44 overflow-hidden" style={{ background: typeColor.header }}>
               <img
                 src={imageUrl}
                 alt={titre}
@@ -85,8 +85,9 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
               <div className="absolute inset-0" style={{ background: `${typeColor.header}99` }} />
             </div>
           ) : (
-            <div className="h-44 flex items-center justify-center">
-              <MapPin className="w-10 h-10 text-white/30" />
+            <div className="h-44 flex flex-col items-center justify-center gap-2 bg-white border-b border-black/[0.07]">
+              <MapPin className="w-8 h-8 text-black/15" />
+              <span className="text-[11px] text-black/25">Aucune photo</span>
             </div>
           )}
 
@@ -101,7 +102,7 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
           {prix_par_nuit && (
             <div className="absolute top-3 right-3 rounded-xl px-3 py-1.5 text-right"
               style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}>
-              <span className="text-white font-bold text-sm leading-none">
+              <span className="text-white font-bold text-base leading-none">
                 {prix_par_nuit.toLocaleString("fr-FR")}
               </span>
               <span className="text-white/70 text-[10px] ml-1">FCFA/nuit</span>
@@ -153,20 +154,40 @@ export default function LogementCard({ logement, index }: LogementCardProps) {
           {/* Séparateur tricolore */}
           <div className="h-px mt-auto bg-black/[0.07]" />
 
-          {/* Contact + Appeler */}
-          <div className="flex items-center justify-between">
+          {/* Contact — numéro Evala uniquement */}
+          <div className="flex items-center justify-between gap-2">
             <div>
-              <p className="text-black text-[12px] font-semibold">{contact_nom}</p>
-              <p className="text-black/40 text-[11px]">{contact_telephone}</p>
+              <p className="text-black text-[12px] font-semibold">Contact Evala</p>
+              <p className="text-black/40 text-[11px]">+228 90 77 88 80</p>
             </div>
-            <button
-              onClick={(e) => { e.preventDefault(); window.open(`tel:${contact_telephone}`, "_blank"); }}
-              className="flex items-center gap-1.5 text-[12px] font-medium rounded-full px-3.5 py-1.5 transition-all duration-200 hover:bg-black hover:text-white"
-              style={{ color: "#111", background: "transparent", border: "2px solid #111" }}
-            >
-              <Phone className="w-3 h-3" />
-              Appeler
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              {/* WhatsApp */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const url = `https://evala.tg/logement/${logement.id}`;
+                  const text = `Bonjour, je suis intéressé par ce logement sur Evala.tg :\n*${titre}*\n${url}`;
+                  window.open(`https://wa.me/22890778880?text=${encodeURIComponent(text)}`, "_blank");
+                }}
+                className="flex items-center gap-1.5 text-[12px] font-medium rounded-full px-3 py-1.5 transition-all duration-200 hover:opacity-85"
+                style={{ background: "#25D366", color: "white" }}
+              >
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L0 24l6.335-1.524A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.727.977.994-3.634-.235-.374A9.818 9.818 0 1112 21.818z"/>
+                </svg>
+                WhatsApp
+              </button>
+              {/* Appeler */}
+              <button
+                onClick={(e) => { e.preventDefault(); window.open(`tel:+22890778880`, "_blank"); }}
+                className="flex items-center gap-1.5 text-[12px] font-medium rounded-full px-3 py-1.5 transition-all duration-200 hover:bg-black hover:text-white"
+                style={{ color: "#111", background: "transparent", border: "2px solid #111" }}
+              >
+                <Phone className="w-3 h-3" />
+                Appeler
+              </button>
+            </div>
           </div>
 
         </div>

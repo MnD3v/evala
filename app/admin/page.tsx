@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Users, BedDouble, Briefcase, Clock, CheckCircle2,
   XCircle, Loader2, Eye, EyeOff, ChevronDown, ChevronUp,
-  ShieldCheck, LogOut,
+  ShieldCheck, LogOut, ShoppingBag,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/navbar";
@@ -14,6 +14,8 @@ import { supabase } from "../lib/supabase";
 import { TYPE_LABELS } from "../types/logement";
 import type { Logement } from "../types/logement";
 import type { OffreEmploi } from "../types/emploi";
+import type { Boutique } from "../types/boutique";
+import { CATEGORIE_BOUTIQUE_LABELS } from "../types/boutique";
 
 /* ─── Constantes ───────────────────────────────────────────────── */
 
@@ -36,9 +38,10 @@ const ACCOUNT_TYPE_LABELS: Record<string, string> = {
   hotel: "Hôtel", auberge: "Auberge",
 };
 
-type Tab = "overview" | "users" | "logements" | "offres";
-type LogementFilter = "tous" | "pending" | "approved";
-type OffreFilter   = "tous" | "pending" | "approved";
+type Tab = "overview" | "users" | "logements" | "offres" | "boutiques";
+type LogementFilter  = "tous" | "pending" | "approved";
+type OffreFilter     = "tous" | "pending" | "approved";
+type BoutiqueFilter  = "tous" | "pending" | "approved";
 
 interface Profile {
   id: string;
@@ -59,10 +62,12 @@ export default function AdminPage() {
   const [tab, setTab]                         = useState<Tab>("overview");
   const [logFilter, setLogFilter]             = useState<LogementFilter>("tous");
   const [offFilter, setOffFilter]             = useState<OffreFilter>("tous");
+  const [boutFilter, setBoutFilter]           = useState<BoutiqueFilter>("tous");
 
   const [profiles,  setProfiles]  = useState<Profile[]>([]);
   const [logements, setLogements] = useState<Logement[]>([]);
   const [offres,    setOffres]    = useState<OffreEmploi[]>([]);
+  const [boutiques, setBoutiques] = useState<Boutique[]>([]);
   const [loading,   setLoading]   = useState(true);
 
   const [actionId, setActionId] = useState<string | null>(null);
@@ -84,14 +89,16 @@ export default function AdminPage() {
   /* ── Fetch data ── */
   const fetchAll = useCallback(async () => {
     setLoading(true);
-    const [{ data: profs }, { data: logs }, { data: offs }] = await Promise.all([
+    const [{ data: profs }, { data: logs }, { data: offs }, { data: bouts }] = await Promise.all([
       supabase.from("profiles").select("*").order("created_at", { ascending: false }),
       supabase.from("logements").select("*").order("created_at", { ascending: false }),
       supabase.from("offres_emploi").select("*").order("created_at", { ascending: false }),
+      supabase.from("boutiques").select("*").order("created_at", { ascending: false }),
     ]);
     setProfiles((profs as Profile[]) ?? []);
     setLogements((logs as Logement[]) ?? []);
     setOffres((offs as OffreEmploi[]) ?? []);
+    setBoutiques((bouts as Boutique[]) ?? []);
     setLoading(false);
   }, []);
 
@@ -115,6 +122,27 @@ export default function AdminPage() {
     setActionId(id);
     await supabase.from("logements").delete().eq("id", id);
     setLogements(prev => prev.filter(l => l.id !== id));
+    setActionId(null);
+  };
+
+  /* ── Actions boutiques ── */
+  const approveBoutique = async (id: string) => {
+    setActionId(id);
+    await supabase.from("boutiques").update({ approuve: true, actif: true }).eq("id", id);
+    setBoutiques(prev => prev.map(b => b.id === id ? { ...b, approuve: true, actif: true } : b));
+    setActionId(null);
+  };
+  const rejectBoutique = async (id: string) => {
+    setActionId(id);
+    await supabase.from("boutiques").update({ approuve: false, actif: false }).eq("id", id);
+    setBoutiques(prev => prev.map(b => b.id === id ? { ...b, approuve: false, actif: false } : b));
+    setActionId(null);
+  };
+  const deleteBoutique = async (id: string) => {
+    if (!confirm("Supprimer définitivement cette boutique ?")) return;
+    setActionId(id);
+    await supabase.from("boutiques").delete().eq("id", id);
+    setBoutiques(prev => prev.filter(b => b.id !== id));
     setActionId(null);
   };
 
@@ -151,21 +179,27 @@ export default function AdminPage() {
   /* ── Stats ── */
   const pendingLogements = logements.filter(l => !l.approuve);
   const pendingOffres    = offres.filter(o => !o.approuve);
-  const totalPending     = pendingLogements.length + pendingOffres.length;
+  const pendingBoutiques = boutiques.filter(b => !b.approuve);
+  const totalPending     = pendingLogements.length + pendingOffres.length + pendingBoutiques.length;
 
-  const filteredLogements = logFilter === "tous"    ? logements
-                          : logFilter === "pending"  ? logements.filter(l => !l.approuve)
+  const filteredLogements = logFilter === "tous"   ? logements
+                          : logFilter === "pending" ? logements.filter(l => !l.approuve)
                           : logements.filter(l => l.approuve);
 
-  const filteredOffres = offFilter === "tous"    ? offres
-                       : offFilter === "pending"  ? offres.filter(o => !o.approuve)
+  const filteredOffres = offFilter === "tous"   ? offres
+                       : offFilter === "pending" ? offres.filter(o => !o.approuve)
                        : offres.filter(o => o.approuve);
+
+  const filteredBoutiques = boutFilter === "tous"   ? boutiques
+                          : boutFilter === "pending" ? boutiques.filter(b => !b.approuve)
+                          : boutiques.filter(b => b.approuve);
 
   const TABS: { id: Tab; label: string; badge?: number }[] = [
     { id: "overview",  label: "Vue d'ensemble" },
     { id: "users",     label: "Comptes",   badge: profiles.length },
     { id: "logements", label: "Logements", badge: pendingLogements.length || undefined },
     { id: "offres",    label: "Offres",    badge: pendingOffres.length || undefined },
+    { id: "boutiques", label: "Boutiques", badge: pendingBoutiques.length || undefined },
   ];
 
   return (
@@ -238,7 +272,8 @@ export default function AdminPage() {
                     { label: "Comptes créés",  value: profiles.length,  color: "#006A4E", icon: <Users className="w-5 h-5" /> },
                     { label: "Logements",      value: logements.length, color: "#006A4E", icon: <BedDouble className="w-5 h-5" /> },
                     { label: "Offres d'emploi",value: offres.length,    color: "#CE1126", icon: <Briefcase className="w-5 h-5" /> },
-                    { label: "En attente",     value: totalPending,     color: "#8a6d00", icon: <Clock className="w-5 h-5" /> },
+                    { label: "Boutiques",      value: boutiques.length, color: "#8a6d00", icon: <ShoppingBag className="w-5 h-5" /> },
+                    { label: "En attente",     value: totalPending,     color: "#CE1126", icon: <Clock className="w-5 h-5" /> },
                   ].map(({ label, value, color, icon }) => (
                     <div key={label} className="bg-white border border-black/[0.07] rounded-2xl p-5 shadow-sm">
                       <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
@@ -287,6 +322,21 @@ export default function AdminPage() {
                           isLoading={actionId === o.id}
                           onApprove={() => approveOffre(o.id)}
                           onReject={() => rejectOffre(o.id)}
+                        />
+                      ))}
+                      {pendingBoutiques.map((b, i) => (
+                        <PendingRow
+                          key={b.id}
+                          index={i + pendingLogements.length + pendingOffres.length}
+                          title={b.nom}
+                          meta={`Boutique · ${CATEGORIE_BOUTIQUE_LABELS[b.categorie]} · ${b.localite}`}
+                          date={b.created_at}
+                          image={b.image_couverture ?? undefined}
+                          icon={<ShoppingBag className="w-4 h-4" />}
+                          color="#8a6d00"
+                          isLoading={actionId === b.id}
+                          onApprove={() => approveBoutique(b.id)}
+                          onReject={() => rejectBoutique(b.id)}
                         />
                       ))}
                     </div>
@@ -388,6 +438,7 @@ export default function AdminPage() {
                         approved={l.approuve}
                         active={l.disponible}
                         image={l.images?.[0]}
+                        images={l.images ?? []}
                         icon={<BedDouble className="w-4 h-4" />}
                         color="#006A4E"
                         isLoading={actionId === l.id}
@@ -397,9 +448,11 @@ export default function AdminPage() {
                         onReject={() => rejectLogement(l.id)}
                         onDelete={() => deleteLogement(l.id)}
                         details={[
-                          { label: "Capacité",  value: `${l.capacite} pers.` },
-                          { label: "Ville",     value: l.ville },
-                          { label: "Contact",   value: `${l.contact_nom} · ${l.contact_telephone}` },
+                          { label: "Type",        value: TYPE_LABELS[l.type] },
+                          { label: "Capacité",    value: `${l.capacite} pers.` },
+                          { label: "Adresse",     value: l.adresse || l.ville },
+                          { label: "Prix / nuit", value: l.prix_par_nuit ? `${l.prix_par_nuit.toLocaleString("fr-FR")} FCFA` : "Non renseigné" },
+                          { label: "Contact réel (privé)", value: `${l.contact_nom} · ${l.contact_telephone}${l.contact_email ? ` · ${l.contact_email}` : ""}` },
                           ...(l.description ? [{ label: "Description", value: l.description }] : []),
                         ]}
                       />
@@ -449,17 +502,73 @@ export default function AdminPage() {
                         onReject={() => rejectOffre(o.id)}
                         onDelete={() => deleteOffre(o.id)}
                         details={[
-                          { label: "Contrat",   value: CONTRAT_LABELS[o.type_contrat] },
-                          { label: "Domaine",   value: DOMAINE_LABELS[o.domaine] },
-                          { label: "Lieu",      value: o.lieu },
-                          { label: "Contact",   value: `${o.contact_nom} · ${o.contact_telephone}` },
-                          ...(o.salaire         ? [{ label: "Salaire",     value: o.salaire }] : []),
-                          ...(o.description     ? [{ label: "Description", value: o.description }] : []),
+                          { label: "Type de mission",  value: CONTRAT_LABELS[o.type_contrat] },
+                          { label: "Domaine",          value: DOMAINE_LABELS[o.domaine] },
+                          { label: "Lieu",             value: o.lieu },
+                          ...(o.date_debut ? [{ label: "Période", value: `${o.date_debut}${o.date_fin ? ` → ${o.date_fin}` : ""}` }] : []),
+                          ...(o.salaire    ? [{ label: "Rémunération", value: o.salaire }] : []),
+                          ...(o.competences?.length ? [{ label: "Compétences", value: o.competences.join(", ") }] : []),
+                          { label: "Contact réel (privé)", value: `${o.contact_nom} · ${o.contact_telephone}${o.contact_email ? ` · ${o.contact_email}` : ""}` },
+                          ...(o.description ? [{ label: "Description", value: o.description }] : []),
                         ]}
                       />
                     ))}
                     {filteredOffres.length === 0 && (
                       <EmptyAdmin message="Aucune offre dans cette catégorie." />
+                    )}
+                  </div>
+                )}
+              </motion.div>
+            )}
+
+            {/* ══ BOUTIQUES ══ */}
+            {tab === "boutiques" && (
+              <motion.div key="boutiques"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3 }}
+              >
+                <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
+                  <h2 className="font-clash text-xl text-black">
+                    Boutiques <span className="text-base font-normal text-black/40">({filteredBoutiques.length})</span>
+                  </h2>
+                  <FilterTabs
+                    value={boutFilter}
+                    onChange={(v) => setBoutFilter(v as BoutiqueFilter)}
+                    counts={{ tous: boutiques.length, pending: pendingBoutiques.length, approved: boutiques.filter(b => b.approuve).length }}
+                  />
+                </div>
+
+                {loading ? <Spinner /> : (
+                  <div className="space-y-3">
+                    {filteredBoutiques.map((b, i) => (
+                      <AdminRow
+                        key={b.id}
+                        index={i}
+                        title={b.nom}
+                        meta={`${CATEGORIE_BOUTIQUE_LABELS[b.categorie]} · ${b.localite}`}
+                        date={b.created_at}
+                        approved={b.approuve}
+                        active={b.actif}
+                        image={b.image_couverture ?? undefined}
+                        images={b.image_couverture ? [b.image_couverture] : []}
+                        icon={<ShoppingBag className="w-4 h-4" />}
+                        color="#8a6d00"
+                        link={`/boutique/${b.slug}`}
+                        isLoading={actionId === b.id}
+                        expanded={expandedId === b.id}
+                        onExpand={() => setExpandedId(expandedId === b.id ? null : b.id)}
+                        onApprove={() => approveBoutique(b.id)}
+                        onReject={() => rejectBoutique(b.id)}
+                        onDelete={() => deleteBoutique(b.id)}
+                        details={[
+                          { label: "Catégorie",  value: CATEGORIE_BOUTIQUE_LABELS[b.categorie] },
+                          { label: "Localité",   value: b.localite },
+                          ...(b.description ? [{ label: "Description", value: b.description }] : []),
+                        ]}
+                      />
+                    ))}
+                    {filteredBoutiques.length === 0 && (
+                      <EmptyAdmin message="Aucune boutique dans cette catégorie." />
                     )}
                   </div>
                 )}
@@ -575,14 +684,15 @@ function PendingRow({ index, title, meta, date, image, icon, color, isLoading, o
   );
 }
 
-function AdminRow({ index, title, meta, date, approved, active, image, icon, color, isLoading,
-  expanded, onExpand, onApprove, onReject, onDelete, details }: {
+function AdminRow({ index, title, meta, date, approved, active, image, images, icon, color, isLoading,
+  expanded, onExpand, onApprove, onReject, onDelete, details, link }: {
   index: number; title: string; meta: string; date: string;
   approved: boolean; active: boolean;
-  image?: string; icon: React.ReactNode; color: string;
+  image?: string; images?: string[]; icon: React.ReactNode; color: string;
   isLoading: boolean; expanded: boolean;
   onExpand: () => void; onApprove: () => void; onReject: () => void; onDelete: () => void;
   details: { label: string; value: string }[];
+  link?: string;
 }) {
   return (
     <motion.div
@@ -607,7 +717,14 @@ function AdminRow({ index, title, meta, date, approved, active, image, icon, col
         {/* Infos */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
-            <p className="font-medium text-black text-sm truncate">{title}</p>
+            {link ? (
+              <a href={link} target="_blank" rel="noopener noreferrer"
+                className="font-semibold text-black text-sm truncate hover:underline underline-offset-2">
+                {title}
+              </a>
+            ) : (
+              <p className="font-semibold text-black text-sm truncate">{title}</p>
+            )}
             <span className="text-[11px] font-medium px-2 py-0.5 rounded-full"
               style={approved
                 ? { background: "rgba(0,106,78,0.08)", color: "#006A4E", border: "1px solid rgba(0,106,78,0.2)" }
@@ -655,11 +772,15 @@ function AdminRow({ index, title, meta, date, approved, active, image, icon, col
                 onMouseLeave={e => { e.currentTarget.style.background = ""; e.currentTarget.style.color = ""; }}>
                 <XCircle className="w-4 h-4" />
               </button>
-              <button onClick={onExpand} title="Détails"
-                className="p-2 rounded-lg transition-all text-black/30"
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.color = "rgba(0,0,0,0.6)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = ""; e.currentTarget.style.color = ""; }}>
-                {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              <button onClick={onExpand} title={expanded ? "Réduire" : "Voir les détails"}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg transition-all text-xs font-medium"
+                style={expanded
+                  ? { background: "rgba(0,0,0,0.06)", color: "rgba(0,0,0,0.6)" }
+                  : { background: "rgba(0,0,0,0.03)", color: "rgba(0,0,0,0.4)" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.08)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = expanded ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.03)"; }}>
+                {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                {expanded ? "Réduire" : "Détails"}
               </button>
             </>
           )}
@@ -676,15 +797,45 @@ function AdminRow({ index, title, meta, date, approved, active, image, icon, col
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 pt-1 border-t border-black/[0.05]">
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+            <div className="px-5 pb-5 pt-3 border-t border-black/[0.05] space-y-4">
+
+              {/* Galerie d'images */}
+              {images && images.length > 0 && (
+                <div>
+                  <p className="text-[10px] uppercase font-medium text-black/30 mb-2">Photos</p>
+                  <div className="flex gap-2 flex-wrap">
+                    {images.map((src, i) => (
+                      <a key={i} href={src} target="_blank" rel="noopener noreferrer"
+                        className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 block shrink-0 hover:opacity-80 transition-opacity">
+                        <img src={src} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Champs détails */}
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3">
                 {details.map(({ label, value }) => (
                   <div key={label}>
-                    <dt className="text-[10px] uppercase font-medium text-black/30 mb-0.5">{label}</dt>
-                    <dd className="text-black/70 text-sm leading-relaxed line-clamp-3">{value}</dd>
+                    <dt className="text-[10px] uppercase font-semibold mb-0.5"
+                      style={{ color: label.includes("privé") ? "#CE1126" : "rgba(0,0,0,0.3)" }}>
+                      {label}
+                    </dt>
+                    <dd className="text-black/75 text-sm leading-relaxed">{value}</dd>
                   </div>
                 ))}
               </dl>
+
+              {/* Lien externe */}
+              {link && (
+                <a href={link} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium transition-opacity hover:opacity-70"
+                  style={{ color: color }}>
+                  <Eye className="w-3.5 h-3.5" />
+                  Voir la page publique
+                </a>
+              )}
             </div>
           </motion.div>
         )}
