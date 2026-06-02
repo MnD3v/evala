@@ -6,7 +6,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://cdn.sanity.io https://firebasestorage.googleapis.com https://i.ibb.co https://wblomyquorcbhzeyztob.supabase.co",
   "font-src 'self' data:",
-  "connect-src 'self' https://wblomyquorcbhzeyztob.supabase.co wss://wblomyquorcbhzeyztob.supabase.co https://api.sanity.io https://cdn.sanity.io",
+  "connect-src 'self' https://wblomyquorcbhzeyztob.supabase.co wss://wblomyquorcbhzeyztob.supabase.co https://api.sanity.io https://*.api.sanity.io https://cdn.sanity.io https://*.cdn.sanity.io",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
   "object-src 'none'",
   "base-uri 'self'",
