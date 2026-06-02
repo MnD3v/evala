@@ -3,9 +3,9 @@
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://firebasestorage.googleapis.com https://i.ibb.co https://wblomyquorcbhzeyztob.supabase.co",
-  "font-src 'self' data:",
+  "font-src 'self' data: https://fonts.gstatic.com",
   "connect-src 'self' https://wblomyquorcbhzeyztob.supabase.co wss://wblomyquorcbhzeyztob.supabase.co https://api.sanity.io https://*.api.sanity.io https://cdn.sanity.io https://*.cdn.sanity.io",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
   "object-src 'none'",
